@@ -1,37 +1,30 @@
-import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
+import { useEffect, useMemo, useState } from "react";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
 
 function App() {
-  const [launchInfo, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
 
-  useEffect(() => {
-    async function getData() {
-      let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-      console.log("fastapi url: ", url);
-      let response = await fetch(url);
-      console.log("------- hello? -------");
-      let data = await response.json();
+  if (!isLoaded) return <div>Loading...</div>;
+  return <Map />;
+}
 
-      if (response.ok) {
-        console.log("got launch data!");
-        setLaunchInfo(data.launch_details);
-      } else {
-        console.log("drat! something happened");
-        setError(data.message);
-      }
-    }
-    getData();
-  }, []);
+function Map() {
+  const center = useMemo(() => ({ lat: 101.2996, lng: 47.1164 }), []);
 
   return (
-    <div>
-      <ErrorNotification error={error} />
-      <Construct info={launchInfo} />
+    <div style={{width:"100vw", height:"100vh"}}>
+      <GoogleMap
+        zoom={5}
+        center={center}
+        mapContainerClassName="map-container"
+        style={{ width: "100vw", height: "100vh" }}
+      >
+        <Marker position={center} />
+      </GoogleMap>
     </div>
   );
 }
-
 export default App;
