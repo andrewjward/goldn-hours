@@ -12,7 +12,7 @@ function App() {
 }
 
 function Map() {
-  const center = useMemo(() => ({ lat: 101.2996, lng: 47.1164 }), []);
+  const center = useMemo(() => ({ lat: 39, lng: -100 }), []);
 
   return (
     <div style={{width:"100vw", height:"100vh"}}>
