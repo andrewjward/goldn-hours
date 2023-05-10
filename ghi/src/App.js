@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
+import Nav from "./components/Nav";
 
 function App() {
   const { isLoaded } = useLoadScript({
@@ -12,18 +13,25 @@ function App() {
 }
 
 function Map() {
-  const center = useMemo(() => ({ lat: 101.2996, lng: 47.1164 }), []);
+  const center = useMemo(() => ({ lat: 39.5, lng: -98.35 }), []);
 
   return (
-    <div style={{width:"100vw", height:"100vh"}}>
-      <GoogleMap
-        zoom={5}
-        center={center}
-        mapContainerClassName="map-container"
+    <div className="">
+      <Nav />
+      <div
+        className="rounded-2xl flex items-center justify-center"
         style={{ width: "100vw", height: "100vh" }}
       >
-        <Marker position={center} />
-      </GoogleMap>
+        <div className="rounded-2xl h-4/5 w-4/5 flex items-center justify-center">
+          <GoogleMap
+            zoom={5.3}
+            center={center}
+            mapContainerClassName="map-container"
+          >
+            <Marker position={center} />
+          </GoogleMap>
+        </div>
+      </div>
     </div>
   );
 }
