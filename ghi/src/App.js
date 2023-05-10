@@ -12,12 +12,12 @@ function App() {
 }
 
 function Map() {
-  const center = useMemo(() => ({ lat: 101.2996, lng: 47.1164 }), []);
+  const center = useMemo(() => ({ lat: 39.5, lng: -98.35 }), []);
 
   return (
-    <div style={{width:"100vw", height:"100vh"}}>
+    <div style={{ width: "100vw", height: "100vh" }}>
       <GoogleMap
-        zoom={5}
+        zoom={5.1}
         center={center}
         mapContainerClassName="map-container"
         style={{ width: "100vw", height: "100vh" }}
