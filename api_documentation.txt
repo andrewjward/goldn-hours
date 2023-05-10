@@ -1,0 +1,98 @@
+### Get a list of Pins
+
+* Endpoint path: /pins
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: Single location details
+* Response shape:
+    ```json
+    {
+      "pins": [
+        "pin1" {
+          "username": string,
+          "location" {
+            "name": str,
+            "longitude": int,
+            "latitude": int,
+          },
+          "date": datetime,
+          "image_url": url,
+          "sliders"{
+            "cloudy": int,
+            "sunny": int,
+            "windy": int,
+            "crowded": int,
+          },
+          "id": int
+        },
+        "pin1" {
+          "username": string,
+          "location" {
+            "name": str,
+            "longitude": int,
+            "latitude": int,
+          },
+          "date": datetime,
+          "image_url": url,
+          "sliders"{
+            "cloudy": int,
+            "sunny": int,
+            "windy": int,
+            "crowded": int,
+          },
+          "id": int
+        }
+      ]
+    }
+    ```
+
+### Get an Account
+
+* Endpoint path: /accounts/{account_name}
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: An account
+* Response shape:
+    ```json
+    {
+        "username": string,
+        "name": string,
+        "profile_pic": url,
+        "description": string,
+        "rating": int,
+    }
+    ```
+
+### Get a list of pics by location
+
+* Endpoint path: /pics?q=latitude,longitude
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: A list of pics by location
+* Response shape:
+    ```json
+    {
+      "pins": [
+        {
+          "image_url": url,
+          "description": string,
+        },
+        {
+          "image_url": url,
+          "description": string,
+        },
+        {
+          "image_url": url,
+          "description": string,
+        },
+      ]
+    }

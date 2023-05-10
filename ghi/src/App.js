@@ -15,6 +15,7 @@ function Map() {
   const center = useMemo(() => ({ lat: 44, lng: -80}), []);
 
   return (
+    <div style={{width:"100vw", height:"100vh"}}>
       <GoogleMap
         zoom={10}
         ceneter={center}
@@ -23,6 +24,7 @@ function Map() {
       >
         <Marker position={center} />
       </GoogleMap>
+    </div>
   );
 }
 export default App;
