@@ -69,6 +69,54 @@
     }
     ```
 
+### Get an Account's pics
+
+* Endpoint path: /picsq?={account_name}
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: A list of pins filtered by account_name
+* Response shape:
+    ```json
+    {
+      "pins": [
+        "pin1" {
+          "location" {
+            "name": str,
+            "longitude": int,
+            "latitude": int,
+          },
+          "date": datetime,
+          "image_url": url,
+          "sliders"{
+            "cloudy": int,
+            "sunny": int,
+            "windy": int,
+            "crowded": int,
+          },
+          "id": int
+        },
+        "pin1" {
+          "location" {
+            "name": str,
+            "longitude": int,
+            "latitude": int,
+          },
+          "date": datetime,
+          "image_url": url,
+          "sliders"{
+            "cloudy": int,
+            "sunny": int,
+            "windy": int,
+            "crowded": int,
+          },
+          "id": int
+        }
+      ]
+    }
+
 ### Get a list of pics by location
 
 * Endpoint path: /pics?q=latitude,longitude
@@ -96,3 +144,48 @@
         },
       ]
     }
+
+
+### Login
+
+* Endpoint path: /login
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: Login page
+* Response shape:
+    ```json
+    {
+        "username": str,
+        "password": str
+    }
+
+
+### Signup
+
+* Endpoint path: /signup
+* Endpoint method: POST
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: Signup page
+* Response shape:
+    ```json
+    {
+        "username": str,
+        "password": str
+    }
+
+
+#Signout    
+
+* Endpoint path: /signout
+* Endpoint method: GET
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: Signout page

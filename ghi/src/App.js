@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   if (!isLoaded) return <div>Loading...</div>;
@@ -12,13 +12,13 @@ function App() {
 }
 
 function Map() {
-  const center = useMemo(() => ({ lat: 44, lng: -80}), []);
+  const center = useMemo(() => ({ lat: 101.2996, lng: 47.1164 }), []);
 
   return (
     <div style={{width:"100vw", height:"100vh"}}>
       <GoogleMap
-        zoom={10}
-        ceneter={center}
+        zoom={5}
+        center={center}
         mapContainerClassName="map-container"
         style={{ width: "100vw", height: "100vh" }}
       >
