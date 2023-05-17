@@ -1,74 +1,19 @@
-from queries.client import Queries
-
-# from bson.objectid import ObjectId
-from pydantic import BaseModel
-
-from typing import Optional, List
+from bson.objectid import ObjectId
+from .client import Queries
+from models.accounts import Account, AccountIn, AccountOut
+from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
-
-
-# class PydanticObjectId(ObjectId):
-#     @classmethod
-#     def __get_validators__(cls):
-#         yield cls.validate
-
-#     @classmethod
-#     def validate(cls, value: ObjectId | str) -> ObjectId:
-#         if value:
-#             try:
-#                 ObjectId(value)
-#             except:
-#                 raise ValueError(f"Not a valid object id: {value}")
-#         return value
+from typing import Union
 
 
 class DuplicateAccountError(ValueError):
     pass
 
 
-class SessionOut(BaseModel):
-    jti: str
-    account_id: str
-
-
-class AccountIn(BaseModel):
-    username: Optional[str]
-    email: str
-    password: str
-    full_name: str
-
-
-# class Account(AccountIn):
-#     # id: PydanticObjectId
-#     id: str  # what is PydanticObjectId??
-#     # roles: List[str]
-
-
-class AccountOut(AccountIn):
-    id: str
-
-
-# class AccountOutWithPassword(AccountOut):
-#     hashed_password: str
-
-
 class AccountQueries(Queries):
-    DB_NAME = "mongo-data"
+    DB_NAME = "cards"
     COLLECTION = "accounts"
 
-    def get(self, username: str) -> AccountOut:
-        pass
-
-    def create(self, info: AccountIn, hashed_password: str) -> AccountOut:
-        props = info.dict()
-        props["password"] = hashed_password
-        try:
-            self.collection.insert_one(props)
-        except DuplicateKeyError:
-            raise DuplicateAccountError()
-        props["id"] = str(props["_id"])
-
-        return AccountOut(**props)
 
     def get_all_accounts(self) -> list[AccountOut]:
         db = self.collection.find()
@@ -77,3 +22,42 @@ class AccountQueries(Queries):
             document["id"] = str(document["_id"])
             accounts.append(AccountOut(**document))
         return accounts
+
+    def get_account(self, username: str) -> AccountOut:
+        props = self.collection.find_one({"username": username})
+        if not props:
+            return None
+        props["id"] = str(props["_id"])
+        return AccountOut(**props)
+
+
+    def create_account(self, info: AccountIn, hashed_password: str) -> Account:
+        props = info.dict()
+        props["password"] = hashed_password
+        try:
+            self.collection.insert_one(props)
+        except DuplicateKeyError:
+            raise DuplicateAccountError()
+        props["id"] = str(props["_id"])
+        return AccountOut(**props)
+
+
+    def update_account(self, id: str, info: AccountIn, hashed_password: Union[None, str]):
+        props = info.dict()
+        if hashed_password is not None:
+            props["unhashed_password"] = props["password"]
+            props["password"] = hashed_password
+
+        try:
+            self.collection.find_one_and_update(
+                {"_id": ObjectId(id)},
+                {"$set": props},
+                return_document=ReturnDocument.AFTER,
+            )
+        except DuplicateKeyError:
+            raise DuplicateAccountError()
+
+        return AccountOut(**props, id=id)
+
+    def delete_account(self, username: str) -> bool:
+        return self.collection.delete_one({"username": username})
