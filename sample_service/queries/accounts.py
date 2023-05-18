@@ -11,7 +11,7 @@ class DuplicateAccountError(ValueError):
 
 
 class AccountQueries(Queries):
-    DB_NAME = "cards"
+    DB_NAME = "Gold'n-Hours"
     COLLECTION = "accounts"
 
 
@@ -22,6 +22,7 @@ class AccountQueries(Queries):
             document["id"] = str(document["_id"])
             accounts.append(AccountOut(**document))
         return accounts
+
 
     def get_account(self, username: str) -> AccountOut:
         props = self.collection.find_one({"username": username})
@@ -58,6 +59,7 @@ class AccountQueries(Queries):
             raise DuplicateAccountError()
 
         return AccountOut(**props, id=id)
+
 
     def delete_account(self, username: str) -> bool:
         return self.collection.delete_one({"username": username})

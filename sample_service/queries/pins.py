@@ -1,28 +1,29 @@
-from pydantic import BaseModel
-from typing import List, Optional, Union
-from datetime import date, datetime
+from .client import Queries
+from models.pins import PinIn, PinOut, Pin
+from bson.objectid import ObjectId
+from typing import List
 
 
-class Error(BaseModel):
-    message: str
+class PinsQueries(Queries):
+    DB_NAME = "Gold'n-Hours"
+    COLLECTION = "pins"
 
 
-class LocationIn(BaseModel):
-    name: str
-    longitude: float
-    lattitude: float
+    def create_pin(self, pin: PinIn) -> PinOut:
+        props = pin.dict()
+        self.collection.insert_one(props)
+        props["id"] = str(props["_id"])
+        return PinOut(**props)
 
 
-class ConditionsIn(BaseModel):
-    sunny: int
-    windy: int
-    crowded: int
-    cloudy: int
+    def get_all_pins(self) -> List[PinOut]:
+        db = self.collection.find()
+        pins = []
+        for pin in db:
+            pin["id"] = str(pin["_id"])
+            pins.append(PinOut(**pin))
+        return pins
 
 
-class PinIn(BaseModel):
-    username: str
-    location: LocationIn
-    conditions: ConditionsIn
-    date: datetime
-    image_url: str
+    def delete_pin(self, id: str) -> bool:
+        return self.collection.delete_one({"_id": ObjectId(id)})
