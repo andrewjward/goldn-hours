@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import List, Optional, Union
-from datetime import date
+from datetime import date, datetime
 
 
 class Error(BaseModel):
@@ -24,5 +24,5 @@ class PinIn(BaseModel):
     username: str
     location: LocationIn
     conditions: ConditionsIn
-    date: datetime.datetime
-    image_url: str 
+    date: datetime
+    image_url: str
