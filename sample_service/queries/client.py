@@ -1,6 +1,7 @@
 import os
 import pymongo
 
+
 dbname = os.environ["DATABASE_URL"]
 client = pymongo.MongoClient(dbname)
 

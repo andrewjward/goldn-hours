@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os, requests
 from keys import REACT_APP_GOOGLE_MAPS_API_KEY
 from authenticator import authenticator
-from routers import accounts
+from routers import accounts, pins
 
 
 description = "Gold'n Hours is THE app for photographers looking to maximize their productivity!"
@@ -58,6 +58,7 @@ def launch_details():
 
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
+app.include_router(pins.router)
 
 
 @app.get("/geocode")
