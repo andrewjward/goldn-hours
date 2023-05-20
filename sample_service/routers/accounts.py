@@ -13,11 +13,7 @@ from queries.accounts import (
     AccountQueries,
     DuplicateAccountError,
 )
-from models.accounts import (
-    AccountIn,
-    Account,
-    AccountOut
-)
+from models.accounts import AccountIn, Account, AccountOut
 
 
 class AccountForm(BaseModel):
@@ -57,7 +53,6 @@ async def create_account(
     response: Response,
     repo: AccountQueries = Depends(),
 ):
-
     hashed_password = authenticator.hash_password(info.password)
     try:
         account = repo.create_account(info, hashed_password)
@@ -70,6 +65,7 @@ async def create_account(
     form = AccountForm(username=info.username, password=info.password)
 
     token = await authenticator.login(response, request, form, repo)
+    print("token", token)
     return AccountToken(account=account, **token.dict())
 
 
