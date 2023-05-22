@@ -46,7 +46,7 @@ async def get_account(
     return account
 
 
-@router.post("/api/accounts/", response_model=AccountToken | HttpError)
+@router.post("/api/accounts/", response_model=AccountOut | HttpError)
 async def create_account(
     info: AccountIn,
     request: Request,
@@ -62,11 +62,11 @@ async def create_account(
             detail="Cannot Create An Account With Those Credentials",
         )
 
-    form = AccountForm(username=info.username, password=info.password)
-
-    token = await authenticator.login(response, request, form, repo)
-    print("token", token)
-    return AccountToken(account=account, **token.dict())
+    # form = AccountForm(username=info.username, password=info.password)
+    # token = await authenticator.login(response, request, form, repo)
+    # print("TOKEN:", token)
+    # print("ACCOUNTTOKEN:", AccountToken(account=account, **token.dict()))
+    return account
 
 
 @router.put(

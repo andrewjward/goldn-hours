@@ -1,21 +1,33 @@
 import { useEffect, useMemo, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
 import Nav from "./components/Nav";
 import SignupForm from "./components/SignupForm";
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
-
-  if (!isLoaded) return <div>Loading...</div>;
-  return <Map />;
+  const basename = "http://localhost:3000"
+  return (
+    <div className="container">
+      <BrowserRouter>
+        <AuthProvider>
+        <Routes>
+          <Route path="/" element={<SignupForm />}></Route>
+        </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 function Map() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
   const center = useMemo(() => ({ lat: 39.5, lng: -98.35 }), []);
 
+  if (!isLoaded) return <div>Loading...</div>;
   return (
     <div className="">
       <Nav />
@@ -32,7 +44,6 @@ function Map() {
             <Marker position={center} />
           </GoogleMap>
         </div> */}
-        <SignupForm />
       </div>
     </div>
   );
