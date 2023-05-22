@@ -5,14 +5,29 @@ import Nav from "./components/Nav";
 import SignupForm from "./components/SignupForm";
 import Profile from "./components/Profile";
 import { BrowserRouter, Route } from "react-router-dom";
-import Profile from “./components/Profile”;
+import { motion } from "framer-motion";
+import logo from './images/golden-logo-transparent.png'
+
 
 function App() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return (
+    <div
+      className="flex items-center justify-center"
+      style={{ width: "100vw", height: "100vh" }}
+    >
+      <motion.img
+        src={logo}
+        alt="Golden Logo"
+        style={{ width: "30%" }}
+        animate={{ x: 100 }}
+        transition={{ delay: 1 }}
+      ></motion.img>
+    </div>
+  );
   return (
     <BrowserRouter>
       <Nav />
@@ -28,14 +43,14 @@ function App() {
 
         <Route path="/pins">
           <Route path="/create" element={<CreatePin />} />
-          <Route path="/pins/location/:id" element={<Location />} />
-          <Route path="pins/profile/:id" element={<Profile />} />
+          <Route path="/location/:id" element={<Location />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Route> */}
 
         {/* <Route path="profiles" element={<Profiles />} /> */}
       </div>
-      {/* <Map />
-      <SignupForm /> */}
+      {/* <Map /> */}
+      {/* <SignupForm /> */}
     </BrowserRouter>
   );
 }
