@@ -32,7 +32,7 @@ class HttpError(BaseModel):
 router = APIRouter(tags=["accounts"])
 
 
-@router.get("/api/accounts/", response_model=list[AccountOut])
+@router.get("/api/accounts", response_model=list[AccountOut])
 async def get_all_accounts(repo: AccountQueries = Depends()):
     return repo.get_all_accounts()
 
@@ -46,7 +46,7 @@ async def get_account(
     return account
 
 
-@router.post("/api/accounts/", response_model=AccountOut | HttpError)
+@router.post("/api/accounts", response_model=AccountOut | HttpError)
 async def create_account(
     info: AccountIn,
     request: Request,
@@ -62,10 +62,10 @@ async def create_account(
             detail="Cannot Create An Account With Those Credentials",
         )
 
-    # form = AccountForm(username=info.username, password=info.password)
-    # token = await authenticator.login(response, request, form, repo)
+    form = AccountForm(username=info.username, password=info.password)
+    token = await authenticator.login(response, request, form, repo)
     # print("TOKEN:", token)
-    # print("ACCOUNTTOKEN:", AccountToken(account=account, **token.dict()))
+    print("ACCOUNTTOKEN:", AccountToken(account=account, **token.dict()))
     return account
 
 
@@ -112,7 +112,7 @@ async def delete_account(
     return True
 
 
-@router.get("/api/token/", response_model=AccountToken | None)
+@router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
     account: Account = Depends(authenticator.try_get_current_account_data),
