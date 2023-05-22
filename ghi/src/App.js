@@ -6,17 +6,33 @@ import Nav from "./components/Nav";
 import SignupForm from "./components/SignupForm";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 
+
 function App() {
-  const basename = "http://localhost:3000"
   return (
     <div className="container">
-      <BrowserRouter>
+    <BrowserRouter>
         <AuthProvider>
-        <Routes>
-          <Route path="/" element={<SignupForm />}></Route>
-        </Routes>
+      <Nav />
+      <div>
+        <Route path="/" element={<Main />} />
+
+        <Route path="/signup" element={<SignupForm />} />
+
+        <Route path="Login" >
+          <Route path="" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+        </Route>
+
+        <Route path="/pins" >
+          <Route path="/create" element={<CreatePin />} />
+          <Route path="/pins/location/:id" element={<Location />} />
+          <Route path="pins/profile/:id" element={<Profile />} />
+        </Route>
+      </div>
+      {/* <Map />
+      <SignupForm /> */}
         </AuthProvider>
-      </BrowserRouter>
+    </BrowserRouter>
     </div>
   );
 }
@@ -30,12 +46,11 @@ function Map() {
   if (!isLoaded) return <div>Loading...</div>;
   return (
     <div className="">
-      <Nav />
       <div
         className="rounded-2xl flex items-center justify-center"
         style={{ width: "100vw", height: "100vh" }}
       >
-        {/* <div className="rounded-2xl h-4/5 w-4/5 flex items-center justify-center">
+        <div className="rounded-2xl h-4/5 w-4/5 flex items-center justify-center">
           <GoogleMap
             zoom={5.3}
             center={center}
@@ -43,7 +58,7 @@ function Map() {
           >
             <Marker position={center} />
           </GoogleMap>
-        </div> */}
+        </div>
       </div>
     </div>
   );
