@@ -4,7 +4,7 @@ import "./App.css";
 import Nav from "./components/Nav";
 import SignupForm from "./components/SignupForm";
 import Profile from "./components/Profile";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   const { isLoaded } = useLoadScript({
@@ -16,20 +16,22 @@ function App() {
     <BrowserRouter>
       <Nav />
       <div>
-        <Route path="/" element={<Main />} />
+        <Routes>
+          {/* <Route path="/" element={<Main />} /> */}
 
-        <Route path="/signup" element={<SignupForm />} />
+          <Route path="/signup" element={<SignupForm />} />
 
-        <Route path="Login">
+          {/* <Route path="Login">
           <Route path="" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
-        </Route>
+        </Route> */}
 
-        <Route path="/pins">
-          <Route path="/create" element={<CreatePin />} />
-          <Route path="/pins/location/:id" element={<Location />} />
-          <Route path="pins/profile/:id" element={<Profile />} />
-        </Route>
+          <Route path="/pins">
+            {/* <Route path="/create" element={<CreatePin />} />
+          <Route path="/pins/location/:id" element={<Location />} /> */}
+            <Route path="pins/profile/:id" element={<Profile />} />
+          </Route>
+        </Routes>
       </div>
       {/* <Map />
       <SignupForm /> */}

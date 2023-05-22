@@ -6,6 +6,7 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const handleEmailChange = (event) => {
     const value = event.target.value;
@@ -22,14 +23,20 @@ const SignupForm = () => {
     setPassword(value);
   };
 
+  const handleNameChange = (event) => {
+    const value = event.target.value;
+    setName(value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    navigate("/pins/pins/profile/1");
     const data = {};
 
     data.email = email;
     data.username = username;
     data.password = password;
+    data.name = name;
 
     const accountUrl = "http://localhost:8000/api/accounts/";
     const fetchConfig = {
@@ -45,6 +52,7 @@ const SignupForm = () => {
         setEmail("");
         setUsername("");
         setPassword("");
+        setName("");
       }
     } catch (error) {
       console.error(error);
@@ -97,6 +105,19 @@ const SignupForm = () => {
                   value={password}
                 />
                 <label htmlFor="fabric">Address</label>
+              </div>
+              <div className="form-floating mb-3">
+                <input
+                  onChange={handleNameChange}
+                  placeholder="Name"
+                  required
+                  type="text"
+                  name="name"
+                  id="name"
+                  className=""
+                  value={name}
+                />
+                <label htmlFor="fabric">Name</label>
               </div>
               <button className="btn btn-success w-100">Sign up</button>
             </form>

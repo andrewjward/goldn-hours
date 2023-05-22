@@ -4,12 +4,13 @@ function Profile() {
   const [pins, setPins] = useState([]);
   const [profile, setProfile] = useState([]);
 
-  const fetchData = async () => {
-    const fetchurl = `http://localhost:8090/api/accounts/${account_id}`;
-    const response = await fetch(fetchurl);
+  const fetchData = async (account_id) => {
+    const fetchUrl = `http://localhost:8000/api/accounts/{account_id}?username=Louis`;
+    const response = await fetch(fetchUrl);
     if (response.ok) {
       const data = await response.json();
-      setPins(data.customers);
+      console.log(data);
+      setProfile(data);
     }
   };
 
@@ -23,44 +24,19 @@ function Profile() {
     fetchData();
   }, []);
 
-  if (!customers.length) {
-    return <div>No Customers to display</div>;
-  }
+  //   if (!customers.length) {
+  //     return <div>No Customers to display</div>;
+  //   }
 
   return (
     <main>
-      <div className="container">
-        <table>
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Phone Number</th>
-              <th>Address</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* {customers.map((customer) => {
-              return ( */}
-            <tr>
-              {/* <td>{customer.first_name}</td>
-                  <td>{customer.last_name}</td>
-                  <td>{customer.phone_number}</td>
-                  <td>{customer.address}</td> */}
-              <td>
-                {/* <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => handleDelete(customer.id)}
-                    >
-                      Delete
-                    </button> */}
-              </td>
-            </tr>
-            ); })}
-          </tbody>
-        </table>
+      <div class="container mx-auto px-4">
+        <div>{profile.name}</div>
+        <img
+          class="w-20 h-20 rounded-full;"
+          src={profile.profile_pic}
+          alt="Rounded avatar"
+        />
       </div>
     </main>
   );
