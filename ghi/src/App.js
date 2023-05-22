@@ -3,6 +3,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
 import Nav from "./components/Nav";
 import SignupForm from "./components/SignupForm";
+import Profile from "./components/Profile";
 import { BrowserRouter, Route } from "react-router-dom";
 
 function App() {
@@ -19,12 +20,12 @@ function App() {
 
         <Route path="/signup" element={<SignupForm />} />
 
-        <Route path="Login" >
+        <Route path="Login">
           <Route path="" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
         </Route>
 
-        <Route path="/pins" >
+        <Route path="/pins">
           <Route path="/create" element={<CreatePin />} />
           <Route path="/pins/location/:id" element={<Location />} />
           <Route path="pins/profile/:id" element={<Profile />} />

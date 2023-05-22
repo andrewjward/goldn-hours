@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function profilePage() {
+function Profile() {
   const [pins, setPins] = useState([]);
   const [profile, setProfile] = useState([]);
 
@@ -41,25 +41,24 @@ function profilePage() {
             </tr>
           </thead>
           <tbody>
-            {customers.map((customer) => {
-              return (
-                <tr>
-                  {/* <td>{customer.first_name}</td>
+            {/* {customers.map((customer) => {
+              return ( */}
+            <tr>
+              {/* <td>{customer.first_name}</td>
                   <td>{customer.last_name}</td>
                   <td>{customer.phone_number}</td>
                   <td>{customer.address}</td> */}
-                  <td>
-                    {/* <button
+              <td>
+                {/* <button
                       type="button"
                       className="btn btn-danger"
                       onClick={() => handleDelete(customer.id)}
                     >
                       Delete
                     </button> */}
-                  </td>
-                </tr>
-              );
-            })}
+              </td>
+            </tr>
+            ); })}
           </tbody>
         </table>
       </div>
@@ -67,4 +66,4 @@ function profilePage() {
   );
 }
 
-export default profilePage;
+export default Profile;
