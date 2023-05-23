@@ -7,7 +7,6 @@ import SignupForm from "./components/SignupForm";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
-  const basename = "http://localhost:3000"
   return (
     <div className="container">
       <BrowserRouter>

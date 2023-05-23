@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
 const SignupForm = () => {
@@ -32,24 +32,12 @@ const SignupForm = () => {
       data.password = password;
 
       const accountUrl = "http://localhost:8000/api/accounts/";
-      // const fetchConfig = {
-      //     method: "POST",
-      //     body: JSON.stringify(data),
-      //     headers: {
-      //         'Content-Type': 'application/json',
-      //     },
 
     try {
-        // const response = await fetch(accountUrl, fetchConfig);
       register(
         data,
         accountUrl
       );
-        // if (response.ok) {
-        //     setEmail('');
-        //     setUsername('');
-        //     setPassword('');
-        // }
       setEmail('');
       setUsername('');
       setPassword('');
@@ -58,8 +46,6 @@ const SignupForm = () => {
         console.error(error);
     }
   };
-  // useEffect(() => {
-  // }, []);
 
   return (
     <div className="container">
