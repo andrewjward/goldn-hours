@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
 const SignupForm = () => {
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const { register } = useToken();
 
   const handleEmailChange = (event) => {
@@ -13,8 +14,8 @@ const SignupForm = () => {
   };
 
   const handleUsernameChange = (event) => {
-      const value = event.target.value;
-      setUsername(value);
+    const value = event.target.value;
+    setUsername(value);
   };
 
   const handlePasswordChange = (event) => {
@@ -26,36 +27,25 @@ const SignupForm = () => {
     const value = event.target.value;
     setName(value);
   };
-  const handlePasswordChange = (event) => {
-    const value = event.target.value;
-    setPassword(value);
-  };
 
   const handleSubmit = async (event) => {
-      event.preventDefault();
+    event.preventDefault();
 
-      const data = {}
-      data.email = email;
-      data.username = username;
-      data.password = password;
-  const handleSubmit = async (event) => {
-      event.preventDefault();
+    const data = {};
+    data.email = email;
+    data.username = username;
+    data.password = password;
+    data.name = name;
 
-      const data = {}
-      data.email = email;
-      data.username = username;
-      data.password = password;
+    console.log(data);
 
-      const accountUrl = "http://localhost:8000/api/accounts/";
+    const accountUrl = "http://localhost:8000/api/accounts/";
     try {
-      register(
-        data,
-        accountUrl
-      );
-      setEmail('');
-      setUsername('');
-      setPassword('');
-
+      register(data, accountUrl);
+      setEmail("");
+      setUsername("");
+      setPassword("");
+      setName("");
     } catch (error) {
       console.error(error);
     }
@@ -107,6 +97,19 @@ const SignupForm = () => {
                 />
                 <label htmlFor="password">Password</label>
               </div>
+              <div className="">
+                <input
+                  onChange={handleNameChange}
+                  placeholder="Name"
+                  required
+                  type="name"
+                  name="name"
+                  id="name"
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={name}
+                />
+                <label htmlFor="name">Name</label>
+              </div>
               <button className="">Sign up</button>
             </form>
           </div>
@@ -114,5 +117,5 @@ const SignupForm = () => {
       </div>
     </div>
   );
-}
+};
 export default SignupForm;
