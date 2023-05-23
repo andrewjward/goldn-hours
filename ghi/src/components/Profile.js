@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 
-function Profile() {
-  const [pins, setPins] = useState([]);
-  const [profile, setProfile] = useState([]);
+// function Profile() {
+//   const [pins, setPins] = useState([]);
+//   const [profile, setProfile] = useState([]);
 
   const fetchData = async (account_id) => {
     const fetchUrl = `http://localhost:8000/api/accounts/{account_id}?username=Louis`;
@@ -42,4 +42,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+// export default Profile;
