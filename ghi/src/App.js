@@ -18,22 +18,10 @@ function App() {
         <AuthProvider>
           <Nav />
           <Routes>
-            {/* <Route path="/" element={<Main />} /> */}
-
             <Route path="/signup" element={<SignupForm />} />
 
-            <Route path="/login">
-              <Route path="" element={<LoginForm />} />
-              {/* <Route path="/logout" element={<Logout />} /> */}
-            </Route>
-
-            {/* <Route path="/pins">
-          <Route path="/create" element={<CreatePin />} />
-          <Route path="/location/:id" element={<Location />} />
-          <Route path="/profile/:id" element={<Profile />} />
-        </Route> */}
-
-            {/* <Route path="profiles" element={<Profiles />} /> */}
+            <Route path="/login" element={<LoginForm />} />
+            {/* <Route path="/logout" element={<Logout />} /> */}
           </Routes>
         </AuthProvider>
       </BrowserRouter>
