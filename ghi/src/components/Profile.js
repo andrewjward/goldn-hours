@@ -30,10 +30,10 @@ function Profile() {
 
   return (
     <main>
-      <div class="container mx-auto px-4">
+      <div className="container mx-auto px-4">
         <div>{profile.name}</div>
         <img
-          class="w-20 h-20 rounded-full;"
+          className="w-20 h-20 rounded-full;"
           src={profile.profile_pic}
           alt="Rounded avatar"
         />
