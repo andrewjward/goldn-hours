@@ -32,8 +32,8 @@ function App() {
     <BrowserRouter>
       <Nav />
       <div>
-        {/* <Routes>
-          {/* <Route path="/" element={<Main />} /> */}
+        <Routes>
+          {/* <Route path="/" element={<Main />} />
 
           <Route path="/signup" element={<SignupForm />} />
 
@@ -41,14 +41,13 @@ function App() {
           <Route path="" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
         </Route> */}
-
           <Route path="/pins">
             {/* <Route path="/create" element={<CreatePin />} />
           <Route path="/location/:id" element={<Location />} /> */}
             <Route path="/profile/:id" element={<Profile />} />
-          </Route> */}
-
-        {/* <Route path="profiles" element={<Profiles />} /> */}
+          </Route>{" "}
+          */}
+          {/* <Route path="profiles" element={<Profiles />} /> */}
         </Routes>
       </div>
       {/* <Map /> */}
