@@ -12,7 +12,6 @@ import logo from './images/golden-logo-transparent.png'
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
-
   return (
     <div className="container">
     <BrowserRouter>

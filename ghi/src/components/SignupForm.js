@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
 const SignupForm = () => {
@@ -32,12 +32,10 @@ const SignupForm = () => {
 
       const accountUrl = "http://localhost:8000/api/accounts/";
     try {
-        // const response = await fetch(accountUrl, fetchConfig);
       register(
         data,
         accountUrl
       );
-
       setEmail('');
       setUsername('');
       setPassword('');

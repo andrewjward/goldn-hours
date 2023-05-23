@@ -32,7 +32,7 @@ const LoginForm = () => {
     setEmail("");
     setPassword("");
 
-    navigate("/main");
+    // navigate("/main");
      }
     catch (error) {
      console.error(error);
