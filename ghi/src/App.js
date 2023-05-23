@@ -3,6 +3,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
 import Nav from "./components/Nav";
 import SignupForm from "./components/SignupForm";
+import PinCard from "./components/PinCard";
 
 function App() {
   const { isLoaded } = useLoadScript({
@@ -32,7 +33,7 @@ function Map() {
             <Marker position={center} />
           </GoogleMap>
         </div> */}
-        <SignupForm />
+        <PinCard />
       </div>
     </div>
   );
