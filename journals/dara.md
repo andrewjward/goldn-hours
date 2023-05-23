@@ -1,10 +1,14 @@
+## May 22, 2023
+
+Today
+
 ##  May 18, 2023
 
 Today, we worked on:
 
     Continuing defining our models for our FASTApi backend.
 
-Craig is the driver today, and we are making our Pins models. We added the ability to make a Pin object and list Pins. We also learned that female turkeys don't have beards.
+Craig is the driver today, and we are making our Pins models. We added the ability to make a Pin object and list Pins. We also learned that female turkeys don't have beards. Additionally, I drove and made the skeletons of 2 front end components.
 
 
 ## May 17, 2023

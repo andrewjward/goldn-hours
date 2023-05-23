@@ -1,3 +1,19 @@
+# MAY 23RD 2023
+
+
+
+
+
+# MAY 22ND 2023
+    Worked on CSS for Pin alone while others worked on
+    different components
+
+    Today we worked on in total the nav bar, the profile
+    page, and the pin css all together.
+
+    My aha moment was messing with the position of certain
+    elements, position relative and absolute was key.
+
 # MAY 17TH 2023
     Worked on authentication of accounts with the team
 
