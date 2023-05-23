@@ -4,6 +4,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
 import Nav from "./components/Nav";
 import SignupForm from "./components/SignupForm";
+import LoginForm from "./components/LoginForm";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
@@ -11,9 +12,13 @@ function App() {
     <div className="container">
       <BrowserRouter>
         <AuthProvider>
-        <Routes>
-          <Route path="/" element={<SignupForm />}></Route>
-        </Routes>
+          <Nav />
+          <Routes>
+            <Route path="/signup" element={<SignupForm />} />
+
+            <Route path="/login" element={<LoginForm />} />
+              {/* <Route path="/logout" element={<Logout />} /> */}
+          </Routes>
         </AuthProvider>
       </BrowserRouter>
     </div>
