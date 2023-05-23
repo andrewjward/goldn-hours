@@ -13,11 +13,7 @@ from queries.accounts import (
     AccountQueries,
     DuplicateAccountError,
 )
-from models.accounts import (
-    AccountIn,
-    Account,
-    AccountOut
-)
+from models.accounts import AccountIn, Account, AccountOut
 
 
 class AccountForm(BaseModel):
@@ -36,7 +32,7 @@ class HttpError(BaseModel):
 router = APIRouter(tags=["accounts"])
 
 
-@router.get("/api/accounts/", response_model=list[AccountOut])
+@router.get("/api/accounts", response_model=list[AccountOut])
 async def get_all_accounts(repo: AccountQueries = Depends()):
     return repo.get_all_accounts()
 
@@ -50,14 +46,13 @@ async def get_account(
     return account
 
 
-@router.post("/api/accounts/", response_model=AccountToken | HttpError)
+@router.post("/api/accounts", response_model=AccountOut | HttpError)
 async def create_account(
     info: AccountIn,
     request: Request,
     response: Response,
     repo: AccountQueries = Depends(),
 ):
-
     hashed_password = authenticator.hash_password(info.password)
     try:
         account = repo.create_account(info, hashed_password)
@@ -68,9 +63,9 @@ async def create_account(
         )
 
     form = AccountForm(username=info.username, password=info.password)
-
     token = await authenticator.login(response, request, form, repo)
-    return AccountToken(account=account, **token.dict())
+    print("ACCOUNTTOKEN:", AccountToken(account=account, **token.dict()))
+    return account
 
 
 @router.put(
@@ -116,12 +111,13 @@ async def delete_account(
     return True
 
 
-@router.get("/api/token/", response_model=AccountToken | None)
+@router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
     account: Account = Depends(authenticator.try_get_current_account_data),
 ) -> AccountToken | None:
     if authenticator.cookie_name in request.cookies:
+        print(authenticator.cookie_name)
         token_data = {
             "access_token": request.cookies[authenticator.cookie_name],
             "type": "Bearer",
