@@ -3,6 +3,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
 import Nav from "./components/Nav";
 import SignupForm from "./components/SignupForm";
+import LoginForm from "./components/LoginForm";
 import Profile from "./components/Profile";
 import { BrowserRouter, Route } from "react-router-dom";
 import { motion } from "framer-motion";
