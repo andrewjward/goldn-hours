@@ -4,7 +4,7 @@ import logo from "../images/gold-icon.png";
 
 const Nav = () => {
      return (
-       <nav className="bg-slate-700 text-white">
+       <nav className="bg-slate-700 text-white w-screen">
          <div className="flex justify-between">
            <ul className="flex justify-center items-center">
              <li className="">
@@ -13,6 +13,7 @@ const Nav = () => {
                    src={logo}
                    alt="Golden Logo"
                    style={{ width: "50px" }}
+                   className='p-1 mx-2'
                  />
                </NavLink>
              </li>

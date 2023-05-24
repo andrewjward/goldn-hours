@@ -1,8 +1,18 @@
+# MAY 24TH 2023
+    // My Bday 🎉
+    Had bit of headache
+
+    Today we worked on the pin form login and sign up
+    and the logout button
+
+    My aha moment came when we got the logout function
+    from the jwt package working.
+
 # MAY 23RD 2023
+    Lots and lots and lots of bugs today no really big
+    progress.
 
-
-
-
+    Aha moment today did not come for me.
 
 # MAY 22ND 2023
     Worked on CSS for Pin alone while others worked on

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 const SignupForm = () => {
-  const navigate = useNavigate();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { register } = useToken();
 
   const handleEmailChange = (event) => {
     const value = event.target.value;
@@ -22,44 +23,42 @@ const SignupForm = () => {
     setPassword(value);
   };
 
+  const handleNameChange = (event) => {
+    const value = event.target.value;
+    setName(value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {};
-
     data.email = email;
     data.username = username;
     data.password = password;
+    data.name = name;
+
+    console.log(data);
 
     const accountUrl = "http://localhost:8000/api/accounts/";
-    const fetchConfig = {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
     try {
-      const response = await fetch(accountUrl, fetchConfig);
-      if (response.ok) {
-        setEmail("");
-        setUsername("");
-        setPassword("");
-      }
+      register(data, accountUrl);
+      setEmail("");
+      setUsername("");
+      setPassword("");
+      setName("");
     } catch (error) {
       console.error(error);
     }
   };
-  useEffect(() => {}, []);
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
-            <h1 className="text-center">Make an Account</h1>
+      <div className="">
+        <div className="">
+          <div className="">
+            <h1 className="">Make an Account</h1>
             <form onSubmit={handleSubmit} id="add-customer-form">
-              <div className="form-floating mb-3">
+              <div className="">
                 <input
                   onChange={handleEmailChange}
                   placeholder="Email"
@@ -67,12 +66,12 @@ const SignupForm = () => {
                   type="text"
                   name="email"
                   id="email"
-                  className=""
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                   value={email}
                 />
-                <label htmlFor="name">Email</label>
+                <label htmlFor="email">Email</label>
               </div>
-              <div className="form-floating mb-3">
+              <div className="">
                 <input
                   onChange={handleUsernameChange}
                   placeholder="Username"
@@ -80,12 +79,12 @@ const SignupForm = () => {
                   type="text"
                   name="username"
                   id="username"
-                  className=""
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                   value={username}
                 />
-                <label htmlFor="fabric">Username</label>
+                <label htmlFor="username">Username</label>
               </div>
-              <div className="form-floating mb-3">
+              <div className="">
                 <input
                   onChange={handlePasswordChange}
                   placeholder="Password"
@@ -93,12 +92,25 @@ const SignupForm = () => {
                   type="password"
                   name="password"
                   id="password"
-                  className=""
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                   value={password}
                 />
-                <label htmlFor="fabric">Address</label>
+                <label htmlFor="password">Password</label>
               </div>
-              <button className="btn btn-success w-100">Sign up</button>
+              <div className="">
+                <input
+                  onChange={handleNameChange}
+                  placeholder="Name"
+                  required
+                  type="name"
+                  name="name"
+                  id="name"
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={name}
+                />
+                <label htmlFor="name">Name</label>
+              </div>
+              <button className="">Sign up</button>
             </form>
           </div>
         </div>
