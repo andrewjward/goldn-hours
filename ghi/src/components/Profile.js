@@ -5,7 +5,7 @@ function Profile() {
   const [profile, setProfile] = useState([]);
 
   const fetchData = async (account_id) => {
-    const fetchUrl = `http://localhost:8000/api/accounts/{account_id}?username=Louis`;
+    const fetchUrl = `http://localhost:8000/api/accounts/{account_id}?username=john`;
     const response = await fetch(fetchUrl);
     if (response.ok) {
       const data = await response.json();
