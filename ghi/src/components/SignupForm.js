@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
 const SignupForm = () => {
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const { register } = useToken();
 
   const handleEmailChange = (event) => {
@@ -13,8 +14,8 @@ const SignupForm = () => {
   };
 
   const handleUsernameChange = (event) => {
-      const value = event.target.value;
-      setUsername(value);
+    const value = event.target.value;
+    setUsername(value);
   };
 
   const handlePasswordChange = (event) => {
@@ -22,34 +23,39 @@ const SignupForm = () => {
     setPassword(value);
   };
 
+  const handleNameChange = (event) => {
+    const value = event.target.value;
+    setName(value);
+  };
+
   const handleSubmit = async (event) => {
-      event.preventDefault();
+    event.preventDefault();
 
-      const data = {}
-      data.email = email;
-      data.username = username;
-      data.password = password;
+    const data = {};
+    data.email = email;
+    data.username = username;
+    data.password = password;
+    data.name = name;
 
-      const accountUrl = "http://localhost:8000/api/accounts/";
+    console.log(data);
+
+    const accountUrl = "http://localhost:8000/api/accounts/";
     try {
-      register(
-        data,
-        accountUrl
-      );
-      setEmail('');
-      setUsername('');
-      setPassword('');
-
+      register(data, accountUrl);
+      setEmail("");
+      setUsername("");
+      setPassword("");
+      setName("");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className="w-screen flex flex-col items-center justify-center">
+    <div className="container">
       <h1 className="">Make an Account</h1>
       <form onSubmit={handleSubmit} id="add-customer-form">
-        <div className="flex flex-col items-center justify-center">
+        <div className="">
           <input
             onChange={handleEmailChange}
             placeholder="Email"
@@ -60,7 +66,9 @@ const SignupForm = () => {
             className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
             value={email}
           />
-          <label htmlFor="email"></label>
+          <label htmlFor="email">Email</label>
+        </div>
+        <div className="">
           <input
             onChange={handleUsernameChange}
             placeholder="Username"
@@ -71,7 +79,9 @@ const SignupForm = () => {
             className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
             value={username}
           />
-          <label htmlFor="username"></label>
+          <label htmlFor="username">Username</label>
+        </div>
+        <div className="">
           <input
             onChange={handlePasswordChange}
             placeholder="Password"
@@ -82,11 +92,24 @@ const SignupForm = () => {
             className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
             value={password}
           />
-          <label htmlFor="password"></label>
-          <button className="m-2 p-3 pl-10  rounded-lg ">Sign Up</button>
+          <label htmlFor="password">Password</label>
+        </div>
+        <div className="">
+          <input
+            onChange={handleNameChange}
+            placeholder="Name"
+            required
+            type="name"
+            name="name"
+            id="name"
+            className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+            value={name}
+          />
+          <label htmlFor="name">Name</label>
+        <button className="">Sign up</button>
         </div>
       </form>
     </div>
   );
-}
+};
 export default SignupForm;
