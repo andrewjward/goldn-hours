@@ -12,10 +12,11 @@ import logo from "./images/golden-logo-transparent.png";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
+  const baseUrl = "http://localhost:8000";
   return (
     <div className="container">
       <BrowserRouter>
-        <AuthProvider>
+        <AuthProvider baseUrl={baseUrl}>
           <Nav />
           <Routes>
             <Route path="/signup" element={<SignupForm />} />
