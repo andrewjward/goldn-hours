@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="container">
       <BrowserRouter>
-        <AuthProvider>
+        <AuthProvider>    {/* set baseUrl = localhost:8000 ?? */}
           <Nav />
           <Routes>
             <Route path="/signup" element={<SignupForm />} />
