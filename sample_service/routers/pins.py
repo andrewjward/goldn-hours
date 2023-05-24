@@ -6,7 +6,7 @@ from fastapi import (
     APIRouter,
     Request,
 )
-from models.pins import PinIn
+from models.pins import PinIn, PinOut
 from queries.pins import PinsQueries
 
 
@@ -17,7 +17,6 @@ router = APIRouter()
 async def create_pin(
     pin: PinIn,
     repo: PinsQueries = Depends(),
-
 ):
     pin = repo.create_pin(pin)
     return pin
@@ -26,6 +25,15 @@ async def create_pin(
 @router.get("/api/pins")
 async def list_pins(repo: PinsQueries = Depends()):
     return repo.get_all_pins()
+
+
+@router.get("/api/pins/{pin_id}", response_model=PinOut)
+async def get_pin(
+    pin_id: str,
+    repo: PinsQueries = Depends(),
+):
+    pin = repo.get_one_pin(id=pin_id)
+    return pin
 
 
 @router.delete("/api/pins/{pin_id}", response_model=bool | str)
