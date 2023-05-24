@@ -14,10 +14,5 @@ class Account(AccountIn):
     id: PydanticObjectId
 
 
-class AccountOut(BaseModel):
+class AccountOut(AccountIn):
     id: str
-    email: str
-    username: str
-    password: str
-    profile_pic: Optional[str]
-    name: str
