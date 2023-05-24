@@ -1,3 +1,7 @@
+## Wednesday, 2023-May-24
+    11:57 - CRD on pins seems good, need U
+            U on accounts is trying to login User, is this correct?
+
 ## Tuesday, 2023-May-23
     Today was a little rough. Code was all over the place.
     My signup/login was still working, but Dara's and Andrew's could not work. We did install some cool-looking CSS though. 😋 Finally I realized that react-jwtdown was sending a post to lh:3000, it seemed the var baseUrl was erroneously set to that. I was able to pass in lh:8000 as a prop from App.js to get it to work! AHA!
