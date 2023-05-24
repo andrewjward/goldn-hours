@@ -1,3 +1,7 @@
+## Tuesday, 2023-May-23
+    Today was a little rough. Code was all over the place.
+    My signup/login was still working, but Dara's and Andrew's could not work. We did install some cool-looking CSS though. 😋 Finally I realized that react-jwtdown was sending a post to lh:3000, it seemed the var baseUrl was erroneously set to that. I was able to pass in lh:8000 as a prop from App.js to get it to work! AHA!
+
 ## Thursday, 2023-May-18
     Yesterday we spent all day trying to get Authentication with jstdown-api working.
     We followed Curtis' video and looked at the mongo-jwtdown example and were able to create accounts but were getting a 401 when logging in. Our list view of accounts was working.
