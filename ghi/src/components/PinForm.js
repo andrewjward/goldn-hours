@@ -5,7 +5,7 @@ const PinForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     // directly below is the user "B B"
-    username: "username_man_cool_man_guy",
+    username: "goku",
     location_name: "",
     longitude: 0,
     latitude: 0,
@@ -43,7 +43,7 @@ const PinForm = () => {
       const response = await fetch(url, fetchConfig);
       if (response.ok) {
         setFormData({
-          username: "username_man_cool_man_guy",
+          username: "goku",
           location_name: "",
           longitude: 0,
           latitude: 0,
@@ -54,7 +54,7 @@ const PinForm = () => {
           image_url: ""
         })
         // event.target.reset();
-        // navigate("/");
+        navigate("/profile/goku");
       }
     } catch (error) {
       console.error(error);

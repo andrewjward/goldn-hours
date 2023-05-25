@@ -11,7 +11,7 @@ const Nav = () => {
   const { token } = useAuthContext();
 
   return (
-    <nav className="bg-slate-700 text-white w-screen">
+    <nav className="bg-slate-700 text-white">
       <div className="flex justify-between">
         <ul className="flex justify-center items-center">
           <li className="">

@@ -15,7 +15,7 @@ import PinForm from "./components/PinForm";
 function App() {
   const baseUrl = "http://localhost:8000";
   return (
-    <div className="container">
+    <div className="">
       <BrowserRouter>
         <AuthProvider baseUrl={baseUrl}>
           <Nav />

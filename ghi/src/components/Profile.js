@@ -10,7 +10,7 @@ function Profile() {
 
 
   const fetchData = async () => {
-    const fetchUrl = `http://localhost:8000/api/accounts/{account_id}?username=${params.username}`;
+    const fetchUrl = `http://localhost:8000/api/accounts/646fd5f3b6e948d3f21370b5`;
     const response = await fetch(fetchUrl);
     console.log(`fetched the user`)
     if (response.ok) {
@@ -48,18 +48,21 @@ function Profile() {
 
   return (
     <main>
-      <div className="container mx-auto px-4">
+      <div className="m-3 container mx-auto px-4 flex flex-col justify-center items-center">
         <div>{profile.name}</div>
         <img
-          className="w-20 h-20 rounded-full"
+          className="m-3 w-20 h-20 rounded-full object-cover"
           src={profile.profile_pic}
           alt="Rounded avatar"
         />
-        <div className="">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {pins.map((pin) => {
             return (
-              <div key={pin.id}>
-                <img className="w-96 h-96 object-cover" src={pin.image_url}></img>
+              <div className="h-auto max-w-full rounded-lg" key={pin.id}>
+                <img
+                  className="relative m-3 rounded-xl w-96 h-56 object-cover"
+                  src={pin.image_url}
+                ></img>
                 <p>{pin.location_name}</p>
               </div>
             );
