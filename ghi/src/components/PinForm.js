@@ -5,7 +5,7 @@ const PinForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     // directly below is the user "B B"
-    user_id: "646d386d86cbc9e82b8cd3e4",
+    username: "username_man_cool_man_guy",
     location_name: "",
     longitude: 0,
     latitude: 0,
@@ -13,7 +13,7 @@ const PinForm = () => {
     windy: 0,
     crowded: 0,
     date: new Date().toISOString().slice(0, 10),
-    image_url: "",
+    image_url: ""
   });
 
   const handleFormData = (event) => {
@@ -42,7 +42,18 @@ const PinForm = () => {
     try {
       const response = await fetch(url, fetchConfig);
       if (response.ok) {
-        event.target.reset();
+        setFormData({
+          username: "username_man_cool_man_guy",
+          location_name: "",
+          longitude: 0,
+          latitude: 0,
+          cloudy: 0,
+          windy: 0,
+          crowded: 0,
+          date: new Date().toISOString().slice(0, 10),
+          image_url: ""
+        })
+        // event.target.reset();
         // navigate("/");
       }
     } catch (error) {
@@ -99,8 +110,8 @@ const PinForm = () => {
               </div>
               <div className="form-floating mb-3">
                 <label
-                  for="steps-range"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  htmlFor="steps-range"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   How Cloudy is It?
                 </label>
@@ -121,8 +132,8 @@ const PinForm = () => {
               </div>
               <div className="form-floating mb-3">
                 <label
-                  for="steps-range"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  htmlFor="steps-range"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Is it Windy?
                 </label>
@@ -143,8 +154,8 @@ const PinForm = () => {
               </div>
               <div className="form-floating mb-3">
                 <label
-                  for="steps-range"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  htmlFor="steps-range"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   How Crowded is it?
                 </label>
@@ -179,7 +190,7 @@ const PinForm = () => {
                 />
                 <label htmlFor="fabric"></label>
               </div>
-              <button className="btn btn-success w-100">Sign up</button>
+              <button className="btn btn-success w-100">Create Pin</button>
             </form>
           </div>
         </div>

@@ -25,5 +25,22 @@ class PinsQueries(Queries):
         return pins
 
 
+    def get_user_pins(self, username: str) -> List[PinOut]:
+        db = self.collection.find({"username": username})
+        pins = []
+        for pin in db:
+            pin["id"] = str(pin["_id"])
+            pins.append(PinOut(**pin))
+        return pins
+
+
+    def get_one_pin(self, id: str) -> PinOut:
+        props = self.collection.find_one({"_id": ObjectId(id)})
+        if not props:
+            return None
+        props["id"] = str(props["_id"])
+        return PinOut(**props)
+
+
     def delete_pin(self, id: str) -> bool:
         return self.collection.delete_one({"_id": ObjectId(id)})

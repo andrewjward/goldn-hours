@@ -39,10 +39,10 @@ async def get_all_accounts(repo: AccountQueries = Depends()):
 
 @router.get("/api/accounts/{account_id}", response_model=AccountOut)
 async def get_account(
-    username: str,
+    account_id: str,
     repo: AccountQueries = Depends(),
 ):
-    account = repo.get_account(username)
+    account = repo.get_account(account_id) # use account id instead
     return account
 
 
@@ -104,10 +104,10 @@ async def update_account(
 
 @router.delete("/api/accounts/{account_id}", response_model=bool)
 async def delete_account(
-    username: str,
+    account_id: str,
     repo: AccountQueries = Depends(),
 ):
-    repo.delete_account(username)
+    repo.delete_account(account_id)
     return True
 
 

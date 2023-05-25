@@ -25,7 +25,7 @@ const Nav = () => {
             </NavLink>
           </li>
           <li className="">
-            <NavLink className="m-2" aria-current="page" to="/pins/profile/:id">
+            <NavLink className="m-2" aria-current="page" to="profile/">
               My Profile
             </NavLink>
           </li>
