@@ -9,7 +9,6 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const { login } = useToken();
 
-
   const handleEmailChange = (event) => {
     const value = event.target.value;
     setEmail(value);
@@ -20,33 +19,27 @@ const LoginForm = () => {
     setPassword(value);
   };
 
- const handleSubmit = async (event) => {
-   event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-   try {
+    try {
+      login(email, password);
+      setEmail("");
+      setPassword("");
 
-    login(
-        email,
-        password
-    );
-    setEmail("");
-    setPassword("");
-
-    // navigate("/main");
-     }
-    catch (error) {
-     console.error(error);
-   }
- };
+      navigate("/main");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="container flex flex-col items-center justify-center">
-      <h1 className="">Login</h1>
       <form onSubmit={handleSubmit} id="add-customer-form">
         <div className="flex flex-col items-center justify-center">
           <input
             onChange={handleEmailChange}
-            placeholder="Email"
+            placeholder="Username"
             required
             type="text"
             name="email"
