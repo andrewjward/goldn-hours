@@ -1,3 +1,11 @@
+## May 25,2023
+
+Today we worked on:
+
+        Making the profile page
+
+Craig was the driver today, and we worked on fetching profile data based on the user. Made the endpoints restful, too.
+
 ## May 24, 2023
 
 Today we worked on:

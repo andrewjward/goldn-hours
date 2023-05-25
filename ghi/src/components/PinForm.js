@@ -1,54 +1,49 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const SignupForm = () => {
-  const [locationName, setLocationName] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [sunny, setSunny] = useState(0);
-  const [windy, setWindy] = useState(0);
-  const [crowded, setCrowded] = useState(0);
-  const [cloudy, setCloudy] = useState(0);
-  const [date, setDate] = useState("");
-  const [image, setImage] = useState("");
+const PinForm = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    // directly below is the user "B B"
+    user_id: "646d386d86cbc9e82b8cd3e4",
+    location_name: "",
+    longitude: 0,
+    latitude: 0,
+    cloudy: 0,
+    windy: 0,
+    crowded: 0,
+    date: new Date().toISOString().slice(0, 10),
+    image_url: "",
+  });
 
-  const handleEmailChange = (event) => {
+  const handleFormData = (event) => {
     const value = event.target.value;
-    setEmail(value);
-  };
+    const inputName = event.target.name;
 
-  const handleUsernameChange = (event) => {
-    const value = event.target.value;
-    setUsername(value);
-  };
-
-  const handlePasswordChange = (event) => {
-    const value = event.target.value;
-    setPassword(value);
+    setFormData({
+      ...formData,
+      [inputName]: value,
+    });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(formData);
 
-    const data = {};
-
-    data.email = email;
-    data.username = username;
-    data.password = password;
-
-    const accountUrl = "http://localhost:8000/api/accounts/";
+    const url = "http://localhost:8000/api/pins";
     const fetchConfig = {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
       },
     };
+
     try {
-      const response = await fetch(accountUrl, fetchConfig);
+      const response = await fetch(url, fetchConfig);
       if (response.ok) {
-        setEmail("");
-        setUsername("");
-        setPassword("");
+        event.target.reset();
+        // navigate("/");
       }
     } catch (error) {
       console.error(error);
@@ -61,46 +56,128 @@ const SignupForm = () => {
       <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
-            <h1 className="text-center">Make an Account</h1>
+            <h1 className="text-center">Make a new Pin!</h1>
             <form onSubmit={handleSubmit} id="add-customer-form">
               <div className="form-floating mb-3">
                 <input
-                  onChange={handleEmailChange}
-                  placeholder="Email"
+                  onChange={handleFormData}
+                  placeholder="Location"
                   required
                   type="text"
-                  name="email"
-                  id="email"
-                  className=""
-                  value={email}
+                  name="location_name"
+                  id="location_name"
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={formData.location_name}
                 />
-                <label htmlFor="name">Email</label>
+                <label htmlFor="name"></label>
               </div>
               <div className="form-floating mb-3">
                 <input
-                  onChange={handleUsernameChange}
-                  placeholder="Username"
+                  onChange={handleFormData}
+                  placeholder="Longitude"
                   required
-                  type="text"
-                  name="username"
-                  id="username"
-                  className=""
-                  value={username}
+                  type="number"
+                  name="longitude"
+                  id="longitude"
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={formData.longitude}
                 />
-                <label htmlFor="fabric">Username</label>
+                <label htmlFor="fabric"></label>
               </div>
               <div className="form-floating mb-3">
                 <input
-                  onChange={handlePasswordChange}
-                  placeholder="Password"
+                  onChange={handleFormData}
+                  placeholder="Latitude"
                   required
-                  type="password"
-                  name="password"
-                  id="password"
-                  className=""
-                  value={password}
+                  type="number"
+                  name="latitude"
+                  id="latitude"
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={formData.latitude}
                 />
-                <label htmlFor="fabric">Address</label>
+                <label htmlFor="fabric"></label>
+              </div>
+              <div className="form-floating mb-3">
+                <label
+                  for="steps-range"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  How Cloudy is It?
+                </label>
+                <input
+                  onChange={handleFormData}
+                  placeholder="Cloudiness"
+                  required
+                  type="range"
+                  min="0"
+                  max="10"
+                  step="1"
+                  name="cloudy"
+                  id="cloudy"
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={formData.cloudy}
+                />
+                <label htmlFor="fabric"></label>
+              </div>
+              <div className="form-floating mb-3">
+                <label
+                  for="steps-range"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Is it Windy?
+                </label>
+                <input
+                  onChange={handleFormData}
+                  placeholder="Windiness"
+                  required
+                  type="range"
+                  min="0"
+                  max="10"
+                  step="1"
+                  name="windy"
+                  id="windy"
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={formData.windy}
+                />
+                <label htmlFor="fabric"></label>
+              </div>
+              <div className="form-floating mb-3">
+                <label
+                  for="steps-range"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  How Crowded is it?
+                </label>
+                <input
+                  onChange={handleFormData}
+                  placeholder="Crowdedness"
+                  required
+                  type="range"
+                  min="0"
+                  max="10"
+                  step="1"
+                  name="crowded"
+                  id="crowded"
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={formData.crowded}
+                />
+                <label htmlFor="fabric"></label>
+              </div>
+              <div className="form-floating mb-3">
+                <label htmlFor="fabric"></label>
+              </div>
+              <div className="form-floating mb-3">
+                <input
+                  onChange={handleFormData}
+                  placeholder="Image"
+                  required
+                  type="url"
+                  name="image_url"
+                  id="image_url"
+                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={formData.image_url}
+                />
+                <label htmlFor="fabric"></label>
               </div>
               <button className="btn btn-success w-100">Sign up</button>
             </form>
@@ -110,4 +187,4 @@ const SignupForm = () => {
     </div>
   );
 };
-export default SignupForm;
+export default PinForm;
