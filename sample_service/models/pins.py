@@ -9,7 +9,7 @@ class Error(BaseModel):
 
 
 class PinIn(BaseModel):
-    user_id: str
+    username: str
 
     #location
     location_name: Optional[str]

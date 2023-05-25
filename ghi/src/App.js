@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
 import Nav from "./components/Nav";
@@ -23,7 +23,7 @@ function App() {
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/new-pin" element={<PinForm />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:username" element={<Profile />} />
             {/* <Route path="/logout" element={<Logout />} /> */}
           </Routes>
         </AuthProvider>
