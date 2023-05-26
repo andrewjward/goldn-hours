@@ -1,14 +1,14 @@
 # volumes:
 volumes:
-    mongo-data-andrew:
-        external: true
+  mongo-data:
+    external: true
 
 services:
   mongo:
     image: mongo:4
     volumes:
       - ./setup/mongodb:/docker-entrypoint-initdb.d
-      - mongo-data-andrew:/data/db     # DB NAME???
+      - mongo-data:/data/db # DB NAME???
     environment:
       MONGO_INITDB_ROOT_USERNAME: squadcore
       MONGO_INITDB_ROOT_PASSWORD: password
@@ -25,7 +25,7 @@ services:
       - ./sample_service:/app
     environment:
       DATABASE_URL: mongodb://squadcore:password@mongo
-      DATABASE_NAME: mongo-data-andrew
+      DATABASE_NAME: mongo-data
       WAIT_HOSTS: mongo:27017
       SIGNING_KEY: ${SIGNING_KEY}
 
