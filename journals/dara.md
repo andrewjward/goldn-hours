@@ -1,6 +1,32 @@
+## May 25,2023
+
+Today we worked on:
+
+        Making the profile page
+
+Craig was the driver today, and we worked on fetching profile data based on the user. Made the endpoints restful, too.
+
+## May 24, 2023
+
+Today we worked on:
+
+        creating a pin form component
+
+Andrew was the driver for today. We worked together on creating the pin form component.
+
+## May 23, 2023
+
+Today we worked on:
+
+        fixing the login problem.
+
+We couldn't get the login token and authorization to work properly and Jonathan ended up finding the solution.
+
 ## May 22, 2023
 
-Today
+Today we worked on:
+
+        adding css on the nav bar
 
 ##  May 18, 2023
 

@@ -34,7 +34,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="container flex flex-col items-center justify-center">
+    <div className="w-screen flex flex-col items-center justify-center">
       <form onSubmit={handleSubmit} id="add-customer-form">
         <div className="flex flex-col items-center justify-center">
           <input
