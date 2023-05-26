@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import "../App.css";
+//useReducer useContext
 
-const LoginForm = () => {
+const LoginForm = ({userData}) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,12 +28,12 @@ const LoginForm = () => {
       setEmail("");
       setPassword("");
 
-      navigate("/main");
+      navigate(`/profile/${userData.username}`);
     } catch (error) {
       console.error(error);
     }
   };
-
+  console.log("ran through it")
   return (
     <div className="w-screen flex flex-col items-center justify-center">
       <form onSubmit={handleSubmit} id="add-customer-form">

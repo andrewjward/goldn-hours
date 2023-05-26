@@ -14,16 +14,40 @@ import PinForm from "./components/PinForm";
 
 function App() {
   const baseUrl = "http://localhost:8000";
+
+  const [userData, setUserData] = useState({});
+
+  const handleGetLoggedInUser = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
+    fetch(url, {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data.account);
+      })
+      .catch((error) => console.error(error));
+  };
+useEffect(() => {
+  handleGetLoggedInUser();
+}, []);
+  
   return (
     <div className="">
       <BrowserRouter>
         <AuthProvider baseUrl={baseUrl}>
-          <Nav />
+          <Nav userData={userData} />
           <Routes>
-            <Route path="/signup" element={<SignupForm />} />
-            <Route path="/new-pin" element={<PinForm />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/profile/:username" element={<Profile />} />
+            <Route
+              path="/signup"
+              element={<SignupForm userData={userData} />}
+            />
+            <Route path="/new-pin" element={<PinForm userData={userData} />} />
+            <Route path="/login" element={<LoginForm userData={userData} />} />
+            <Route
+              path="/profile/:username"
+              element={<Profile userData={userData} />}
+            />
             {/* <Route path="/logout" element={<Logout />} /> */}
           </Routes>
         </AuthProvider>

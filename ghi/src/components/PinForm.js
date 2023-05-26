@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const PinForm = () => {
+const PinForm = ({userData}) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    // directly below is the user "B B"
-    username: "goku",
+    username: userData.username,
     location_name: "",
     longitude: 0,
     latitude: 0,
@@ -28,7 +27,6 @@ const PinForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
 
     const url = "http://localhost:8000/api/pins";
     const fetchConfig = {
@@ -43,7 +41,7 @@ const PinForm = () => {
       const response = await fetch(url, fetchConfig);
       if (response.ok) {
         setFormData({
-          username: "goku",
+          username: "",
           location_name: "",
           longitude: 0,
           latitude: 0,
@@ -53,14 +51,14 @@ const PinForm = () => {
           date: new Date().toISOString().slice(0, 10),
           image_url: ""
         })
-        // event.target.reset();
-        navigate("/profile/goku");
+        navigate(`/profile/${userData.username}`);
       }
     } catch (error) {
       console.error(error);
     }
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+  }, []);
 
   return (
     <div className="container">

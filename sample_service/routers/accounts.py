@@ -40,8 +40,13 @@ async def get_all_accounts(repo: AccountQueries = Depends()):
 @router.get("/api/accounts/{account_id}", response_model=AccountOut)
 async def get_account(
     account_id: str,
+    username: str | None=None,
+
     repo: AccountQueries = Depends(),
 ):
+    if username:
+        return repo.get_account_by_username(username)
+    
     account = repo.get_account(account_id) # use account id instead
     return account
 
