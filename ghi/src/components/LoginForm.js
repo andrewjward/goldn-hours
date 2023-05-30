@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import "../App.css";
+//useReducer useContext
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -27,12 +28,28 @@ const LoginForm = () => {
       setEmail("");
       setPassword("");
 
-      navigate("/main");
+      navigate(`/profile/${userData.username}`);
     } catch (error) {
       console.error(error);
     }
   };
+    const [userData, setUserData] = useState({});
 
+    const handleGetLoggedInUser = async () => {
+      const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
+      fetch(url, {
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setUserData(data.account);
+        })
+        .catch((error) => console.error(error));
+    };
+    useEffect(() => {
+      handleGetLoggedInUser();
+    }, []);
+  console.log("ran through it")
   return (
     <div className="w-screen flex flex-col items-center justify-center">
       <form onSubmit={handleSubmit} id="add-customer-form">

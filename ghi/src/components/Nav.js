@@ -5,17 +5,23 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({userData, setUserData }) => {
   const { logout } = useToken();
   const navigate = useNavigate();
   const { token } = useAuthContext();
 
+  const handleLogout = () => {
+    logout();
+    setUserData({});
+    navigate("/");
+
+  }
   return (
     <nav className="bg-slate-700 text-white">
       <div className="flex justify-between">
         <ul className="flex justify-center items-center">
           <li className="">
-            <NavLink className="" aria-current="page" to="/main">
+            <NavLink className="" aria-current="page" to="/">
               <img
                 src={logo}
                 alt="Golden Logo"
@@ -25,7 +31,7 @@ const Nav = () => {
             </NavLink>
           </li>
           <li className="">
-            <NavLink className="m-2" aria-current="page" to="profile/">
+            <NavLink className="m-2" aria-current="page" to={userData}>
               My Profile
             </NavLink>
           </li>
@@ -55,19 +61,27 @@ const Nav = () => {
           </button>
           {token ? (
             <button
-              onClick={logout}
+              onClick={handleLogout}
               type="submit"
               className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
             >
               Logout
             </button>
           ) : (
-            <NavLink
-              to="/login"
-              className="m-2 p-3 pl-10 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-            >
-              Sign In
-            </NavLink>
+            <div>
+              <NavLink
+                to="/login"
+                className="m-2 p-3 pl-10 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/signup"
+                className="m-2 p-3 pl-10 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+              >
+                Sign up
+              </NavLink>
+            </div>
           )}
         </div>
       </div>
