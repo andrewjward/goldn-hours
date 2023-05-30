@@ -9,6 +9,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useToken();
+  const [userData, setUserData] = useState({});
 
   const handleEmailChange = (event) => {
     const value = event.target.value;
@@ -27,13 +28,12 @@ const LoginForm = () => {
       login(email, password);
       setEmail("");
       setPassword("");
-
+      await handleGetLoggedInUser();
       navigate(`/profile/${userData.username}`);
     } catch (error) {
       console.error(error);
     }
   };
-    const [userData, setUserData] = useState({});
 
     const handleGetLoggedInUser = async () => {
       const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
@@ -46,9 +46,9 @@ const LoginForm = () => {
         })
         .catch((error) => console.error(error));
     };
-    useEffect(() => {
-      handleGetLoggedInUser();
-    }, []);
+    // useEffect(() => {
+    //   handleGetLoggedInUser();
+    // }, []);
   console.log("ran through it")
   return (
     <div className="w-screen flex flex-col items-center justify-center">
