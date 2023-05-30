@@ -38,6 +38,7 @@ useEffect(() => {
         <AuthProvider baseUrl={baseUrl}>
           <Nav userData={userData} setUserData={setUserData} />
           <Routes>
+            <Route path="/" element={<Map />} />
             <Route
               path="/signup"
               element={

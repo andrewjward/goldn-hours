@@ -1,15 +1,34 @@
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker, InfoWindowF } from "@react-google-maps/api";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import logo from "../images/golden-logo-transparent.png";
+
+//map.fitbounds
 
 import "../App.css";
 
 function Map() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyD0SiphFHbZb8paV9YA3AM_X65d8eAyf-A",
   });
+
+  const [pins, setPins] = useState([]);
+
+  const fetchPins = async () => {
+    const pinsUrl = `http://localhost:8000/api/pins`;
+    const response = await fetch(pinsUrl);
+    if (response.ok) {
+      const pinsData = await response.json();
+      setPins(pinsData);
+      console.log(pins);
+    }
+  };
+
   const center = useMemo(() => ({ lat: 39.5, lng: -98.35 }), []);
+ 
+  useEffect(() => {
+    fetchPins();
+  }, []);
 
   if (!isLoaded)
     return (
@@ -38,6 +57,13 @@ function Map() {
             center={center}
             mapContainerClassName="map-container"
           >
+            {pins.map((pin)=> {
+              return (
+                <InfoWindowF position={{ lat: 69, lng: -69 }}>
+                  <div style={{ color: "black" }}>WOW YES</div>
+                </InfoWindowF>
+              );
+            })}
             <Marker position={center} />
           </GoogleMap>
         </div>
@@ -45,3 +71,4 @@ function Map() {
     </div>
   );
 }
+export default Map

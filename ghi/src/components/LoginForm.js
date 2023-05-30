@@ -28,7 +28,8 @@ const LoginForm = () => {
       setEmail("");
       setPassword("");
 
-      navigate(`/profile/${userData.username}`);
+      setTimeout(() => {navigate(`/profile/${email}`)}, 1000)
+      
     } catch (error) {
       console.error(error);
     }
