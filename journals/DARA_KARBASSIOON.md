@@ -1,4 +1,12 @@
-## May 25,2023
+## May 26, 2023
+
+Today we worked on:
+
+        Front end profile things
+
+I am driving today. We are removing hard coded elements which should be dynamic. But we are having trouble syncing state across different components. Violet said that we should try using useContext or useReducer to solve this without Redux.
+
+## May 25, 2023
 
 Today we worked on:
 
@@ -13,6 +21,7 @@ Today we worked on:
         creating a pin form component
 
 Andrew was the driver for today. We worked together on creating the pin form component.
+
 
 ## May 23, 2023
 

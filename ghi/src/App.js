@@ -36,14 +36,21 @@ useEffect(() => {
     <div className="">
       <BrowserRouter>
         <AuthProvider baseUrl={baseUrl}>
-          <Nav userData={userData} />
+          <Nav userData={userData} setUserData={setUserData} />
           <Routes>
             <Route
               path="/signup"
-              element={<SignupForm userData={userData} />}
+              element={
+                <SignupForm userData={userData} setUserData={setUserData} />
+              }
             />
             <Route path="/new-pin" element={<PinForm userData={userData} />} />
-            <Route path="/login" element={<LoginForm userData={userData} />} />
+            <Route
+              path="/login"
+              element={
+                <LoginForm userData={userData} setUserData={setUserData} />
+              }
+            />
             <Route
               path="/profile/:username"
               element={<Profile userData={userData} />}
