@@ -1,12 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
-function Profile({userData}) {
+function Profile({}) {
   const [pins, setPins] = useState([]);
   const [profile, setProfile] = useState([]);
   const params = useParams();
-  const isLoggedIn = params.username === userData.username;
+  const [userData, setUserData] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    params.username === userData.username
+  );
 
+  const handleGetLoggedInUser = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
+    fetch(url, {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data.account);
+        setIsLoggedIn(params.username === data.account.username);
+      })
+      .catch((error) => console.error(error));
+  };
+  useEffect(() => {
+    handleGetLoggedInUser();
+  }, []);
 
   const fetchData = async () => {
     const fetchUrl = `http://localhost:8000/api/accounts/69?username=${params.username}`;
@@ -24,7 +42,7 @@ function Profile({userData}) {
       const pinsData = await response.json();
       setPins(pinsData);
     }
-  }
+  };
 
   //   const handleDelete = async (customerId) => {
   //     const deletedurl = `http://localhost:8090/api/customers/${customerId}`;
@@ -54,8 +72,7 @@ function Profile({userData}) {
           >
             Edit Profile
           </button>
-        ) : null
-        }
+        ) : null}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {pins.map((pin) => {
             return (
