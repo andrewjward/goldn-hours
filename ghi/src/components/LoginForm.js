@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import "../App.css";
-//useReducer useContext
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useToken();
   const [userData, setUserData] = useState({});
 
-  const handleEmailChange = (event) => {
+  if (token) {
+    navigate(`/profile/${username}`);
+  }
+
+  const handleUsernameChange = (event) => {
     const value = event.target.value;
-    setEmail(value);
+    setUsername(value);
   };
 
   const handlePasswordChange = (event) => {
@@ -21,12 +24,16 @@ const LoginForm = () => {
     setPassword(value);
   };
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      login(email, password);
-      setEmail("");
+      login(username, password);
+      // setUsername("");
       setPassword("");
       await handleGetLoggedInUser();
       navigate(`/profile/${userData.username}`);
@@ -55,16 +62,16 @@ const LoginForm = () => {
       <form onSubmit={handleSubmit} id="add-customer-form">
         <div className="flex flex-col items-center justify-center">
           <input
-            onChange={handleEmailChange}
+            onChange={handleUsernameChange}
             placeholder="Username"
             required
             type="text"
-            name="email"
-            id="email"
+            name="username"
+            id="username"
             className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-            value={email}
+            value={username}
           />
-          <label htmlFor="email"></label>
+          <label htmlFor="username"></label>
           <input
             onChange={handlePasswordChange}
             placeholder="Password"
