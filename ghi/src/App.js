@@ -11,9 +11,12 @@ import { motion } from "framer-motion";
 import logo from "./images/golden-logo-transparent.png";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import PinForm from "./components/PinForm";
+import PinCard from "./components/PinCard";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
   const baseUrl = "http://localhost:8000";
+  const { token } = useToken();
 
   const [userData, setUserData] = useState({});
 
@@ -28,10 +31,10 @@ function App() {
       })
       .catch((error) => console.error(error));
   };
-useEffect(() => {
-  handleGetLoggedInUser();
-}, []);
-  
+  useEffect(() => {
+    handleGetLoggedInUser();
+  }, []);
+
   return (
     <div className="">
       <BrowserRouter>
@@ -46,16 +49,14 @@ useEffect(() => {
               }
             />
             <Route path="/new-pin" element={<PinForm userData={userData} />} />
+            <Route path="/pin" element={<PinCard />} />
             <Route
               path="/login"
               element={
                 <LoginForm userData={userData} setUserData={setUserData} />
               }
             />
-            <Route
-              path="/profile/:username"
-              element={<Profile userData={userData} />}
-            />
+            <Route path="/profile/:username" element={<Profile />} />
             {/* <Route path="/logout" element={<Logout />} /> */}
           </Routes>
         </AuthProvider>

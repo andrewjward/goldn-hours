@@ -1,7 +1,13 @@
-import { GoogleMap, useLoadScript, Marker, InfoWindowF } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindowF,
+} from "@react-google-maps/api";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import logo from "../images/golden-logo-transparent.png";
+import PinCard from "./PinCard";
 
 //map.fitbounds
 
@@ -20,12 +26,11 @@ function Map() {
     if (response.ok) {
       const pinsData = await response.json();
       setPins(pinsData);
-      console.log(pins);
     }
   };
 
   const center = useMemo(() => ({ lat: 39.5, lng: -98.35 }), []);
- 
+  console.log(pins);
   useEffect(() => {
     fetchPins();
   }, []);
@@ -57,12 +62,8 @@ function Map() {
             center={center}
             mapContainerClassName="map-container"
           >
-            {pins.map((pin)=> {
-              return (
-                <InfoWindowF position={{ lat: 69, lng: -69 }}>
-                  <div style={{ color: "black" }}>WOW YES</div>
-                </InfoWindowF>
-              );
+            {pins.map((pin) => {
+              return <PinCard pin={pin} />;
             })}
             <Marker position={center} />
           </GoogleMap>
@@ -71,4 +72,4 @@ function Map() {
     </div>
   );
 }
-export default Map
+export default Map;

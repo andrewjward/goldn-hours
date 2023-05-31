@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const PinForm = ({userData}) => {
+const PinForm = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
+  const [userName, setUserName] = useState({});
+  // const [formToJSON, setFormToJSON] = useState({});
+
   const [formData, setFormData] = useState({
-    username: userData.username,
+    username: "",
     location_name: "",
     longitude: 0,
     latitude: 0,
@@ -22,12 +26,31 @@ const PinForm = ({userData}) => {
     setFormData({
       ...formData,
       [inputName]: value,
+      username: userName,
     });
+    // console.log(formData);
+  };
+
+
+  const handleGetLoggedInUser = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
+    fetch(url, {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data.account);
+        setUserName(data.account.username);
+      })
+      .catch((error) => console.error(error));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log("FORMDATA:", formData);
+    // formToJSON = formData;
+    // formToJSON["username"] = userName;
+    // console.log("FORM2JSON:", formToJSON);
     const url = "http://localhost:8000/api/pins";
     const fetchConfig = {
       method: "POST",
@@ -58,6 +81,7 @@ const PinForm = ({userData}) => {
     }
   };
   useEffect(() => {
+    handleGetLoggedInUser();
   }, []);
 
   return (

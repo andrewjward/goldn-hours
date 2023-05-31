@@ -1,3 +1,11 @@
+## May 30, 2023
+
+Today we worked on:
+
+        trying to fix the login problem
+
+Unfortunately we still have trouble with the login. The userData is still undefined. Just started the map stuff now. Need to access all user pins to show them on the map.
+
 ## May 26, 2023
 
 Today we worked on:
