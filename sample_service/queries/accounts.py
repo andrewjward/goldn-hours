@@ -30,7 +30,7 @@ class AccountQueries(Queries):
             return None
         props["id"] = str(props["_id"])
         return AccountOut(**props)
-    
+
     def get_account_by_username(self, account_username: str) -> AccountOut:
         props = self.collection.find_one({"username": account_username})
         if not props:
@@ -50,11 +50,9 @@ class AccountQueries(Queries):
         return AccountOut(**props)
 
 
-    def update_account(self, id: str, info: AccountIn, hashed_password: Union[None, str]):
+    def update_account(self, id: str, info: AccountIn):
         props = info.dict()
-        if hashed_password is not None:
-            props["unhashed_password"] = props["password"]
-            props["password"] = hashed_password
+
 
         try:
             self.collection.find_one_and_update(
