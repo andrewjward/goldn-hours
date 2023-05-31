@@ -1,0 +1,46 @@
+# volumes:
+volumes:
+    mongo-data:
+        external: true
+
+services:
+  mongo:
+    image: mongo:4
+    volumes:
+      - ./setup/mongodb:/docker-entrypoint-initdb.d
+      - mongo-data:/data/db     # DB NAME???
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: squadcore
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+
+  fastapi:
+    build:
+      context: sample_service
+      dockerfile: Dockerfile.dev
+    ports:
+      - 8000:8000
+    volumes:
+      - ./sample_service:/app
+    environment:
+      DATABASE_URL: mongodb://squadcore:password@mongo
+      DATABASE_NAME: mongo-data
+      WAIT_HOSTS: mongo:27017
+      SIGNING_KEY: ${SIGNING_KEY}
+
+  ghi:
+    image: node:lts-bullseye
+    command: /bin/bash run.sh
+    working_dir: /app
+    volumes:
+      - ./ghi:/app
+    ports:
+      - "3000:3000"
+    environment:
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
+      PUBLIC_URL: http://localhost:3000
+      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+      REACT_APP_USER_SERVICE_API_HOST: http://localhost:8000

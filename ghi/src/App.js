@@ -1,38 +1,68 @@
 import { useEffect, useMemo, useState } from "react";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
 import Nav from "./components/Nav";
+import SignupForm from "./components/SignupForm";
+import LoginForm from "./components/LoginForm";
+import Profile from "./components/Profile";
+import Map from "./components/Map";
+import { motion } from "framer-motion";
+import logo from "./images/golden-logo-transparent.png";
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+import PinForm from "./components/PinForm";
+import PinCard from "./components/PinCard";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
+  const baseUrl = "http://localhost:8000";
+  const { token } = useToken();
 
-  if (!isLoaded) return <div>Loading...</div>;
-  return <Map />;
-}
+  const [userData, setUserData] = useState({});
 
-function Map() {
-  const center = useMemo(() => ({ lat: 39.5, lng: -98.35 }), []);
+  const handleGetLoggedInUser = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
+    fetch(url, {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data.account);
+      })
+      .catch((error) => console.error(error));
+  };
+  useEffect(() => {
+    handleGetLoggedInUser();
+  }, []);
 
   return (
     <div className="">
-      <Nav />
-      <div
-        className="rounded-2xl flex items-center justify-center"
-        style={{ width: "100vw", height: "100vh" }}
-      >
-        <div className="rounded-2xl h-4/5 w-4/5 flex items-center justify-center">
-          <GoogleMap
-            zoom={5.3}
-            center={center}
-            mapContainerClassName="map-container"
-          >
-            <Marker position={center} />
-          </GoogleMap>
-        </div>
-      </div>
+      <BrowserRouter>
+        <AuthProvider baseUrl={baseUrl}>
+          <Nav userData={userData} setUserData={setUserData} />
+          <Routes>
+            <Route path="/" element={<Map />} />
+            <Route
+              path="/signup"
+              element={
+                <SignupForm userData={userData} setUserData={setUserData} />
+              }
+            />
+            <Route path="/new-pin" element={<PinForm userData={userData} />} />
+            <Route path="/pin" element={<PinCard />} />
+            <Route
+              path="/login"
+              element={
+                <LoginForm userData={userData} setUserData={setUserData} />
+              }
+            />
+            <Route path="/profile/:username" element={<Profile />} />
+            {/* <Route path="/logout" element={<Logout />} /> */}
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
     </div>
   );
 }
+
 export default App;

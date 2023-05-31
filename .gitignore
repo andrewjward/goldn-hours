@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# pipeline failing
+.gitlab-ci.yml
+
 # Distribution / packaging
 .Python
 build/
@@ -102,6 +105,7 @@ ipython_config.py
 #poetry.lock
 
 # pdm
+keys.py
 #   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
 #pdm.lock
 #   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
