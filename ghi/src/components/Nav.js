@@ -21,7 +21,7 @@ const Nav = ({userData, setUserData }) => {
       <div className="flex justify-between">
         <ul className="flex justify-center items-center">
           <li className="">
-            <NavLink className="" aria-current="page" to="/">
+            <NavLink aria-current="page" to="/">
               <img
                 src={logo}
                 alt="Golden Logo"
