@@ -22,9 +22,6 @@ function Profile({}) {
       })
       .catch((error) => console.error(error));
   };
-  useEffect(() => {
-    handleGetLoggedInUser();
-  }, []);
 
   const fetchData = async () => {
     const fetchUrl = `http://localhost:8000/api/accounts/69?username=${params.username}`;
@@ -51,6 +48,7 @@ function Profile({}) {
   //   };
 
   useEffect(() => {
+    handleGetLoggedInUser();
     fetchData();
     fetchPins();
   }, []);
