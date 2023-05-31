@@ -24,8 +24,15 @@ class AccountQueries(Queries):
         return accounts
 
 
-    def get_account(self, username: str) -> AccountOut:
-        props = self.collection.find_one({"username": username})
+    def get_account(self, account_id: str) -> AccountOut:
+        props = self.collection.find_one({"_id": ObjectId(account_id)})
+        if not props:
+            return None
+        props["id"] = str(props["_id"])
+        return AccountOut(**props)
+    
+    def get_account_by_username(self, account_username: str) -> AccountOut:
+        props = self.collection.find_one({"username": account_username})
         if not props:
             return None
         props["id"] = str(props["_id"])
@@ -61,5 +68,5 @@ class AccountQueries(Queries):
         return AccountOut(**props, id=id)
 
 
-    def delete_account(self, username: str) -> bool:
-        return self.collection.delete_one({"username": username})
+    def delete_account(self, account_id: str) -> bool:
+        return self.collection.delete_one({"_id": ObjectId(account_id)})

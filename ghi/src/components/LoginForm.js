@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import "../App.css";
+//useReducer useContext
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useToken();
+  const { login, token } = useToken();
 
+  if (token) {
+    navigate(`/profile/${username}`);
+  }
 
-  const handleEmailChange = (event) => {
+  const handleUsernameChange = (event) => {
     const value = event.target.value;
-    setEmail(value);
+    setUsername(value);
   };
 
   const handlePasswordChange = (event) => {
@@ -20,41 +24,44 @@ const LoginForm = () => {
     setPassword(value);
   };
 
- const handleSubmit = async (event) => {
-   event.preventDefault();
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
-   try {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    login(
-        email,
-        password
-    );
-    setEmail("");
-    setPassword("");
+    try {
+      login(username, password);
+      // setUsername("");
+      setPassword("");
 
-    // navigate("/main");
-     }
-    catch (error) {
-     console.error(error);
-   }
- };
+      // handleGetLoggedInUser();
+      // navigate(`/profile/${userData.username}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // useEffect(() => {
+  //   handleGetLoggedInUser();
+  // }, []);
 
   return (
-    <div className="container flex flex-col items-center justify-center">
-      <h1 className="">Login</h1>
+    <div className="w-screen flex flex-col items-center justify-center">
       <form onSubmit={handleSubmit} id="add-customer-form">
         <div className="flex flex-col items-center justify-center">
           <input
-            onChange={handleEmailChange}
-            placeholder="Email"
+            onChange={handleUsernameChange}
+            placeholder="Username"
             required
             type="text"
-            name="email"
-            id="email"
+            name="username"
+            id="username"
             className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-            value={email}
+            value={username}
           />
-          <label htmlFor="email"></label>
+          <label htmlFor="username"></label>
           <input
             onChange={handlePasswordChange}
             placeholder="Password"

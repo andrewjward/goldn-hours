@@ -1,23 +1,60 @@
 import { useEffect, useMemo, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
 import Nav from "./components/Nav";
 import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
+import Profile from "./components/Profile";
+import Map from "./components/Map";
+import { motion } from "framer-motion";
+import logo from "./images/golden-logo-transparent.png";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
+import PinForm from "./components/PinForm";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
-  return (
-    <div className="container">
-      <BrowserRouter>
-        <AuthProvider>    {/* set baseUrl = localhost:8000 ?? */}
-          <Nav />
-          <Routes>
-            <Route path="/signup" element={<SignupForm />} />
+  const baseUrl = "http://localhost:8000";
+  const { token } = useToken();
 
-            <Route path="/login" element={<LoginForm />} />
-              {/* <Route path="/logout" element={<Logout />} /> */}
+  const [userData, setUserData] = useState({});
+
+  const handleGetLoggedInUser = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
+    fetch(url, {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data.account);
+      })
+      .catch((error) => console.error(error));
+  };
+  useEffect(() => {
+    handleGetLoggedInUser();
+  }, []);
+
+  return (
+    <div className="">
+      <BrowserRouter>
+        <AuthProvider baseUrl={baseUrl}>
+          <Nav userData={userData} setUserData={setUserData} />
+          <Routes>
+            <Route
+              path="/signup"
+              element={
+                <SignupForm userData={userData} setUserData={setUserData} />
+              }
+            />
+            <Route path="/new-pin" element={<PinForm userData={userData} />} />
+            <Route
+              path="/login"
+              element={
+                <LoginForm userData={userData} setUserData={setUserData} />
+              }
+            />
+            <Route path="/profile/:username" element={<Profile />} />
+            {/* <Route path="/logout" element={<Logout />} /> */}
           </Routes>
         </AuthProvider>
       </BrowserRouter>
@@ -25,31 +62,4 @@ function App() {
   );
 }
 
-function Map() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
-  const center = useMemo(() => ({ lat: 39.5, lng: -98.35 }), []);
-
-  if (!isLoaded) return <div>Loading...</div>;
-  return (
-    <div className="">
-      <Nav />
-      <div
-        className="rounded-2xl flex items-center justify-center"
-        style={{ width: "100vw", height: "100vh" }}
-      >
-        {/* <div className="rounded-2xl h-4/5 w-4/5 flex items-center justify-center">
-          <GoogleMap
-            zoom={5.3}
-            center={center}
-            mapContainerClassName="map-container"
-          >
-            <Marker position={center} />
-          </GoogleMap>
-        </div> */}
-      </div>
-    </div>
-  );
-}
 export default App;

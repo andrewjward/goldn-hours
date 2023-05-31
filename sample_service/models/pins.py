@@ -12,18 +12,17 @@ class PinIn(BaseModel):
     username: str
 
     #location
-    location_name: str
+    location_name: Optional[str]
     longitude: float
     latitude: float
 
     #conditions
-    sunny: int
+    cloudy: int
     windy: int
     crowded: int
-    cloudy: int
 
     #info
-    date: datetime
+    date: str
     image_url: str
 
 
