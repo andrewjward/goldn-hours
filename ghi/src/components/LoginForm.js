@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import "../App.css";
-//useReducer useContext
 
 const LoginForm = () => {
   const navigate = useNavigate();

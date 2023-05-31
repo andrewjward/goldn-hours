@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import logo from "./images/golden-logo-transparent.png";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import PinForm from "./components/PinForm";
+import PinCard from "./components/PinCard";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <AuthProvider baseUrl={baseUrl}>
           <Nav userData={userData} setUserData={setUserData} />
           <Routes>
+            <Route path="/" element={<Map />} />
             <Route
               path="/signup"
               element={
@@ -47,6 +49,7 @@ function App() {
               }
             />
             <Route path="/new-pin" element={<PinForm userData={userData} />} />
+            <Route path="/pin" element={<PinCard />} />
             <Route
               path="/login"
               element={

@@ -22,10 +22,9 @@ async def create_pin(
     return pin
 
 
-@router.get("/api/pins") # ?q= optional query for specific user's pins
+@router.get("/api/pins")  # ?q= optional query for specific user's pins
 async def list_pins(
-    username: str | None=None,
-    repo: PinsQueries = Depends()
+    username: str | None = None, repo: PinsQueries = Depends()
 ):
     if username:
         return repo.get_user_pins(username)
