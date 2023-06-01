@@ -31,7 +31,11 @@ const Nav = ({userData, setUserData }) => {
             </NavLink>
           </li>
           <li className="">
-            <NavLink className="m-2" aria-current="page" to={userData}>
+            <NavLink
+              className="m-2"
+              aria-current="page"
+              to={`/profile/${userData.username}`}
+            >
               My Profile
             </NavLink>
           </li>
