@@ -12,6 +12,7 @@ import logo from "./images/golden-logo-transparent.png";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import PinForm from "./components/PinForm";
 import PinCard from "./components/PinCard";
+import LocationInput from "./components/LocationInput";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function App() {
