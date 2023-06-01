@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 const PinForm = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
+  const [userName, setUserName] = useState({});
+  // const [formToJSON, setFormToJSON] = useState({});
+
   const [formData, setFormData] = useState({
-    // directly below is the user "B B"
-    username: "goku",
+    username: "",
     location_name: "",
     longitude: 0,
     latitude: 0,
@@ -23,13 +26,31 @@ const PinForm = () => {
     setFormData({
       ...formData,
       [inputName]: value,
+      username: userName,
     });
+    // console.log(formData);
+  };
+
+
+  const handleGetLoggedInUser = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
+    fetch(url, {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data.account);
+        setUserName(data.account.username);
+      })
+      .catch((error) => console.error(error));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
-
+    console.log("FORMDATA:", formData);
+    // formToJSON = formData;
+    // formToJSON["username"] = userName;
+    // console.log("FORM2JSON:", formToJSON);
     const url = "http://localhost:8000/api/pins";
     const fetchConfig = {
       method: "POST",
@@ -43,7 +64,7 @@ const PinForm = () => {
       const response = await fetch(url, fetchConfig);
       if (response.ok) {
         setFormData({
-          username: "goku",
+          username: "",
           location_name: "",
           longitude: 0,
           latitude: 0,
@@ -53,14 +74,15 @@ const PinForm = () => {
           date: new Date().toISOString().slice(0, 10),
           image_url: ""
         })
-        // event.target.reset();
-        navigate("/profile/goku");
+        navigate(`/profile/${userData.username}`);
       }
     } catch (error) {
       console.error(error);
     }
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    handleGetLoggedInUser();
+  }, []);
 
   return (
     <div className="container">

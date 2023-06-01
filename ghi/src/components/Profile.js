@@ -1,36 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 
-function Profile() {
+function Profile({}) {
   const [pins, setPins] = useState([]);
   const [profile, setProfile] = useState([]);
-  const isLoggedIn = true;
+  const params = useParams();
+  const [userData, setUserData] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    params.username === userData.username
+  );
 
-  let params = useParams();
-
+  const handleGetLoggedInUser = async () => {
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
+    fetch(url, {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data.account);
+        setIsLoggedIn(params.username === data.account.username);
+      })
+      .catch((error) => console.error(error));
+  };
 
   const fetchData = async () => {
-    const fetchUrl = `http://localhost:8000/api/accounts/646fd5f3b6e948d3f21370b5`;
+    const fetchUrl = `http://localhost:8000/api/accounts/69?username=${params.username}`;
     const response = await fetch(fetchUrl);
-    console.log(`fetched the user`)
     if (response.ok) {
       const data = await response.json();
-      // console.log(data);
       setProfile(data);
     }
   };
 
-
   const fetchPins = async () => {
     const pinsUrl = `http://localhost:8000/api/pins?username=${params.username}`;
     const response = await fetch(pinsUrl);
-    console.log(`fetched the pins`)
     if (response.ok) {
       const pinsData = await response.json();
-      console.log(pinsData);
       setPins(pinsData);
     }
-  }
+  };
 
   //   const handleDelete = async (customerId) => {
   //     const deletedurl = `http://localhost:8090/api/customers/${customerId}`;
@@ -39,12 +48,10 @@ function Profile() {
   //   };
 
   useEffect(() => {
+    handleGetLoggedInUser();
     fetchData();
     fetchPins();
   }, []);
-
-  console.log(`Ran through the code`)
-
 
   return (
     <main>
@@ -55,6 +62,15 @@ function Profile() {
           src={profile.profile_pic}
           alt="Rounded avatar"
         />
+        {isLoggedIn ? (
+          <button
+            // onClick={}
+            type="submit"
+            className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+          >
+            Edit Profile
+          </button>
+        ) : null}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {pins.map((pin) => {
             return (

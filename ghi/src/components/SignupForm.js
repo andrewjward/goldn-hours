@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { register } = useToken();
+  const { register, token } = useToken();
+  const navigate = useNavigate();
+
+  if (token) {
+    navigate(`/profile/${username}`);
+  }
 
   const handleEmailChange = (event) => {
     const value = event.target.value;
@@ -37,15 +43,14 @@ const SignupForm = () => {
     data.password = password;
     data.name = name;
 
-    console.log(data);
-
     const accountUrl = "http://localhost:8000/api/accounts/";
     try {
       register(data, accountUrl);
       setEmail("");
-      setUsername("");
+      // setUsername("");
       setPassword("");
       setName("");
+
     } catch (error) {
       console.error(error);
     }

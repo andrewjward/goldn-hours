@@ -40,8 +40,13 @@ async def get_all_accounts(repo: AccountQueries = Depends()):
 @router.get("/api/accounts/{account_id}", response_model=AccountOut)
 async def get_account(
     account_id: str,
+    username: str | None=None,
+
     repo: AccountQueries = Depends(),
 ):
+    if username:
+        return repo.get_account_by_username(username)
+    
     account = repo.get_account(account_id) # use account id instead
     return account
 
@@ -97,7 +102,7 @@ async def update_account(
             detail="Cannot Create An Account With Those Credentials",
         )
 
-    form = AccountForm(username=info.email, password=info.password)
+    form = AccountForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
 
