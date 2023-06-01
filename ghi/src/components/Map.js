@@ -34,7 +34,7 @@ function Map() {
   const mapOptions = {
     styles: styles,
   };
-  console.log(pins);
+  // console.log(pins);
   useEffect(() => {
     fetchPins();
   }, []);
