@@ -14,8 +14,7 @@ const Nav = ({ username }) => {
     logout();
     // setUserData({});   ! doeES THIS DO ANYTHING???
     navigate("/");
-
-  }
+  };
   return (
     <nav className="bg-slate-700 text-white">
       <div className="flex justify-between">
@@ -31,12 +30,16 @@ const Nav = ({ username }) => {
             </NavLink>
           </li>
           <li className="">
-            <NavLink className="m-2" aria-current="page" to={`/profile/${username}`}>
+            <NavLink
+              className="m-2"
+              aria-current="page"
+              to={`/profile/${username}`}
+            >
               My Profile
             </NavLink>
           </li>
           <li className="">
-            <NavLink className="m-2" aria-current="page" to="/">
+            <NavLink className="m-2" aria-current="page" to="/search-users">
               Search Users
             </NavLink>
           </li>
