@@ -34,9 +34,6 @@ const LoginForm = () => {
       login(username, password);
       // setUsername("");
       setPassword("");
-
-      // handleGetLoggedInUser();
-      // navigate(`/profile/${userData.username}`);
     } catch (error) {
       console.error(error);
     }
