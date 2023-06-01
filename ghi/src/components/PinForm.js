@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 
 const PinForm = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
   const [userName, setUserName] = useState({});
+  const [locationLongitude, setLocationLongitude] = useState(0);
+  const [locationLatitude, setLocationLatitude] = useState(0);
   // const [formToJSON, setFormToJSON] = useState({});
 
   const [formData, setFormData] = useState({
@@ -45,9 +48,31 @@ const PinForm = () => {
       .catch((error) => console.error(error));
   };
 
+
+  const handleGeocode = async () => {
+    // let lat = 0;
+    // let lng = 0;
+    geocodeByAddress('Montevideo, Uruguay')
+      .then(results => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        setLocationLongitude(lng); setLocationLatitude(lat);
+    })
+      .catch(error => console.error(error));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("FORMDATA:", formData);
+    handleGeocode();
+    setTimeout(() => {
+      console.log("HANDLE_SUBMIT:", locationLongitude, locationLatitude);
+    }, 3000);
+    setFormData({
+      ...formData,
+      longitude: locationLongitude,
+      latitude: locationLatitude
+    });
+
+    // console.log("FORMDATA:", formData);
     // formToJSON = formData;
     // formToJSON["username"] = userName;
     // console.log("FORM2JSON:", formToJSON);
@@ -104,7 +129,7 @@ const PinForm = () => {
                 />
                 <label htmlFor="name"></label>
               </div>
-              <div className="form-floating mb-3">
+              {/* <div className="form-floating mb-3">
                 <input
                   onChange={handleFormData}
                   placeholder="Longitude"
@@ -129,7 +154,7 @@ const PinForm = () => {
                   value={formData.latitude}
                 />
                 <label htmlFor="fabric"></label>
-              </div>
+              </div> */}
               <div className="form-floating mb-3">
                 <label
                   htmlFor="steps-range"
