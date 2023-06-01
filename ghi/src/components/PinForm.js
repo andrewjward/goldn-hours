@@ -8,7 +8,11 @@ const PinForm = () => {
   const [userName, setUserName] = useState({});
   const [locationLongitude, setLocationLongitude] = useState(0);
   const [locationLatitude, setLocationLatitude] = useState(0);
-  // const [formToJSON, setFormToJSON] = useState({});
+
+
+  // if (locationLatitude !== 0 && locationLongitude !== 0) {
+  //   console.log("LONG:", locationLongitude, "LAT:", locationLatitude);
+  // }
 
   const [formData, setFormData] = useState({
     username: "",
@@ -31,7 +35,6 @@ const PinForm = () => {
       [inputName]: value,
       username: userName,
     });
-    // console.log(formData);
   };
 
 
@@ -49,62 +52,72 @@ const PinForm = () => {
   };
 
 
-  const handleGeocode = async () => {
-    // let lat = 0;
-    // let lng = 0;
-    geocodeByAddress('Montevideo, Uruguay')
-      .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) => {
-        setLocationLongitude(lng); setLocationLatitude(lat);
-    })
-      .catch(error => console.error(error));
-  };
+
+//  I WROTE OUT THIS CODE INSIDE HANDLESUBMIT!!!
+  // const handleGeocode = async () => {
+  //   geocodeByAddress('Montevideo, Uruguay')
+  //     .then(results => getLatLng(results[0]))
+  //     .then(({ lat, lng }) => {
+  //       setLocationLongitude(prev => lng); setLocationLatitude(prev => lat);
+  //   })
+  //     .catch(error => console.error(error));
+  // };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    handleGeocode();
-    setTimeout(() => {
-      console.log("HANDLE_SUBMIT:", locationLongitude, locationLatitude);
-    }, 3000);
-    setFormData({
-      ...formData,
-      longitude: locationLongitude,
-      latitude: locationLatitude
-    });
-
-    // console.log("FORMDATA:", formData);
-    // formToJSON = formData;
-    // formToJSON["username"] = userName;
-    // console.log("FORM2JSON:", formToJSON);
-    const url = "http://localhost:8000/api/pins";
-    const fetchConfig = {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
     try {
-      const response = await fetch(url, fetchConfig);
-      if (response.ok) {
-        setFormData({
-          username: "",
-          location_name: "",
-          longitude: 0,
-          latitude: 0,
-          cloudy: 0,
-          windy: 0,
-          crowded: 0,
-          date: new Date().toISOString().slice(0, 10),
-          image_url: ""
-        })
-        navigate(`/profile/${userData.username}`);
-      }
+      const results = await geocodeByAddress(formData.location_name);
+      const { lat, lng } = await getLatLng(results[0]);
+
+      setFormData({
+        ...formData,
+        longitude: lng,
+        latitude: lat
+      });
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (formData.latitude !== 0 && formData.longitude !== 0) {
+      console.log("HANDLE_SUBMIT:", formData.longitude, formData.latitude);
+
+      const submitData = async () => {
+        const url = "http://localhost:8000/api/pins";
+        const fetchConfig = {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        try {
+          const response = await fetch(url, fetchConfig);
+          if (response.ok) {
+            setFormData({
+              username: "",
+              location_name: "",
+              longitude: 0,
+              latitude: 0,
+              cloudy: 0,
+              windy: 0,
+              crowded: 0,
+              date: new Date().toISOString().slice(0, 10),
+              image_url: ""
+            })
+            navigate(`/profile/${userData.username}`);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      submitData();
+    }
+  }, [formData, navigate, userData]);
   useEffect(() => {
     handleGetLoggedInUser();
   }, []);
