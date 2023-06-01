@@ -16,12 +16,12 @@ const PinCard = ({ pin }) => {
           <motion.div
             animate={{ y: 0 }}
             initial={{ y: 100 }}
-            className="rounded-lg bg-slate-700 w-100 h-40"
+            className="rounded-lg bg-slate-700 w-100 h-100"
           >
-            <div className="flex flex-col items-center justify-center mt-2">
-                <p>{pin.location_name}</p>
+            <div className="flex flex-col items-center justify-center">
+                <h1>{pin.location_name}</h1>
               <img
-                className="h-20 rounded shadow-lg object-cover"
+                className="h-40 rounded shadow-lg object-cover"
                 src={pin.image_url}
                 key={pin.id}
                 onClick={() => setClicked(false)}
