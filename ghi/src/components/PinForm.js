@@ -10,9 +10,9 @@ const PinForm = () => {
   const [locationLatitude, setLocationLatitude] = useState(0);
 
 
-  if (locationLatitude !== 0 && locationLongitude !== 0) {
-    console.log("LONG:", locationLongitude, "LAT:", locationLatitude);
-  }
+  // if (locationLatitude !== 0 && locationLongitude !== 0) {
+  //   console.log("LONG:", locationLongitude, "LAT:", locationLatitude);
+  // }
 
   const [formData, setFormData] = useState({
     username: "",

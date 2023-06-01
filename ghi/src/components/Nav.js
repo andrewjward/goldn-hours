@@ -5,14 +5,14 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 
-const Nav = ({userData, setUserData }) => {
+const Nav = ({ username }) => {
   const { logout } = useToken();
   const navigate = useNavigate();
   const { token } = useAuthContext();
 
   const handleLogout = () => {
     logout();
-    setUserData({});
+    // setUserData({});   ! doeES THIS DO ANYTHING???
     navigate("/");
 
   }
@@ -31,7 +31,7 @@ const Nav = ({userData, setUserData }) => {
             </NavLink>
           </li>
           <li className="">
-            <NavLink className="m-2" aria-current="page" to={userData}>
+            <NavLink className="m-2" aria-current="page" to={`/profile/${username}`}>
               My Profile
             </NavLink>
           </li>
