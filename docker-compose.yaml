@@ -44,3 +44,5 @@ services:
       PUBLIC_URL: http://localhost:3000
       REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
       REACT_APP_USER_SERVICE_API_HOST: http://localhost:8000
+      GOOGLE_MAPS_API_KEY: "AIzaSyAHLu1pjtU9SsQQ7HpiJ4WQGJOXtf2NyJs"
+      MAP_ID: "54caa8767cd2db96"
