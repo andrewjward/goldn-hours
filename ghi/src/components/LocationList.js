@@ -28,7 +28,7 @@ const LocationList = ({ searchTerm }) => {
           {pins.map((pin) => {
             return (
               <div
-                className="flex flex-col justify-center items-center h-auto max-w-full rounded-lg"
+                className="flex flex-col items-center h-auto max-w-full rounded-lg"
                 key={pin.id}
               >
                 <img

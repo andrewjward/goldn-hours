@@ -66,7 +66,6 @@ const PinForm = () => {
 
   useEffect(() => {
     if (formData.latitude !== 0 && formData.longitude !== 0) {
-      console.log("HANDLE_SUBMIT:", formData.longitude, formData.latitude);
 
       const submitData = async () => {
         const url = "http://localhost:8000/api/pins";
