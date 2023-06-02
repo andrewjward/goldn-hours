@@ -77,7 +77,6 @@ function App() {
                 <Profile username={username} setUsername={setUsername} />
               }
             />
-            {/* <Route path="/logout" element={<Logout />} /> */}
           </Routes>
         </AuthProvider>
       </BrowserRouter>

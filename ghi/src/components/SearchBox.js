@@ -31,7 +31,7 @@ const SearchBox = () => {
 
 
   return (
-    <form onSubmit={getGeo}>
+    <form className="flex" onSubmit={getGeo}>
       <input
         type="search"
         onChange={handleSearchTerm}

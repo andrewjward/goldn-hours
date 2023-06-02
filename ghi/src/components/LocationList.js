@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react'
-import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+import { useParams } from "react-router-dom";
 
-
-const LocationList = () => {
+const LocationList = ({ searchTerm }) => {
   const [pins, setPins] = useState([]);
   const params = useParams();
-  const searchRange = 1;
-
+  const searchRange = 100;
 
   const fetchPins = async () => {
     const pinsUrl = `http://localhost:8000/api/pins?lat=${params.latitude}&long=${params.longitude}&radius=${searchRange}`;
@@ -18,17 +16,20 @@ const LocationList = () => {
     }
   };
 
-
   useEffect(() => {
     fetchPins();
-  }, [])
-
+  }, []);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div>
+      {pins.length > 0 ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {pins.map((pin) => {
             return (
-              <div className="h-auto max-w-full rounded-lg" key={pin.id}>
+              <div
+                className="flex flex-col justify-center items-center h-auto max-w-full rounded-lg"
+                key={pin.id}
+              >
                 <img
                   className="relative m-3 rounded-xl w-96 h-56 object-cover"
                   src={pin.image_url}
@@ -38,7 +39,13 @@ const LocationList = () => {
             );
           })}
         </div>
-  )
-}
+      ) : (
+        <div className="w-100 h-screen flex flex-col justify-center items-center">
+          <h1>NO POSTS</h1>
+        </div>
+      )}
+    </div>
+  );
+};
 
-export default LocationList
+export default LocationList;
