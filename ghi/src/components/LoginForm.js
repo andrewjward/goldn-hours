@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import "../App.css";
+import loginz from '../images/login.png';
+import { motion } from "framer-motion";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -33,33 +35,20 @@ const LoginForm = () => {
 
     try {
       login(username, password);
-      // setUsername("");
       setPassword("");
-      await handleGetLoggedInUser();
-      navigate(`/profile/${userData.username}`);
     } catch (error) {
       console.error(error);
     }
   };
 
-    const handleGetLoggedInUser = async () => {
-      const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
-      fetch(url, {
-        credentials: "include",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setUserData(data.account);
-        })
-        .catch((error) => console.error(error));
-    };
-    // useEffect(() => {
-    //   handleGetLoggedInUser();
-    // }, []);
-  console.log("ran through it")
   return (
     <div className="w-screen flex flex-col items-center justify-center">
-      <form onSubmit={handleSubmit} id="add-customer-form">
+      <form
+        className="flex flex-col justify-center items-center"
+        onSubmit={handleSubmit}
+        id="add-customer-form"
+      >
+        <img className="m-4 w-1/2 rounded-full" src={loginz} />
         <div className="flex flex-col items-center justify-center">
           <input
             onChange={handleUsernameChange}
@@ -83,11 +72,16 @@ const LoginForm = () => {
             value={password}
           />
           <label htmlFor="password"></label>
-          <button>
-            <span className="loginButton m-2 p-3 pl-10  rounded-lg ">
-              Login
-            </span>
-          </button>
+          <motion.button
+            className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+            whileHover={{
+              scale: 1.2,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{ scale: 0.9 }}
+            >
+            Login
+          </motion.button>
         </div>
       </form>
     </div>
