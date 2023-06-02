@@ -5,7 +5,7 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 
-const Nav = ({userData, setUserData }) => {
+const Nav = ({ userData, setUserData }) => {
   const { logout } = useToken();
   const navigate = useNavigate();
   const { token } = useAuthContext();

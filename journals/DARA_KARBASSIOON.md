@@ -1,3 +1,14 @@
+## June 1, 2023
+
+Today, Craig and I worked on putting together the locations filtered by latitude and longitude.
+
+## May 31, 2023
+
+Today we worked on:
+
+        improving the UI
+I was the driver, and we worked on getting our pinCard form and visuals up and appealing.
+
 ## May 30, 2023
 
 Today we worked on:
