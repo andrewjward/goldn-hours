@@ -46,7 +46,7 @@ async def get_account(
 ):
     if username:
         return repo.get_account_by_username(username)
-    
+
     account = repo.get_account(account_id) # use account id instead
     return account
 
@@ -84,10 +84,7 @@ async def update_account(
     response: Response,
     repo: AccountQueries = Depends(),
 ):
-    if info.password is not None:
-        hashed_password = authenticator.hash_password(info.password)
-    else:
-        hashed_password = None
+
 
     try:
         # if info.email in [document.email for document in repo.get_all()]:

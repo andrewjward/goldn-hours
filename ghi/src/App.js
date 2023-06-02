@@ -15,6 +15,7 @@ import PinForm from "./components/PinForm";
 import PinCard from "./components/PinCard";
 import LocationInput from "./components/LocationInput";
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import SearchUserList from "./components/SearchUser";
 
 function App() {
   const baseUrl = "http://localhost:8000";
@@ -41,7 +42,11 @@ function App() {
     <div className="">
       <BrowserRouter>
         <AuthProvider baseUrl={baseUrl}>
-          <Nav userData={userData} setUserData={setUserData} username={username} />
+          <Nav
+            userData={userData}
+            setUserData={setUserData}
+            username={username}
+          />
           <Routes>
             <Route
             path="/location/"
@@ -54,6 +59,10 @@ function App() {
                 <SignupForm userData={userData} setUserData={setUserData} />
               }
             />
+            <Route
+              path="/search-users"
+              element={<SearchUserList userData={userData} />}
+            />
             <Route path="/new-pin" element={<PinForm userData={userData} />} />
             <Route path="/pin" element={<PinCard />} />
             <Route
@@ -62,7 +71,12 @@ function App() {
                 <LoginForm userData={userData} setUserData={setUserData} />
               }
             />
-            <Route path="/profile/:username" element={<Profile username={username} setUsername={setUsername}/>} />
+            <Route
+              path="/profile/:username"
+              element={
+                <Profile username={username} setUsername={setUsername} />
+              }
+            />
             {/* <Route path="/logout" element={<Logout />} /> */}
           </Routes>
         </AuthProvider>
