@@ -15,6 +15,12 @@ const Nav = ({ username }) => {
     // setUserData({});   ! doeES THIS DO ANYTHING???
     navigate("/");
   };
+  const handleLogin = () => {
+    navigate("/login");
+  };
+  const handleSignup = () => {
+    navigate("/signup");
+  };
   return (
     <nav className="bg-slate-700 text-white">
       <div className="flex justify-between">
@@ -71,19 +77,21 @@ const Nav = ({ username }) => {
               Logout
             </button>
           ) : (
-            <div>
-              <NavLink
-                to="/login"
-                className="m-2 p-3 pl-10 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+            <div className="flex">
+              <button
+                onClick={handleLogin}
+                type="submit"
+                className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
               >
                 Login
-              </NavLink>
-              <NavLink
-                to="/signup"
-                className="m-2 p-3 pl-10 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+              </button>
+              <button
+                onClick={handleSignup}
+                type="submit"
+                className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
               >
                 Sign up
-              </NavLink>
+              </button>
             </div>
           )}
         </div>
