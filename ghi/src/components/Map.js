@@ -43,7 +43,7 @@ function Map() {
     return (
       <div
         className="flex items-center justify-center"
-        style={{ width: "100vw", height: "100vh" }}
+        
       >
         <motion.img
           src={logo}
@@ -55,7 +55,7 @@ function Map() {
       </div>
     );
   return (
-    <div className="">
+    <div className="" style={{ width: "100vw", height: "100vh" }}>
       <div
         className="rounded-2xl flex items-center justify-center"
         style={{ width: "100vw", height: "100vh" }}
@@ -63,7 +63,7 @@ function Map() {
         <div className="rounded-2xl h-4/5 w-4/5 flex items-center justify-center">
           <GoogleMap
             zoom={4}
-            options={{styles: styles}}
+            options={{ styles: styles }}
             center={center}
             mapContainerClassName="map-container"
           >

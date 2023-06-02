@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+import useToken from "@galvanize-inc/jwtdown-for-react";
+
 
 const PinForm = () => {
   const navigate = useNavigate();
@@ -8,6 +10,8 @@ const PinForm = () => {
   const [userName, setUserName] = useState({});
   const [locationLongitude, setLocationLongitude] = useState(0);
   const [locationLatitude, setLocationLatitude] = useState(0);
+  const { token } = useToken();
+
 
 
   // if (locationLatitude !== 0 && locationLongitude !== 0) {
@@ -124,7 +128,7 @@ const PinForm = () => {
 
   return (
     <div className="container">
-      <div className="row">
+      {token ? (<div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
             <h1 className="text-center">Make a new Pin!</h1>
@@ -253,8 +257,8 @@ const PinForm = () => {
               <button className="btn btn-success w-100">Create Pin</button>
             </form>
           </div>
-        </div>
-      </div>
+        </div>[]
+      </div>) : (<div>Please login</div>) }
     </div>
   );
 };

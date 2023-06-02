@@ -40,37 +40,45 @@ function SearchUserList() {
                 type="text"
                 id="usernameinput"
                 name="usernameinput"
+                placeholder="Search Users"
                 maxLength="25"
                 onChange={handleUserChange}
                 value={user}
               ></input>
               <button
-                className="btn btn-sm btn-outline-info"
+                className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
                 onClick={handleSearchSubmit}
               >
                 Search Users
               </button>
             </div>
           </div>
-          <div className="p-2 flex-fill">
-            <h1>Service History</h1>
-          </div>
+          <div className="p-2 flex-fill"></div>
         </div>
-        <table className="table table-striped">
+        <table className="table-layout: auto;">
           <thead>
             <tr>
-              <th>User</th>
-              <th></th>
+              <th>Name</th>
+              <th>Username</th>
             </tr>
           </thead>
           <tbody>
             {accounts &&
               accounts.map((account) => {
                 return (
-                  account.username
+                  (account.username
                     .toLowerCase()
-                    .includes(searchString.toLowerCase()) && (
-                    <tr key={account.username}>{account.username}</tr>
+                    .includes(searchString.toLowerCase()) ||
+                    account.name
+                      .toLowerCase()
+                      .includes(searchString.toLowerCase()) ||
+                    account.email
+                      .toLowerCase()
+                      .includes(searchString.toLowerCase())) && (
+                    <tr key={account.username}>
+                      <td>{account.name}</td>
+                      <td>{account.username}</td>
+                    </tr>
                   )
                 );
               })}
