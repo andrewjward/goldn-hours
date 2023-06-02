@@ -8,13 +8,13 @@ const SearchBox = () => {
   const navigate = useNavigate();
 
 
-
   const getGeo = async (event) => {
     event.preventDefault();
     geocodeByAddress(searchTerm)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         navigate(`/location/${lat}/${lng}`)
+        window.location.reload();
       });
   }
 
@@ -23,6 +23,7 @@ const SearchBox = () => {
     const value = event.target.value;
     setSearchTerm(value);
   }
+
 
   useEffect(() => {
     setSearchTerm();
