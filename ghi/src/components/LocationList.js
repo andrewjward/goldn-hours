@@ -6,11 +6,11 @@ import { useParams } from 'react-router-dom';
 const LocationList = () => {
   const [pins, setPins] = useState([]);
   const params = useParams();
-
+  const searchRange = 1;
 
 
   const fetchPins = async () => {
-    const pinsUrl = `http://localhost:8000/api/pins?lat=69&long=69&radius=10000000000`;
+    const pinsUrl = `http://localhost:8000/api/pins?lat=${params.latitude}&long=${params.longitude}&radius=${searchRange}`;
     const response = await fetch(pinsUrl);
     if (response.ok) {
       const pinsData = await response.json();

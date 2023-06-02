@@ -1,27 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+import { useNavigate } from 'react-router-dom';
 
 
 const SearchBox = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
 
 
-  const getGeo = async () => {
-    geocodeByAddress("empire state build")
+  const getGeo = async (event) => {
+    event.preventDefault();
+    geocodeByAddress(searchTerm)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
-        // setLatitude(lat);
-        // setLongitude(lng);
+        navigate(`/location/${lat}/${lng}`)
       });
   }
 
 
+  const handleSearchTerm = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+  }
+
+  useEffect(() => {
+    setSearchTerm();
+  }, [])
+
 
   return (
-    <div>
+    <form onSubmit={getGeo}>
       <input
         type="search"
+        onChange={handleSearchTerm}
         id="default-search"
         className="m-2 p-3 pl-10 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
         placeholder="Search Locations"
@@ -32,7 +44,7 @@ const SearchBox = () => {
       >
         Search
       </button>
-    </div>
+    </form>
   )
 }
 

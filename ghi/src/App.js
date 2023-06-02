@@ -49,7 +49,7 @@ function App() {
           />
           <Routes>
             <Route
-            path="/location/"
+            path="/location/:latitude/:longitude"
             element={<LocationList />}
             />
             <Route path="/" element={<Map />} />
