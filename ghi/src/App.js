@@ -19,8 +19,8 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 function App() {
   const baseUrl = "http://localhost:8000";
   const { token } = useToken();
-
   const [userData, setUserData] = useState({});
+  const [username, setUsername] = useState({});
 
   const handleGetLoggedInUser = async () => {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
@@ -35,13 +35,13 @@ function App() {
   };
   useEffect(() => {
     handleGetLoggedInUser();
-  }, []);
+  }, [token]);
 
   return (
     <div className="">
       <BrowserRouter>
         <AuthProvider baseUrl={baseUrl}>
-          <Nav userData={userData} setUserData={setUserData} />
+          <Nav userData={userData} setUserData={setUserData} username={username} />
           <Routes>
             <Route
             path="/location/"
@@ -62,7 +62,7 @@ function App() {
                 <LoginForm userData={userData} setUserData={setUserData} />
               }
             />
-            <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/profile/:username" element={<Profile username={username} setUsername={setUsername}/>} />
             {/* <Route path="/logout" element={<Logout />} /> */}
           </Routes>
         </AuthProvider>

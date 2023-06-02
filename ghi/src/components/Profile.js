@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-function Profile({}) {
+function Profile({ username, setUsername}) {
   const [pins, setPins] = useState([]);
   const [profile, setProfile] = useState([]);
   const params = useParams();
@@ -18,6 +18,7 @@ function Profile({}) {
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.account);
+        setUsername(data.account.username);
         setIsLoggedIn(params.username === data.account.username);
       })
       .catch((error) => console.error(error));
