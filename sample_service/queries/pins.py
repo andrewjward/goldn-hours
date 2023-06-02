@@ -2,6 +2,7 @@ from .client import Queries
 from models.pins import PinIn, PinOut, Pin
 from bson.objectid import ObjectId
 from typing import List
+from geopy.distance import distance
 
 
 class PinsQueries(Queries):
@@ -31,6 +32,22 @@ class PinsQueries(Queries):
         for pin in db:
             pin["id"] = str(pin["_id"])
             pins.append(PinOut(**pin))
+        return pins
+
+
+    def get_by_location(
+        self,
+        lat: float,
+        long: float,
+        radius: float
+    ):
+        center_point = (lat, long)
+        db = self.collection.find()
+        pins = []
+        for pin in db:
+            if distance(center_point, (pin['latitude'], pin['longitude'])).miles <= radius:
+                pin["id"] = str(pin["_id"])
+                pins.append(PinOut(**pin))
         return pins
 
 

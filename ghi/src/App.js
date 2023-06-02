@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "./App.css";
 import Nav from "./components/Nav";
+import LocationList from "./components/LocationList";
 import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
 import Profile from "./components/Profile";
@@ -47,6 +48,10 @@ function App() {
             username={username}
           />
           <Routes>
+            <Route
+            path="/location/:latitude/:longitude"
+            element={<LocationList />}
+            />
             <Route path="/" element={<Map />} />
             <Route
               path="/signup"
