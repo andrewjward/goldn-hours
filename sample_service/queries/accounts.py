@@ -1,9 +1,10 @@
 from bson.objectid import ObjectId
 from .client import Queries
 from models.accounts import Account, AccountIn, AccountOut
-from pymongo import ReturnDocument
+from pymongo import ReturnDocument, ASCENDING
 from pymongo.errors import DuplicateKeyError
-from typing import Union
+
+# from typing import Union
 
 
 class DuplicateAccountError(ValueError):
@@ -14,6 +15,10 @@ class AccountQueries(Queries):
     DB_NAME = "Gold'n-Hours"
     COLLECTION = "accounts"
 
+    def __init__(self):
+        super().__init__()
+        self.collection.create_index([("username", ASCENDING)], unique=True)
+        self.collection.create_index([("email", ASCENDING)], unique=True)
 
     def get_all_accounts(self) -> list[AccountOut]:
         db = self.collection.find()
@@ -22,7 +27,6 @@ class AccountQueries(Queries):
             document["id"] = str(document["_id"])
             accounts.append(AccountOut(**document))
         return accounts
-
 
     def get_account(self, account_id: str) -> AccountOut:
         props = self.collection.find_one({"_id": ObjectId(account_id)})
@@ -38,7 +42,6 @@ class AccountQueries(Queries):
         props["id"] = str(props["_id"])
         return AccountOut(**props)
 
-
     def create_account(self, info: AccountIn, hashed_password: str) -> Account:
         props = info.dict()
         props["password"] = hashed_password
@@ -49,11 +52,8 @@ class AccountQueries(Queries):
         props["id"] = str(props["_id"])
         return AccountOut(**props)
 
-
     def update_account(self, id: str, info: AccountIn):
         props = info.dict()
-
-
         try:
             self.collection.find_one_and_update(
                 {"_id": ObjectId(id)},
@@ -64,7 +64,6 @@ class AccountQueries(Queries):
             raise DuplicateAccountError()
 
         return AccountOut(**props, id=id)
-
 
     def delete_account(self, account_id: str) -> bool:
         return self.collection.delete_one({"_id": ObjectId(account_id)})

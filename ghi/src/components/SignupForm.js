@@ -7,10 +7,11 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [duplicateAccountError, setDuplicateAccountError] = useState(false);
   const { register, token } = useToken();
   const navigate = useNavigate();
 
-  if (token) {
+  if (token && !duplicateAccountError) {
     navigate(`/profile/${username}`);
   }
 
@@ -50,9 +51,10 @@ const SignupForm = () => {
       // setUsername("");
       setPassword("");
       setName("");
-
+      setDuplicateAccountError(false);
     } catch (error) {
       console.error(error);
+      setDuplicateAccountError(true);
     }
   };
 

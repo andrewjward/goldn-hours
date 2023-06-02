@@ -40,14 +40,13 @@ async def get_all_accounts(repo: AccountQueries = Depends()):
 @router.get("/api/accounts/{account_id}", response_model=AccountOut)
 async def get_account(
     account_id: str,
-    username: str | None=None,
-
+    username: str | None = None,
     repo: AccountQueries = Depends(),
 ):
     if username:
         return repo.get_account_by_username(username)
 
-    account = repo.get_account(account_id) # use account id instead
+    account = repo.get_account(account_id)  # use account id instead
     return account
 
 
@@ -63,8 +62,8 @@ async def create_account(
         account = repo.create_account(info, hashed_password)
     except DuplicateAccountError:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot Create An Account With Those Credentials",
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Duplicate Username or Email Address",
         )
 
     form = AccountForm(username=info.username, password=info.password)
@@ -84,8 +83,6 @@ async def update_account(
     response: Response,
     repo: AccountQueries = Depends(),
 ):
-
-
     try:
         # if info.email in [document.email for document in repo.get_all()]:
         #   raise HTTPException(
