@@ -79,7 +79,7 @@ function Profile({ username, setUsername}) {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {pins.map((pin) => {
             return (
-              <div className="h-auto max-w-full rounded-lg" key={pin.id}>
+              <div className="flex flex-col items-center h-auto max-w-full rounded-lg" key={pin.id}>
                 <img
                   className="relative m-3 rounded-xl w-96 h-56 object-cover"
                   src={pin.image_url}

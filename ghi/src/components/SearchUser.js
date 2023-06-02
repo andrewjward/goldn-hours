@@ -21,14 +21,12 @@ function SearchUserList() {
     const fetchList = await fetch(listUrl);
     if (fetchList.ok) {
       const data = await fetchList.json();
-      console.log(data);
       setAccounts(data);
     }
   };
   useEffect(() => {
     fetchAccountList();
   }, []);
-  console.log(accounts);
 
   return (
     <>
