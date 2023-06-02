@@ -36,7 +36,7 @@ function SearchUserList() {
           <div>
             <div className="input-group">
               <input
-                className="form-control"
+                className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
                 type="text"
                 id="usernameinput"
                 name="usernameinput"
@@ -67,7 +67,9 @@ function SearchUserList() {
             {accounts &&
               accounts.map((account) => {
                 return (
-                  account.username.includes(searchString) && (
+                  account.username
+                    .toLowerCase()
+                    .includes(searchString.toLowerCase()) && (
                     <tr key={account.username}>{account.username}</tr>
                   )
                 );
