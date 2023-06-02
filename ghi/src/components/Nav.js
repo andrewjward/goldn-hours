@@ -53,7 +53,7 @@ const Nav = ({ username, setUserData }) => {
           </li>
           {token ? (<li className="">
             <NavLink className="m-2" aria-current="page" to="/new-pin">
-              New Post +
+              New Pin +
             </NavLink>
           </li>) : (<></>)}
           

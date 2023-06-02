@@ -55,12 +55,12 @@ function Map() {
       </div>
     );
   return (
-    <div className="" style={{ width: "100vw", height: "100vh" }}>
+    <div style={{ width: "100vw", height: "100vh" }}>
       <div
-        className="rounded-2xl flex items-center justify-center"
+        className="flex items-center justify-center"
         style={{ width: "100vw", height: "100vh" }}
       >
-        <div className="rounded-2xl h-4/5 w-4/5 flex items-center justify-center">
+        <div className=" h-4/5 w-4/5 flex items-center justify-center">
           <GoogleMap
             zoom={4}
             options={{ styles: styles }}

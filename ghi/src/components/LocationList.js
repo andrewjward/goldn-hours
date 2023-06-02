@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { useParams } from "react-router-dom";
+import notFound from '../images/not_found.png';
 
 const LocationList = ({ searchTerm }) => {
   const [pins, setPins] = useState([]);
@@ -41,6 +42,7 @@ const LocationList = ({ searchTerm }) => {
         </div>
       ) : (
         <div className="w-100 h-screen flex flex-col justify-center items-center">
+          <img className="w-1/2 rounded-3xl m-3" src={notFound} />
           <h1>NO POSTS</h1>
         </div>
       )}

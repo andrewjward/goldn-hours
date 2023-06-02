@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import useToken from "@galvanize-inc/jwtdown-for-react";
-
+import { motion } from 'framer-motion';
 
 const PinForm = () => {
   const navigate = useNavigate();
@@ -11,12 +11,6 @@ const PinForm = () => {
   const [locationLongitude, setLocationLongitude] = useState(0);
   const [locationLatitude, setLocationLatitude] = useState(0);
   const { token } = useToken();
-
-
-
-  // if (locationLatitude !== 0 && locationLongitude !== 0) {
-  //   console.log("LONG:", locationLongitude, "LAT:", locationLatitude);
-  // }
 
   const [formData, setFormData] = useState({
     username: "",
@@ -41,7 +35,6 @@ const PinForm = () => {
     });
   };
 
-
   const handleGetLoggedInUser = async () => {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
     fetch(url, {
@@ -54,19 +47,6 @@ const PinForm = () => {
       })
       .catch((error) => console.error(error));
   };
-
-
-
-//  I WROTE OUT THIS CODE INSIDE HANDLESUBMIT!!!
-  // const handleGeocode = async () => {
-  //   geocodeByAddress('Montevideo, Uruguay')
-  //     .then(results => getLatLng(results[0]))
-  //     .then(({ lat, lng }) => {
-  //       setLocationLongitude(prev => lng); setLocationLatitude(prev => lat);
-  //   })
-  //     .catch(error => console.error(error));
-  // };
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -127,138 +107,125 @@ const PinForm = () => {
   }, []);
 
   return (
-    <div className="container">
-      {token ? (<div className="row">
-        <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
-            <h1 className="text-center">Make a new Pin!</h1>
-            <form onSubmit={handleSubmit} id="add-customer-form">
-              <div className="form-floating mb-3">
-                <input
-                  onChange={handleFormData}
-                  placeholder="Location"
-                  required
-                  type="text"
-                  name="location_name"
-                  id="location_name"
-                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                  value={formData.location_name}
-                />
-                <label htmlFor="name"></label>
-              </div>
-              {/* <div className="form-floating mb-3">
-                <input
-                  onChange={handleFormData}
-                  placeholder="Longitude"
-                  required
-                  type="number"
-                  name="longitude"
-                  id="longitude"
-                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                  value={formData.longitude}
-                />
-                <label htmlFor="fabric"></label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  onChange={handleFormData}
-                  placeholder="Latitude"
-                  required
-                  type="number"
-                  name="latitude"
-                  id="latitude"
-                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                  value={formData.latitude}
-                />
-                <label htmlFor="fabric"></label>
-              </div> */}
-              <div className="form-floating mb-3">
-                <label
-                  htmlFor="steps-range"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  How Cloudy is It?
-                </label>
-                <input
-                  onChange={handleFormData}
-                  placeholder="Cloudiness"
-                  required
-                  type="range"
-                  min="0"
-                  max="10"
-                  step="1"
-                  name="cloudy"
-                  id="cloudy"
-                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                  value={formData.cloudy}
-                />
-                <label htmlFor="fabric"></label>
-              </div>
-              <div className="form-floating mb-3">
-                <label
-                  htmlFor="steps-range"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Is it Windy?
-                </label>
-                <input
-                  onChange={handleFormData}
-                  placeholder="Windiness"
-                  required
-                  type="range"
-                  min="0"
-                  max="10"
-                  step="1"
-                  name="windy"
-                  id="windy"
-                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                  value={formData.windy}
-                />
-                <label htmlFor="fabric"></label>
-              </div>
-              <div className="form-floating mb-3">
-                <label
-                  htmlFor="steps-range"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  How Crowded is it?
-                </label>
-                <input
-                  onChange={handleFormData}
-                  placeholder="Crowdedness"
-                  required
-                  type="range"
-                  min="0"
-                  max="10"
-                  step="1"
-                  name="crowded"
-                  id="crowded"
-                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                  value={formData.crowded}
-                />
-                <label htmlFor="fabric"></label>
-              </div>
-              <div className="form-floating mb-3">
-                <label htmlFor="fabric"></label>
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  onChange={handleFormData}
-                  placeholder="Image"
-                  required
-                  type="url"
-                  name="image_url"
-                  id="image_url"
-                  className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                  value={formData.image_url}
-                />
-                <label htmlFor="fabric"></label>
-              </div>
-              <button className="btn btn-success w-100">Create Pin</button>
-            </form>
-          </div>
-        </div>[]
-      </div>) : (<div>Please login</div>) }
+    <div className="flex flex-col justify-center items-center">
+      {token ? (
+        <div className="w-1/3 rounded-lg bg-slate-700 flex flex-col justify-center items-center p-4 mt-4 drop-shadow-lg">
+          <h1 className="text-center">Make a new Pin!</h1>
+          <form
+            className="flex flex-col items-center justify-center form-floating mb-3"
+            onSubmit={handleSubmit}
+            id="add-customer-form"
+          >
+            <div className="">
+              <input
+                onChange={handleFormData}
+                placeholder="Location"
+                required
+                type="text"
+                name="location_name"
+                id="location_name"
+                className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                value={formData.location_name}
+              />
+              <label htmlFor="name"></label>
+            </div>
+            <div className="form-floating mb-3">
+              <label
+                htmlFor="steps-range"
+                className="text-center block mb-2 text-sm font-medium dark:text-white"
+              >
+                How's the weather?
+              </label>
+              <input
+                onChange={handleFormData}
+                placeholder="Cloudiness"
+                required
+                type="range"
+                min="0"
+                max="10"
+                step="1"
+                name="cloudy"
+                id="cloudy"
+                className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                value={formData.cloudy}
+              />
+              <label htmlFor="fabric"></label>
+            </div>
+            <div className="form-floating mb-3">
+              <label
+                htmlFor="steps-range"
+                className="text-center block mb-2 text-sm font-medium dark:text-white"
+              >
+                Is it Windy?
+              </label>
+              <input
+                onChange={handleFormData}
+                placeholder="Windiness"
+                required
+                type="range"
+                min="0"
+                max="10"
+                step="1"
+                name="windy"
+                id="windy"
+                className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                value={formData.windy}
+              />
+              <label htmlFor="fabric"></label>
+            </div>
+            <div className="form-floating mb-3">
+              <label
+                htmlFor="steps-range"
+                className="block mb-2 text-sm font-medium text-center dark:text-white"
+              >
+                How Crowded is it?
+              </label>
+              <input
+                onChange={handleFormData}
+                placeholder="Crowdedness"
+                required
+                type="range"
+                min="0"
+                max="10"
+                step="1"
+                name="crowded"
+                id="crowded"
+                className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                value={formData.crowded}
+              />
+              <label htmlFor="fabric"></label>
+            </div>
+            <div className="form-floating mb-3">
+              <label htmlFor="fabric"></label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                onChange={handleFormData}
+                placeholder="Image"
+                required
+                type="url"
+                name="image_url"
+                id="image_url"
+                className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                value={formData.image_url}
+              />
+              <label htmlFor="fabric"></label>
+            </div>
+            <motion.button
+              className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+              whileHover={{
+                scale: 1.2,
+                transition: { duration: 0.2 },
+              }}
+              whileTap={{ scale: 0.9 }}
+            >
+              Make Pin
+            </motion.button>
+          </form>
+        </div>
+      ) : (
+        <div>Please login</div>
+      )}
     </div>
   );
 };
