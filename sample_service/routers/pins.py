@@ -24,10 +24,16 @@ async def create_pin(
 
 @router.get("/api/pins")  # ?q= optional query for specific user's pins
 async def list_pins(
-    username: str | None = None, repo: PinsQueries = Depends()
+    username: str | None = None,
+    repo: PinsQueries = Depends(),
+    long: float | None = None,
+    lat: float | None = None,
+    radius: float | None = 1
 ):
     if username:
         return repo.get_user_pins(username)
+    if long and lat:
+        return repo.get_by_location(long=long, lat=lat, radius=radius)
     return repo.get_all_pins()
 
 

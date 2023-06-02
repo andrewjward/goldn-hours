@@ -1,3 +1,16 @@
+# JUNE 1ST 2023
+    Work as a group on getting longitude and lat
+    from a address // string by calling google
+    geocoding api
+
+    also pair programmed with dara on creating
+    a api endpoint in our backend for getting
+    pins in a radius of a long and lat
+
+    my aha moment was when we found out why
+    we couldn't get our longitude and latitude
+    from the backend pin object.
+
 # MAY 24TH 2023
     // My Bday 🎉
     Had bit of headache

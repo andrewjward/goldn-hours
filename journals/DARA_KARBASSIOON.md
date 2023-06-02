@@ -1,3 +1,18 @@
+## June 2, 2023
+
+We are all working on separate things this morning. I created and solved some issues regarding the nav bar, such as being able to access the profile page when not logged in and restricting making a post when not logged in.
+
+## June 1, 2023
+
+Today, Craig and I worked on putting together the locations filtered by latitude and longitude.
+
+## May 31, 2023
+
+Today we worked on:
+
+        improving the UI
+I was the driver, and we worked on getting our pinCard form and visuals up and appealing.
+
 ## May 30, 2023
 
 Today we worked on:

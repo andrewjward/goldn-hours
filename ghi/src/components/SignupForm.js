@@ -59,7 +59,7 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="container">
+    <div>
       <h1 className="">Make an Account</h1>
       <form onSubmit={handleSubmit} id="add-customer-form">
         <div className="">

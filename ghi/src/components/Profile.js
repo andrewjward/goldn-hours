@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Profile({ username, setUsername}) {
   const [pins, setPins] = useState([]);
@@ -42,12 +43,6 @@ function Profile({ username, setUsername}) {
     }
   };
 
-  //   const handleDelete = async (customerId) => {
-  //     const deletedurl = `http://localhost:8090/api/customers/${customerId}`;
-  //     const response = await fetch(deletedurl, { method: "DELETE" });
-  //     fetchData();
-  //   };
-
   useEffect(() => {
     handleGetLoggedInUser();
     fetchData();
@@ -56,21 +51,30 @@ function Profile({ username, setUsername}) {
 
   return (
     <main>
-      <div className="m-3 container mx-auto px-4 flex flex-col justify-center items-center">
+      <div className="m-3 mx-auto px-4 flex flex-col justify-center items-center">
         <div>{profile.name}</div>
-        <img
+        <motion.img
           className="m-3 w-20 h-20 rounded-full object-cover"
           src={profile.profile_pic}
           alt="Rounded avatar"
+          whileHover={{
+            scale: 1.2,
+            transition: { duration: 0.2 },
+          }}
         />
         {isLoggedIn ? (
-          <button
+          <motion.button
             // onClick={}
             type="submit"
             className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+            whileHover={{
+              scale: 1.1,
+              transition: { duration: 0.2 },
+            }}
+            whileTap={{ scale: 0.9 }}
           >
             Edit Profile
-          </button>
+          </motion.button>
         ) : null}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {pins.map((pin) => {
