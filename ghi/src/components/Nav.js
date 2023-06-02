@@ -5,7 +5,7 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 
-const Nav = ({ userData, setUserData }) => {
+const Nav = ({ username, setUserData }) => {
   const { logout } = useToken();
   const navigate = useNavigate();
   const { token } = useAuthContext();
@@ -14,8 +14,7 @@ const Nav = ({ userData, setUserData }) => {
     logout();
     setUserData({});
     navigate("/");
-
-  }
+  };
   return (
     <nav className="bg-slate-700 text-white">
       <div className="flex justify-between">
@@ -30,25 +29,27 @@ const Nav = ({ userData, setUserData }) => {
               />
             </NavLink>
           </li>
-          <li className="">
+          {token ? (<li className="">
             <NavLink
               className="m-2"
               aria-current="page"
-              to={`/profile/${userData.username}`}
+              to={`/profile/${username}`}
             >
               My Profile
             </NavLink>
-          </li>
+          </li>) : (<></>) }
+          
           <li className="">
-            <NavLink className="m-2" aria-current="page" to="/">
+            <NavLink className="m-2" aria-current="page" to="/search-users">
               Search Users
             </NavLink>
           </li>
-          <li className="">
+          {token ? (<li className="">
             <NavLink className="m-2" aria-current="page" to="/new-pin">
               New Post +
             </NavLink>
-          </li>
+          </li>) : (<></>)}
+          
         </ul>
         <div className="flex">
           <input

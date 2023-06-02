@@ -14,12 +14,13 @@ import PinForm from "./components/PinForm";
 import PinCard from "./components/PinCard";
 import LocationInput from "./components/LocationInput";
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import SearchUserList from "./components/SearchUser";
 
 function App() {
   const baseUrl = "http://localhost:8000";
   const { token } = useToken();
-
   const [userData, setUserData] = useState({});
+  const [username, setUsername] = useState({});
 
   const handleGetLoggedInUser = async () => {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
@@ -34,13 +35,17 @@ function App() {
   };
   useEffect(() => {
     handleGetLoggedInUser();
-  }, []);
+  }, [token]);
 
   return (
     <div className="">
       <BrowserRouter>
         <AuthProvider baseUrl={baseUrl}>
-          <Nav userData={userData} setUserData={setUserData} />
+          <Nav
+            userData={userData}
+            setUserData={setUserData}
+            username={username}
+          />
           <Routes>
             <Route path="/" element={<Map />} />
             <Route
@@ -48,6 +53,10 @@ function App() {
               element={
                 <SignupForm userData={userData} setUserData={setUserData} />
               }
+            />
+            <Route
+              path="/search-users"
+              element={<SearchUserList userData={userData} />}
             />
             <Route path="/new-pin" element={<PinForm userData={userData} />} />
             <Route path="/pin" element={<PinCard />} />
@@ -59,10 +68,11 @@ function App() {
             />
             <Route
               path="/profile/:username"
-              userData={userData}
-              setUserData={setUserData}
-              element={<Profile />}
+              element={
+                <Profile username={username} setUsername={setUsername} />
+              }
             />
+            {/* <Route path="/logout" element={<Logout />} /> */}
           </Routes>
         </AuthProvider>
       </BrowserRouter>
