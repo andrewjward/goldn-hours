@@ -52,7 +52,7 @@ const PinForm = () => {
   const handleGeocode = async () => {
     // let lat = 0;
     // let lng = 0;
-    geocodeByAddress('Montevideo, Uruguay')
+    geocodeByAddress(formData.location_name)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         setLocationLongitude(lng); setLocationLatitude(lat);
@@ -63,47 +63,47 @@ const PinForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     handleGeocode();
-    setTimeout(() => {
+    setTimeout(async () => {
       console.log("HANDLE_SUBMIT:", locationLongitude, locationLatitude);
-    }, 3000);
-    setFormData({
-      ...formData,
-      longitude: locationLongitude,
-      latitude: locationLatitude
-    });
+      setFormData({
+        ...formData,
+        longitude: locationLongitude,
+        latitude: locationLatitude
+      });
 
-    // console.log("FORMDATA:", formData);
-    // formToJSON = formData;
-    // formToJSON["username"] = userName;
-    // console.log("FORM2JSON:", formToJSON);
-    const url = "http://localhost:8000/api/pins";
-    const fetchConfig = {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+      // console.log("FORMDATA:", formData);
+      // formToJSON = formData;
+      // formToJSON["username"] = userName;
+      // console.log("FORM2JSON:", formToJSON);
+      const url = "http://localhost:8000/api/pins";
+      const fetchConfig = {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-    try {
-      const response = await fetch(url, fetchConfig);
-      if (response.ok) {
-        setFormData({
-          username: "",
-          location_name: "",
-          longitude: 0,
-          latitude: 0,
-          cloudy: 0,
-          windy: 0,
-          crowded: 0,
-          date: new Date().toISOString().slice(0, 10),
-          image_url: ""
-        })
-        navigate(`/profile/${userData.username}`);
+      try {
+        const response = await fetch(url, fetchConfig);
+        if (response.ok) {
+          setFormData({
+            username: "",
+            location_name: "",
+            longitude: 0,
+            latitude: 0,
+            cloudy: 0,
+            windy: 0,
+            crowded: 0,
+            date: new Date().toISOString().slice(0, 10),
+            image_url: ""
+          })
+          navigate(`/profile/${userData.username}`);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
+    }, 3000);
   };
   useEffect(() => {
     handleGetLoggedInUser();
