@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-function Profile({ username, setUsername}) {
+function Profile({ username, setUsername }) {
   const [pins, setPins] = useState([]);
   const [profile, setProfile] = useState([]);
   const params = useParams();
@@ -69,7 +69,7 @@ function Profile({ username, setUsername}) {
             type="submit"
             className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
           >
-            Edit Profile
+            Edit Profile Picture
           </button>
         ) : null}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
