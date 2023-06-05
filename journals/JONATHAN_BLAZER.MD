@@ -1,3 +1,8 @@
+## Monday, 2023-Jun-5
+    Got started on Continuous Integration, writing Unit Tests.
+    All of our unit tests are passing.
+    It was critical that we added __init__.py to the /tests folder.
+
 ## Thursday, 2023-Jun-1
     Great day
 ## Wednesday, 2023-May-24

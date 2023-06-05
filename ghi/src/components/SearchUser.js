@@ -51,6 +51,7 @@ function SearchUserList() {
                   transition: { duration: 0.1 },
                 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={handleSearchSubmit}
               >
                 Search Users
               </motion.button>
