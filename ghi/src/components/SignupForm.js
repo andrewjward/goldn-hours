@@ -9,12 +9,14 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [duplicateAccountError, setDuplicateAccountError] = useState(false);
-  const { register, token } = useToken();
+  const [duplicateAccountError, setDuplicateAccountError] = useState(true);
+  const { register, token, logout } = useToken();
   const navigate = useNavigate();
 
   if (token && !duplicateAccountError) {
     navigate(`/profile/${username}`);
+  } else if (token && duplicateAccountError) {
+    logout();
   }
 
   const handleEmailChange = (event) => {
@@ -47,6 +49,21 @@ const SignupForm = () => {
     data.name = name;
 
     const accountUrl = "http://localhost:8000/api/accounts/";
+
+    const tryToFetchUsername = async () => {
+      const fetchUrl = `http://localhost:8000/api/accounts/69?username=${username}`;
+      const response = await fetch(fetchUrl);
+      if (response.ok) {
+        setDuplicateAccountError(true);
+      }
+    };
+
+    try {
+      tryToFetchUsername();
+    } catch (error) {
+      console.error("TRIED TO GET USERNAME BUT GOT ERROR!", error);
+    }
+
     try {
       register(data, accountUrl);
       setEmail("");
