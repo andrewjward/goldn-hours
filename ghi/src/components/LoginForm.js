@@ -9,7 +9,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useToken();
+  const { login, token } = useToken();
   const [userData, setUserData] = useState({});
 
   if (token) {
