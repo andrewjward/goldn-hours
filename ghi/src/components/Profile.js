@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import pic from '../images/gold-icon.png';
 
 function Profile({ username, setUsername}) {
   const [pins, setPins] = useState([]);
@@ -55,7 +56,7 @@ function Profile({ username, setUsername}) {
         <div>{profile.name}</div>
         <motion.img
           className="m-3 w-20 h-20 rounded-full object-cover"
-          src={profile.profile_pic}
+          src={pic}
           alt="Rounded avatar"
           whileHover={{
             scale: 1.2,

@@ -1,12 +1,12 @@
 from fastapi.testclient import TestClient
-from sample_service.authenticator import authenticator
 from main import app
 from queries.pins import PinsQueries
+from authenticator import authenticator
 
 client = TestClient(app)
 
 class CreatePin:
-    def create(self, pin):
+    def create_pin(self, pin):
         result = {
             "username": "bob",
             "location_name": "New York, NY",
@@ -58,9 +58,18 @@ def test_create_pin():
         "id": "1",
     }
     expected = {
-
-    }
-    response = client.post("/post", json=json)
+        "username": "bob",
+        "location_name": "New York, NY",
+        "longitude": 49.65,
+        "latitude": 12.88,
+        "cloudy": 6,
+        "windy": 9,
+        "crowded": 2,
+        "date": "6-22-2023",
+        "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoivaHZMdv9L8C8ro=/0x0:2000x1330/1200x800/filters:focal(840x505:1160x825)/cdn.vox-cdn.com/uploads/chorus_image/image/66852958/MGMGrand_hearts.0.jpg",
+        "id": "1",
+        }
+    response = client.post("/api/pins", json=json)
 
     app.dependency_overrides = {}
     assert response.status_code == 200
