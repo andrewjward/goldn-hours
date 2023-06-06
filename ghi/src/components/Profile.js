@@ -56,7 +56,7 @@ function Profile({ username, setUsername}) {
         <div>{profile.name}</div>
         <motion.img
           className="m-3 w-20 h-20 rounded-full object-cover"
-          src={pic}
+          src={profile.profile_pic ?? pic}
           alt="Rounded avatar"
           whileHover={{
             scale: 1.2,
