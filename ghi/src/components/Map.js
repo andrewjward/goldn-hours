@@ -49,10 +49,10 @@ function Map() {
       </div>
     );
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div >
       <div
         className="flex items-center justify-center"
-        style={{ width: "100vw", height: "100vh" }}
+        style={{ width: "99vw", height: "100vh" }}
       >
         <div className=" h-4/5 w-4/5 flex items-center justify-center">
           <GoogleMap
