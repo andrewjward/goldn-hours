@@ -1,5 +1,6 @@
 # JUNE 6TH 2023
     closing issues that forgor to do before.
+    q
 
 # JUNE 5TH 2023
     Started creating unit tests as a team,
