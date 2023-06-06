@@ -23,7 +23,7 @@ const Nav = ({ username, setUserData }) => {
     navigate("/signup");
   };
   return (
-    <nav className="bg-slate-700 text-white">
+    <nav className="bg-slate-700 w-screen text-white">
       <div className="flex justify-between">
         <ul className="flex justify-center items-center">
           <li className="">
@@ -31,32 +31,39 @@ const Nav = ({ username, setUserData }) => {
               <img
                 src={logo}
                 alt="Golden Logo"
-                style={{ width: "50px" }}
+                style={{ width: "50px", minWidth: "50px" }}
                 className="p-1 mx-2"
               />
             </NavLink>
           </li>
-          {token ? (<li className="">
-            <NavLink
-              className="m-2"
-              aria-current="page"
-              to={`/profile/${username}`}
-            >
-              My Profile
-            </NavLink>
-          </li>) : (<></>) }
-          
+          {token ? (
+            <li className="">
+              <NavLink
+                className="m-2"
+                aria-current="page"
+                to={`/profile/${username}`}
+              >
+                My Profile
+              </NavLink>
+            </li>
+          ) : (
+            <></>
+          )}
+
           <li className="">
             <NavLink className="m-2" aria-current="page" to="/search-users">
               Search Users
             </NavLink>
           </li>
-          {token ? (<li className="">
-            <NavLink className="m-2" aria-current="page" to="/new-pin">
-              New Pin +
-            </NavLink>
-          </li>) : (<></>)}
-          
+          {token ? (
+            <li className="">
+              <NavLink className="m-2" aria-current="page" to="/new-pin">
+                New Pin +
+              </NavLink>
+            </li>
+          ) : (
+            <></>
+          )}
         </ul>
         <div className="flex">
           <SearchBox />
