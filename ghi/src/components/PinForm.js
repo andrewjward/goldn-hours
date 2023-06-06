@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import useToken from "@galvanize-inc/jwtdown-for-react";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const PinForm = () => {
   const navigate = useNavigate();
@@ -21,8 +21,9 @@ const PinForm = () => {
     windy: 0,
     crowded: 0,
     date: new Date().toISOString().slice(0, 10),
-    image_url: ""
+    image_url: "",
   });
+  console.log(formData);
 
   const handleFormData = (event) => {
     const value = event.target.value;
@@ -57,7 +58,7 @@ const PinForm = () => {
       setFormData({
         ...formData,
         longitude: lng,
-        latitude: lat
+        latitude: lat,
       });
     } catch (error) {
       console.error(error);
@@ -66,7 +67,6 @@ const PinForm = () => {
 
   useEffect(() => {
     if (formData.latitude !== 0 && formData.longitude !== 0) {
-
       const submitData = async () => {
         const url = "http://localhost:8000/api/pins";
         const fetchConfig = {
@@ -89,8 +89,8 @@ const PinForm = () => {
               windy: 0,
               crowded: 0,
               date: new Date().toISOString().slice(0, 10),
-              image_url: ""
-            })
+              image_url: "",
+            });
             navigate(`/profile/${userData.username}`);
           }
         } catch (error) {
