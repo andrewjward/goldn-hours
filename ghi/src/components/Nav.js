@@ -13,7 +13,6 @@ const Nav = ({ username, setUserData }) => {
 
   const handleLogout = () => {
     logout();
-    setUserData({});
     navigate("/");
   };
   const handleLogin = () => {
@@ -23,7 +22,7 @@ const Nav = ({ username, setUserData }) => {
     navigate("/signup");
   };
   return (
-    <nav className="bg-slate-700 w-screen text-white">
+    <nav className="bg-slate-700 text-white">
       <div className="flex justify-between">
         <ul className="flex justify-center items-center">
           <li className="">
