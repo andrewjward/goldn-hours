@@ -66,7 +66,6 @@ const PinForm = () => {
 
   useEffect(() => {
     if (formData.latitude !== 0 && formData.longitude !== 0) {
-      console.log("HANDLE_SUBMIT:", formData.longitude, formData.latitude);
 
       const submitData = async () => {
         const url = "http://localhost:8000/api/pins";
@@ -109,7 +108,7 @@ const PinForm = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       {token ? (
-        <div className="w-1/3 rounded-lg bg-slate-700 flex flex-col justify-center items-center p-4 mt-4 drop-shadow-lg">
+        <div className="w-80 rounded-lg bg-slate-700 flex flex-col justify-center items-center mt-4 drop-shadow-lg">
           <h1 className="text-center">Make a new Pin!</h1>
           <form
             className="flex flex-col items-center justify-center form-floating mb-3"
@@ -124,31 +123,35 @@ const PinForm = () => {
                 type="text"
                 name="location_name"
                 id="location_name"
-                className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                className="m-4 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                 value={formData.location_name}
               />
               <label htmlFor="name"></label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="flexform-floating mb-3">
               <label
                 htmlFor="steps-range"
                 className="text-center block mb-2 text-sm font-medium dark:text-white"
               >
                 How's the weather?
               </label>
-              <input
-                onChange={handleFormData}
-                placeholder="Cloudiness"
-                required
-                type="range"
-                min="0"
-                max="10"
-                step="1"
-                name="cloudy"
-                id="cloudy"
-                className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                value={formData.cloudy}
-              />
+              <div className="flex justify-center items-center">
+                <h5>☀️</h5>
+                <input
+                  onChange={handleFormData}
+                  placeholder="Cloudiness"
+                  required
+                  type="range"
+                  min="0"
+                  max="10"
+                  step="1"
+                  name="cloudy"
+                  id="cloudy"
+                  className="w-48 cursor-pointer m-4 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={formData.cloudy}
+                />
+                <h5>☁</h5>
+              </div>
               <label htmlFor="fabric"></label>
             </div>
             <div className="form-floating mb-3">
@@ -158,19 +161,23 @@ const PinForm = () => {
               >
                 Is it Windy?
               </label>
-              <input
-                onChange={handleFormData}
-                placeholder="Windiness"
-                required
-                type="range"
-                min="0"
-                max="10"
-                step="1"
-                name="windy"
-                id="windy"
-                className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                value={formData.windy}
-              />
+              <div className="flex justify-center items-center">
+                <h5>🍃</h5>
+                <input
+                  onChange={handleFormData}
+                  placeholder="Windiness"
+                  required
+                  type="range"
+                  min="0"
+                  max="10"
+                  step="1"
+                  name="windy"
+                  id="windy"
+                  className="cursor-pointer m-4 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white w-48 dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={formData.windy}
+                />
+                <h5>💨</h5>
+              </div>
               <label htmlFor="fabric"></label>
             </div>
             <div className="form-floating mb-3">
@@ -180,19 +187,23 @@ const PinForm = () => {
               >
                 How Crowded is it?
               </label>
-              <input
-                onChange={handleFormData}
-                placeholder="Crowdedness"
-                required
-                type="range"
-                min="0"
-                max="10"
-                step="1"
-                name="crowded"
-                id="crowded"
-                className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
-                value={formData.crowded}
-              />
+              <div className="flex justify-center items-center">
+                <h5>🤸‍♂️</h5>
+                <input
+                  onChange={handleFormData}
+                  placeholder="Crowdedness"
+                  required
+                  type="range"
+                  min="0"
+                  max="10"
+                  step="1"
+                  name="crowded"
+                  id="crowded"
+                  className="w-48 cursor-pointer m-4 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                  value={formData.crowded}
+                />
+                <h5>👨‍👩‍👦‍👦</h5>
+              </div>
               <label htmlFor="fabric"></label>
             </div>
             <div className="form-floating mb-3">
@@ -206,13 +217,13 @@ const PinForm = () => {
                 type="url"
                 name="image_url"
                 id="image_url"
-                className="m-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                className="m-4 text-sm text-orange-900 border border-orange-300 rounded-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                 value={formData.image_url}
               />
               <label htmlFor="fabric"></label>
             </div>
             <motion.button
-              className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+              className="m-4 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
               whileHover={{
                 scale: 1.2,
                 transition: { duration: 0.2 },

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { useParams } from "react-router-dom";
 import notFound from '../images/not_found.png';
+import { NavLink } from "react-router-dom";
 
 const LocationList = ({ searchTerm }) => {
   const [pins, setPins] = useState([]);
@@ -28,7 +29,7 @@ const LocationList = ({ searchTerm }) => {
           {pins.map((pin) => {
             return (
               <div
-                className="flex flex-col justify-center items-center h-auto max-w-full rounded-lg"
+                className="flex flex-col items-center h-auto max-w-full rounded-lg"
                 key={pin.id}
               >
                 <img
@@ -36,6 +37,7 @@ const LocationList = ({ searchTerm }) => {
                   src={pin.image_url}
                 ></img>
                 <p>{pin.location_name}</p>
+                <NavLink to={`/profile/${pin.username}`}>{pin.username}</NavLink>
               </div>
             );
           })}
