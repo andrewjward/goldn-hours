@@ -35,9 +35,9 @@ const PinCard = ({ pin }) => {
               <p className="text-sm text-center truncate">
                 ☀️ {pin.cloudy} 🍃 {pin.windy} 🧔 {pin.crowded}
               </p>
-              <button className="truncate mt-2 border-b-2 border-b-amber-600 bg-amber-400 rounded-lg h-8 w-30 text-center active:bg-amber-500 hover:bg-amber-300 shadow-md active:shadow-none active:border-b-0">
+              <NavLink to={`/location/${pin.latitude}/${pin.longitude}`} className="flex items-center truncate mt-2 border-b-2 border-b-amber-600 bg-amber-400 rounded-lg h-8 w-30 text-center active:bg-amber-500 hover:bg-amber-300 shadow-md active:shadow-none active:border-b-0">
                 View more
-              </button>
+              </NavLink>
             </div>
           </motion.div>
         ) : (
