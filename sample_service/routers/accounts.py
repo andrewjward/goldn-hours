@@ -37,7 +37,7 @@ async def get_all_accounts(repo: AccountQueries = Depends()):
     return repo.get_all_accounts()
 
 
-@router.get("/api/accounts/{account_id}", response_model=AccountOut)
+@router.get("/api/accounts/{account_id}", response_model=AccountOut | None)
 async def get_account(
     account_id: str,
     username: str | None = None,

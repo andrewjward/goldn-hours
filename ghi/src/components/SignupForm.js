@@ -55,8 +55,9 @@ const SignupForm = () => {
       try {
         const response = await fetch(fetchUrl);
         if (response.ok) {
+          const data = await response.json();
           setDuplicateAccountError(true);
-          console.log(response);
+          console.log(data);
         } else {
           try {
             register(data, accountUrl);

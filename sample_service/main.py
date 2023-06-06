@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os, requests
-from keys import GOOGLE_MAPS_API_KEY
 from authenticator import authenticator
 from routers import accounts, pins
 
@@ -66,7 +65,7 @@ async def geocode(address: str):
     url = "https://maps.googleapis.com/maps/api/geocode/json"
     params = {
         "address": address,
-        "key": GOOGLE_MAPS_API_KEY,
+        "key": os.environ["GOOGLE_MAPS_API_KEY"],
     }
     response = requests.get(url, params=params)
     response.raise_for_status()
