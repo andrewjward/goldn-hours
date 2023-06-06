@@ -9,21 +9,30 @@ const LocationList = ({ searchTerm }) => {
   const params = useParams();
   const searchRange = 100;
 
+  console.log("SEARCH TERM: ", searchTerm);
+
   const fetchPins = async () => {
     const pinsUrl = `http://localhost:8000/api/pins?lat=${params.latitude}&long=${params.longitude}&radius=${searchRange}`;
     const response = await fetch(pinsUrl);
     if (response.ok) {
       const pinsData = await response.json();
+      console.log(pinsData);
       setPins(pinsData);
     }
   };
 
   useEffect(() => {
+    console.log("LocationList HELLO!");
     fetchPins();
-  }, []);
+  }, [params]);
+
+  // useEffect(() => {
+  //   fetchPins();
+  // }, []);
 
   return (
     <div>
+      <h1>{searchTerm}</h1>
       {pins.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {pins.map((pin) => {

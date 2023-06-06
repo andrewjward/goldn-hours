@@ -21,6 +21,7 @@ function App() {
   const { token } = useToken();
   const [userData, setUserData] = useState({});
   const [username, setUsername] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleGetLoggedInUser = async () => {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
@@ -37,6 +38,11 @@ function App() {
     handleGetLoggedInUser();
   }, [token]);
 
+  useEffect(() => {
+    handleGetLoggedInUser();
+  }, []);
+
+
   return (
     <div className="">
       <BrowserRouter>
@@ -45,11 +51,15 @@ function App() {
             userData={userData}
             setUserData={setUserData}
             username={username}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
           />
           <Routes>
             <Route
             path="/location/:latitude/:longitude"
-            element={<LocationList />}
+            element={<LocationList
+            searchTerm={searchTerm}
+            />}
             />
             <Route path="/" element={<Map />} />
             <Route
