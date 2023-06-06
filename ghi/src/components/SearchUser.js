@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 function SearchUserList() {
   const [accounts, setAccounts] = useState([]);
@@ -20,21 +21,19 @@ function SearchUserList() {
     const fetchList = await fetch(listUrl);
     if (fetchList.ok) {
       const data = await fetchList.json();
-      console.log(data);
       setAccounts(data);
     }
   };
   useEffect(() => {
     fetchAccountList();
   }, []);
-  console.log(accounts);
 
   return (
     <>
-      <div className="container">
+      <div className="flex flex-col items-center justify-center">
         <div className="mt-4 d-flex flex-row-reverse align-items-center justify-content-between">
           <div>
-            <div className="input-group">
+            <div className="input-group flex flex-col">
               <input
                 className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
                 type="text"
@@ -45,12 +44,16 @@ function SearchUserList() {
                 onChange={handleUserChange}
                 value={user}
               ></input>
-              <button
+              <motion.button
                 className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
-                onClick={handleSearchSubmit}
+                whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 0.1 },
+                }}
+                whileTap={{ scale: 0.9 }}
               >
                 Search Users
-              </button>
+              </motion.button>
             </div>
           </div>
           <div className="p-2 flex-fill"></div>
