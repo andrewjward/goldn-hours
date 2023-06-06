@@ -1,4 +1,5 @@
 # JUNE 6TH 2023
+    closing issues that forgor to do before.
 
 
 # JUNE 5TH 2023
