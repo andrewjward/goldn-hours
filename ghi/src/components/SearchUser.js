@@ -31,7 +31,7 @@ function SearchUserList() {
   return (
     <>
       <div className="flex flex-col items-center justify-center">
-        <div className="mt-4 d-flex flex-row-reverse align-items-center justify-content-between">
+        <div className="rounded-lg w-80 h-90 bg-slate-700 mt-4 d-flex flex-row-reverse align-items-center justify-content-between">
           <div>
             <div className="input-group flex flex-col">
               <input
@@ -46,8 +46,9 @@ function SearchUserList() {
               ></input>
               <motion.button
                 className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                onClick={handleSearchSubmit}
                 whileHover={{
-                  scale: 1.1,
+                  scale: 1.05,
                   transition: { duration: 0.1 },
                 }}
                 whileTap={{ scale: 0.9 }}
@@ -56,37 +57,37 @@ function SearchUserList() {
               </motion.button>
             </div>
           </div>
-          <div className="p-2 flex-fill"></div>
-        </div>
-        <table className="table-layout: auto;">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Username</th>
-            </tr>
-          </thead>
-          <tbody>
-            {accounts &&
-              accounts.map((account) => {
-                return (
-                  (account.username
-                    .toLowerCase()
-                    .includes(searchString.toLowerCase()) ||
-                    account.name
+          <div className="p-2 flex flex-col justify-center items-center"></div>
+          <table className="m-1 flex flex-col items-center justify-center table-layout: auto;">
+            <thead className=" m-3">
+              <tr className="w-64 flex justify-around">
+                <th>Name</th>
+                <th>Username</th>
+              </tr>
+            </thead>
+            <tbody className="m-2">
+              {accounts &&
+                accounts.map((account) => {
+                  return (
+                    (account.username
                       .toLowerCase()
                       .includes(searchString.toLowerCase()) ||
-                    account.email
-                      .toLowerCase()
-                      .includes(searchString.toLowerCase())) && (
-                    <tr key={account.username}>
-                      <td>{account.name}</td>
-                      <td>{account.username}</td>
-                    </tr>
-                  )
-                );
-              })}
-          </tbody>
-        </table>
+                      account.name
+                        .toLowerCase()
+                        .includes(searchString.toLowerCase()) ||
+                      account.email
+                        .toLowerCase()
+                        .includes(searchString.toLowerCase())) && (
+                      <tr className="m-2" key={account.username}>
+                        <td>{account.name}</td>
+                        <td>{account.username}</td>
+                      </tr>
+                    )
+                  );
+                })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

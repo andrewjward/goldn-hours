@@ -33,6 +33,7 @@ origins = [
     os.environ.get("PUBLIC_URL", None),
 ]
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
