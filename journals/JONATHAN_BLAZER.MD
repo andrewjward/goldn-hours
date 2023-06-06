@@ -1,3 +1,5 @@
+## Tuesday, 2023-Jun-6
+    Made some great progress on eliminating duplicate account signups!
 ## Monday, 2023-Jun-5
     Got started on Continuous Integration, writing Unit Tests.
     All of our unit tests are passing.
