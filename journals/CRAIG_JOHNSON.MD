@@ -1,6 +1,6 @@
 # JUNE 6TH 2023
     closing issues that forgor to do before.
-    q
+    qq
 
 # JUNE 5TH 2023
     Started creating unit tests as a team,
@@ -17,7 +17,7 @@
     Worked on the search box for location today
 
     aha moment came with using window.location.reload
-    to refresh a component when updating from another
+    to refresh a component when updating gfrom another
     component
 
 
