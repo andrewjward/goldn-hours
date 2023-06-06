@@ -55,22 +55,38 @@ const SignupForm = () => {
       try {
         const response = await fetch(fetchUrl);
         if (response.ok) {
-          const data = await response.json();
-          setDuplicateAccountError(true);
-          console.log(data);
-        } else {
-          try {
+          const dupeUserData = await response.json();
+          // setDuplicateAccountError(true);
+          console.log(dupeUserData);
+          if (!dupeUserData) {
+            try {
             register(data, accountUrl);
             setEmail("");
             // setUsername("");
             setPassword("");
             setName("");
             setDuplicateAccountError(false);
-          } catch (error) {
-            console.error(error);
+            } catch (error) {
+              console.error("DUPLICATE EMAIL!", error);
+              setDuplicateAccountError(true);
+            }
+          } else {
             setDuplicateAccountError(true);
           }
         }
+        // } else {
+        //   try {
+        //     register(data, accountUrl);
+        //     setEmail("");
+        //     // setUsername("");
+        //     setPassword("");
+        //     setName("");
+        //     setDuplicateAccountError(false);
+        //   } catch (error) {
+        //     console.error(error);
+        //     setDuplicateAccountError(true);
+        //   }
+        // }
       } catch (error) {
         console.error("BAD FETCH", error);
       }
