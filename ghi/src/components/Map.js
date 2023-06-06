@@ -9,14 +9,14 @@ import { motion } from "framer-motion";
 import logo from "../images/golden-logo-transparent.png";
 import PinCard from "./PinCard";
 import { NavLink } from "react-router-dom";
-import styles from "./mapStyles"
+import styles from "./mapStyles";
 //map.fitbounds
 
 import "../App.css";
 
 function Map() {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyD0SiphFHbZb8paV9YA3AM_X65d8eAyf-A",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   const [pins, setPins] = useState([]);
@@ -34,17 +34,14 @@ function Map() {
   const mapOptions = {
     styles: styles,
   };
-  
+
   useEffect(() => {
     fetchPins();
   }, []);
 
   if (!isLoaded)
     return (
-      <div
-        className="flex items-center justify-center"
-        
-      >
+      <div className="flex items-center justify-center">
         <motion.img
           src={logo}
           alt="Golden Logo"

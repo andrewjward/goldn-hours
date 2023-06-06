@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os, requests
-from keys import GOOGLE_MAPS_API_KEY
 from authenticator import authenticator
 from routers import accounts, pins
 
