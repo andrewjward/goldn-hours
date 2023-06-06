@@ -38,10 +38,7 @@ function Map() {
 
   if (!isLoaded)
     return (
-      <div
-        className="flex items-center justify-center"
-
-      >
+      <div className="w-screen h-screen flex items-center justify-center">
         <motion.img
           src={logo}
           alt="Golden Logo"

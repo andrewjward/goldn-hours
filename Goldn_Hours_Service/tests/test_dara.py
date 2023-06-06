@@ -21,7 +21,7 @@ class CreatePin:
         }
         result.update(pin)
         return result
-    
+
 mock_data = {
     "username": "bob",
     "location_name": "New York, NY",

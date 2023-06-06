@@ -7,10 +7,11 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 COPY main.py main.py
 
-# Copy all of the subdirectories in your service's directory
-# Modify these instructions to do that
-# COPY queries queries
-# COPY routers routers
+COPY  models models
+COPY queries queries
+COPY routers routers
+COPY tests tests
+COPY authenticator.py authenticator.py
 
 RUN python -m pip install -r requirements.txt
 

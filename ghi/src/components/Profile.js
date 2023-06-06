@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import pic from '../images/gold-icon.png';
 
-function Profile({ username, setUsername}) {
+function Profile({ username, setUsername }) {
   const [pins, setPins] = useState([]);
   const [profile, setProfile] = useState([]);
   const params = useParams();
@@ -56,7 +56,7 @@ function Profile({ username, setUsername}) {
         <div>{profile.name}</div>
         <motion.img
           className="m-3 w-20 h-20 rounded-full object-cover"
-          src={pic}
+          src={profile.profile_pic ?? pic}
           alt="Rounded avatar"
           whileHover={{
             scale: 1.2,
@@ -80,7 +80,10 @@ function Profile({ username, setUsername}) {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {pins.map((pin) => {
             return (
-              <div className="flex flex-col items-center h-auto max-w-full rounded-lg" key={pin.id}>
+              <div
+                className="flex flex-col items-center h-auto max-w-full rounded-lg"
+                key={pin.id}
+              >
                 <img
                   className="relative m-3 rounded-xl w-96 h-56 object-cover"
                   src={pin.image_url}
