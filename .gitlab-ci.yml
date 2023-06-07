@@ -71,4 +71,4 @@ pages:
     - mv ghi/build public
   artifacts:
     paths:
-      public
+      - public
