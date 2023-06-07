@@ -1,3 +1,26 @@
+# JUNE 6TH 2023
+    closing issues that forgor to do before.
+    qq
+
+# JUNE 5TH 2023
+    Started creating unit tests as a team,
+    and a little bit of css playing around in the
+    evening.
+
+    Our aha moment came when we found out we needed
+    an __init__.py in the tests folder in order for
+    it to be able to grab components from our parent
+    directory.
+
+
+# JUNE 2ND 2023
+    Worked on the search box for location today
+
+    aha moment came with using window.location.reload
+    to refresh a component when updating gfrom another
+    component
+
+
 # JUNE 1ST 2023
     Work as a group on getting longitude and lat
     from a address // string by calling google
