@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function SearchUserList() {
   const [accounts, setAccounts] = useState([]);
   const [user, setUser] = useState("");
   const [searchString, setSearchString] = useState("");
+  const navigate = useNavigate();
 
   const handleUserChange = (event) => {
     const value = event.target.value;
@@ -14,6 +16,11 @@ function SearchUserList() {
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     setSearchString(user);
+  };
+
+  const handleProfileClick = (event) => {
+    event.preventDefault();
+    navigate(`/profile/${event.key}`);
   };
 
   const fetchAccountList = async () => {
@@ -81,9 +88,7 @@ function SearchUserList() {
                       <tr
                         className="cursor-pointer m-2"
                         key={account.username}
-                        onClick={() =>
-                          (window.location.href = `/profile/${account.username}`)
-                        }
+                        onClick={handleProfileClick}
                       >
                         <td className="">{account.name}</td>
                         <td>{account.username}</td>
