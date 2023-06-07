@@ -28,6 +28,7 @@ services:
       DATABASE_NAME: mongo-data
       WAIT_HOSTS: mongo:27017
       SIGNING_KEY: ${SIGNING_KEY}
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
 
   ghi:
     image: node:lts-bullseye

@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 from .pydantic_object import PydanticObjectId
 
+
 class AccountIn(BaseModel):
     email: str
     password: str

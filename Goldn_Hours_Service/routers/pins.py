@@ -28,7 +28,7 @@ async def list_pins(
     repo: PinsQueries = Depends(),
     long: float | None = None,
     lat: float | None = None,
-    radius: float | None = 1
+    radius: float | None = 1,
 ):
     if username:
         return repo.get_user_pins(username)
