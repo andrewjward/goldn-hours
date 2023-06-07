@@ -17,7 +17,7 @@ function SearchUserList() {
   };
 
   const fetchAccountList = async () => {
-    const listUrl = `http://localhost:8000/api/accounts/`;
+    const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/`;
     const fetchList = await fetch(listUrl);
     if (fetchList.ok) {
       const data = await fetchList.json();
