@@ -1,78 +1,78 @@
 stages:
-  - test
-  - build
-  - deploy
+- test
+- build
+- deploy
 
 # Run flake8 to check for code quality
 backend-test-job:
-  image: python:3-bullseye
-  stage: test
-  script:
-    - pip install flake8
-    - flake8 Goldn_Hours_Service
-    - cd Goldn_Hours_Service
-    - pip install -r requirements.txt
-    - python -m pytest
+image: python:3-bullseye
+stage: test
+script:
+  - pip install flake8
+  - flake8 Goldn_Hours_Service
+  - cd Goldn_Hours_Service
+  - pip install -r requirements.txt
+  - python -m pytest
 
 build-front-end-job:
-  stage: build
-  image: node:lts-bullseye
+stage: build
+image: node:lts-bullseye
+script:
+  - cd ghi
+  - npm install
+  - npm run build
+
+variables:
+    # If either of these variables is defined in the GitLab
+    # CI/CD variables, that value will override the value here.
+    # You need to substitute in your real values for
+    # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
+    PUBLIC_URL: https://jonathanrblazer.gitlab.io/module3-project-gamma/
+    REACT_APP_GOLDN_HOURS_API_HOST: https://feb-23-et-3-goldn-hours.mod3projects.com
   script:
     - cd ghi
     - npm install
     - npm run build
-
-  variables:
-      # If either of these variables is defined in the GitLab
-      # CI/CD variables, that value will override the value here.
-      # You need to substitute in your real values for
-      # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
-      PUBLIC_URL: https://jonathanrblazer.gitlab.io/module3-project-gamma/
-      REACT_APP_GOLDN_HOURS_API_HOST: https://feb-23-et-3-goldn-hours.mod3projects.com
-    script:
-      - cd ghi
-      - npm install
-      - npm run build
-      - cp build/index.html build/404.html
-    artifacts:
-      paths:
-        - ghi/build/
+    - cp build/index.html build/404.html
+  artifacts:
+    paths:
+      - ghi/build/
 services:
-  - docker:dind
+- docker:dind
 
-  deploy-user-image:
-    stage: deploy
-    image: registry.gitlab.com/galvanize-inc/foss/glv-cloud-cli:latest
-    script:
-      - glv-cloud-cli reset -a ${GOLDN_HOURS_API} -t ${CIRRUS_TOKEN}
-    only:
-      - main
-
-build-goldn-hours-service-image:
-  stage: build
-  image: docker:git
-  variables:
-    GITLAB_IMAGE: ${CI_REGISTRY_IMAGE}/goldn_hours_service_image
-  before_script:
-    # $CI_JOB_TOKEN is variable automatically added by Gitlab: see https://docs.gitlab.com/ee/ci/variables/predefined_variables.html#variables-reference
-    - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token registry.gitlab.com --password-stdin
+deploy-user-image:
+  stage: deploy
+  image: registry.gitlab.com/galvanize-inc/foss/glv-cloud-cli:latest
   script:
-    - docker build --tag $GITLAB_IMAGE:latest goldn_hours_service
-    - docker push $GITLAB_IMAGE:latest
+    - glv-cloud-cli reset -a ${GOLDN_HOURS_API} -t ${CIRRUS_TOKEN}
   only:
     - main
 
+build-goldn-hours-service-image:
+stage: build
+image: docker:git
+variables:
+  GITLAB_IMAGE: ${CI_REGISTRY_IMAGE}/goldn_hours_service_image
+before_script:
+  # $CI_JOB_TOKEN is variable automatically added by Gitlab: see https://docs.gitlab.com/ee/ci/variables/predefined_variables.html#variables-reference
+  - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token registry.gitlab.com --password-stdin
+script:
+  - docker build --tag $GITLAB_IMAGE:latest goldn_hours_service
+  - docker push $GITLAB_IMAGE:latest
+only:
+  - main
+
 pages:
-  stage: deploy
-  rules:
-    # Only run if pushing to the main branch
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  dependencies:
-    - build-front-end-job
-  needs:
-    - build-front-end-job
-  script:
-    - mv ghi/build public
-  artifacts:
-    paths:
-      public
+stage: deploy
+rules:
+  # Only run if pushing to the main branch
+  - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+dependencies:
+  - build-front-end-job
+needs:
+  - build-front-end-job
+script:
+  - mv ghi/build public
+artifacts:
+  paths:
+    public
