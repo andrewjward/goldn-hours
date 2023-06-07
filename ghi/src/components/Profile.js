@@ -49,7 +49,7 @@ function Profile({ username, setUsername }) {
     fetchData();
     fetchPins();
     // eslint-disable-next-line
-  }, []);
+  }, [params]);
 
   return (
     <main>
