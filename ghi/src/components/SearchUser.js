@@ -33,9 +33,9 @@ function SearchUserList() {
       <div className="flex flex-col items-center justify-center">
         <div className="rounded-lg w-80 h-90 bg-slate-700 mt-4 d-flex flex-row-reverse align-items-center justify-content-between">
           <div>
-            <div className="input-group flex flex-col">
+            <div className="input-group flex flex-col items-center">
               <input
-                className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                className="m-4 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
                 type="text"
                 id="usernameinput"
                 name="usernameinput"
@@ -45,7 +45,7 @@ function SearchUserList() {
                 value={user}
               ></input>
               <motion.button
-                className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                className="m-2 w-2/3 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
                 onClick={handleSearchSubmit}
                 whileHover={{
                   scale: 1.05,
@@ -58,7 +58,7 @@ function SearchUserList() {
             </div>
           </div>
           <div className="p-2 flex flex-col justify-center items-center"></div>
-          <table className="m-1 flex flex-col items-center justify-center table-layout: auto;">
+          <table className="m-4 flex flex-col items-center table-auto;">
             <thead className=" m-3">
               <tr className="w-64 flex justify-around">
                 <th>Name</th>
@@ -78,8 +78,14 @@ function SearchUserList() {
                       account.email
                         .toLowerCase()
                         .includes(searchString.toLowerCase())) && (
-                      <tr className="m-2" key={account.username}>
-                        <td>{account.name}</td>
+                      <tr
+                        className="cursor-pointer m-2"
+                        key={account.username}
+                        onClick={() =>
+                          (window.location.href = `/profile/${account.username}`)
+                        }
+                      >
+                        <td className="">{account.name}</td>
                         <td>{account.username}</td>
                       </tr>
                     )

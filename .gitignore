@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # pipeline failing
-.gitlab-ci.yml
+# .gitlab-ci.yml
 
 # Distribution / packaging
 .Python

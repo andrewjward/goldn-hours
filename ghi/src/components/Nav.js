@@ -6,14 +6,13 @@ import { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from "react-router-dom";
 import SearchBox from "./SearchBox";
 
-const Nav = ({ username, setUserData }) => {
+const Nav = ({ username, setUserData, searchTerm, setSearchTerm }) => {
   const { logout } = useToken();
   const navigate = useNavigate();
   const { token } = useAuthContext();
 
   const handleLogout = () => {
     logout();
-    setUserData({});
     navigate("/");
   };
   const handleLogin = () => {
@@ -23,7 +22,7 @@ const Nav = ({ username, setUserData }) => {
     navigate("/signup");
   };
   return (
-    <nav className="bg-slate-700 w-screen text-white">
+    <nav className="bg-slate-700 text-white">
       <div className="flex justify-between">
         <ul className="flex justify-center items-center">
           <li className="">
@@ -66,7 +65,10 @@ const Nav = ({ username, setUserData }) => {
           )}
         </ul>
         <div className="flex">
-          <SearchBox />
+          <SearchBox
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          />
           {token ? (
             <button
               onClick={handleLogout}
