@@ -20,8 +20,10 @@ function SearchUserList() {
 
   const handleProfileClick = (event) => {
     event.preventDefault();
-    navigate(`/profile/${event.key}`);
+    const username = event.currentTarget.dataset.username;
+    navigate(`/profile/${username}`);
   };
+
 
   const fetchAccountList = async () => {
     const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts`;
@@ -88,6 +90,7 @@ function SearchUserList() {
                       <tr
                         className="cursor-pointer m-2"
                         key={account.username}
+                        data-username={account.username}
                         onClick={handleProfileClick}
                       >
                         <td className="">{account.name}</td>
