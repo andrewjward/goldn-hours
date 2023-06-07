@@ -8,8 +8,6 @@ const LocationList = ({ searchTerm }) => {
   const params = useParams();
   const searchRange = 100;
 
-  console.log("SEARCH TERM: ", searchTerm);
-
   const fetchPins = async () => {
     const pinsUrl = `http://localhost:8000/api/pins?lat=${params.latitude}&long=${params.longitude}&radius=${searchRange}`;
     const response = await fetch(pinsUrl);
@@ -21,7 +19,6 @@ const LocationList = ({ searchTerm }) => {
   };
 
   useEffect(() => {
-    console.log("LocationList HELLO!");
     fetchPins();
   }, [params]);
 

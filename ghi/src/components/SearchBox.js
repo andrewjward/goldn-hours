@@ -13,7 +13,6 @@ const SearchBox = ({ searchTerm, setSearchTerm }) => {
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         navigate(`/location/${lat}/${lng}`)
-        // window.location.reload(true);
       });
   }
 
