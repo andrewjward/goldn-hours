@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { useParams } from "react-router-dom";
 import notFound from '../images/not_found.png';
 import { NavLink } from "react-router-dom";
@@ -26,9 +25,6 @@ const LocationList = ({ searchTerm }) => {
     fetchPins();
   }, [params]);
 
-  // useEffect(() => {
-  //   fetchPins();
-  // }, []);
 
   return (
     <div>
