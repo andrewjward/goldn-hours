@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import pic from '../images/gold-icon.png';
+import pic from "../images/gold-icon.png";
 
 function Profile({ username, setUsername }) {
   const [pins, setPins] = useState([]);
@@ -48,6 +48,7 @@ function Profile({ username, setUsername }) {
     handleGetLoggedInUser();
     fetchData();
     fetchPins();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -87,6 +88,7 @@ function Profile({ username, setUsername }) {
                 <img
                   className="relative m-3 rounded-xl w-96 h-56 object-cover"
                   src={pin.image_url}
+                  alt="List of Pins"
                 ></img>
                 <p>{pin.location_name}</p>
               </div>

@@ -1,13 +1,9 @@
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-} from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import logo from "../images/golden-logo-transparent.png";
 import PinCard from "./PinCard";
-import styles from "./mapStyles"
+import styles from "./mapStyles";
 
 import "../App.css";
 
@@ -28,9 +24,6 @@ function Map() {
   };
 
   const center = useMemo(() => ({ lat: 39.0742, lng: 21.8243 }), []);
-  const mapOptions = {
-    styles: styles,
-  };
 
   useEffect(() => {
     fetchPins();
@@ -49,7 +42,7 @@ function Map() {
       </div>
     );
   return (
-    <div >
+    <div>
       <div
         className="flex items-center justify-center"
         style={{ width: "99vw", height: "100vh" }}

@@ -19,12 +19,13 @@ const PinCard = ({ pin }) => {
             className="rounded-lg bg-slate-700 w-100 h-100"
           >
             <div className="flex flex-col items-center justify-center">
-                <h1>{pin.location_name}</h1>
+              <h1>{pin.location_name}</h1>
               <img
                 className="h-40 rounded shadow-lg object-cover"
                 src={pin.image_url}
                 key={pin.id}
                 onClick={() => setClicked(false)}
+                alt="pin"
               />
               <NavLink
                 to={`/profile/${pin.username}`}
@@ -35,7 +36,10 @@ const PinCard = ({ pin }) => {
               <p className="text-sm text-center truncate">
                 ☀️ {pin.cloudy} 🍃 {pin.windy} 🧔 {pin.crowded}
               </p>
-              <NavLink to={`/location/${pin.latitude}/${pin.longitude}`} className="flex items-center truncate mt-2 border-b-2 border-b-amber-600 bg-amber-400 rounded-lg h-8 w-30 text-center active:bg-amber-500 hover:bg-amber-300 shadow-md active:shadow-none active:border-b-0">
+              <NavLink
+                to={`/location/${pin.latitude}/${pin.longitude}`}
+                className="flex items-center truncate mt-2 border-b-2 border-b-amber-600 bg-amber-400 rounded-lg h-8 w-30 text-center active:bg-amber-500 hover:bg-amber-300 shadow-md active:shadow-none active:border-b-0"
+              >
                 View more
               </NavLink>
             </div>

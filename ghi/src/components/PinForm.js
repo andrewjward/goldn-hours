@@ -8,8 +8,6 @@ const PinForm = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
   const [userName, setUserName] = useState({});
-  const [locationLongitude, setLocationLongitude] = useState(0);
-  const [locationLatitude, setLocationLatitude] = useState(0);
   const { token } = useToken();
 
   const [formData, setFormData] = useState({

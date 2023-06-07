@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import "../App.css";
-import loginz from '../images/login.png';
+import loginz from "../images/login.png";
 import { motion } from "framer-motion";
 
 const LoginForm = () => {
@@ -10,7 +10,6 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login, token } = useToken();
-  const [userData, setUserData] = useState({});
 
   if (token) {
     navigate(`/profile/${username}`);
@@ -25,10 +24,6 @@ const LoginForm = () => {
     const value = event.target.value;
     setPassword(value);
   };
-
-  function refreshPage() {
-    window.location.reload(false);
-  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,7 +43,7 @@ const LoginForm = () => {
         onSubmit={handleSubmit}
         id="add-customer-form"
       >
-        <img className="m-4 w-1/2 rounded-full" src={loginz} />
+        <img className="m-4 w-1/2 rounded-full" src={loginz} alt="Login Pic" />
         <div className="flex flex-col items-center justify-center">
           <input
             onChange={handleUsernameChange}
@@ -79,7 +74,7 @@ const LoginForm = () => {
               transition: { duration: 0.2 },
             }}
             whileTap={{ scale: 0.9 }}
-            >
+          >
             Login
           </motion.button>
         </div>

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { useParams } from "react-router-dom";
-import notFound from '../images/not_found.png';
+import notFound from "../images/not_found.png";
 import { NavLink } from "react-router-dom";
 
 const LocationList = ({ searchTerm }) => {
@@ -20,6 +19,7 @@ const LocationList = ({ searchTerm }) => {
 
   useEffect(() => {
     fetchPins();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -35,16 +35,23 @@ const LocationList = ({ searchTerm }) => {
                 <img
                   className="relative m-3 rounded-xl w-96 h-56 object-cover"
                   src={pin.image_url}
+                  alt="pin"
                 ></img>
                 <p>{pin.location_name}</p>
-                <NavLink to={`/profile/${pin.username}`}>{pin.username}</NavLink>
+                <NavLink to={`/profile/${pin.username}`}>
+                  {pin.username}
+                </NavLink>
               </div>
             );
           })}
         </div>
       ) : (
         <div className="w-100 h-screen flex flex-col justify-center items-center">
-          <img className="w-1/2 rounded-3xl m-3" src={notFound} />
+          <img
+            className="w-1/2 rounded-3xl m-3"
+            src={notFound}
+            alt="Not Found"
+          />
           <h1>NO POSTS</h1>
         </div>
       )}

@@ -52,7 +52,6 @@ function SearchUserList() {
                   transition: { duration: 0.1 },
                 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={handleSearchSubmit}
               >
                 Search Users
               </motion.button>
@@ -79,7 +78,13 @@ function SearchUserList() {
                       account.email
                         .toLowerCase()
                         .includes(searchString.toLowerCase())) && (
-                      <tr className="cursor-pointer m-2" key={account.username} onClick={()=>window.location.href = `/profile/${account.username}`}>
+                      <tr
+                        className="cursor-pointer m-2"
+                        key={account.username}
+                        onClick={() =>
+                          (window.location.href = `/profile/${account.username}`)
+                        }
+                      >
                         <td className="">{account.name}</td>
                         <td>{account.username}</td>
                       </tr>
