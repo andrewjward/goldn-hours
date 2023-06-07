@@ -25,6 +25,7 @@ const SearchBox = ({ searchTerm, setSearchTerm }) => {
 
   useEffect(() => {
     setSearchTerm("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
