@@ -14,7 +14,7 @@ import useToken from "@galvanize-inc/jwtdown-for-react";
 import SearchUserList from "./components/SearchUser";
 
 function App() {
-  const baseUrl = "http://localhost:8000";
+  const baseUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}`;
   const { token } = useToken();
   const [userData, setUserData] = useState({});
   const [username, setUsername] = useState({});

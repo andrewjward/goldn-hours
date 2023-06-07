@@ -9,11 +9,10 @@ const LocationList = ({ searchTerm }) => {
   const searchRange = 100;
 
   const fetchPins = async () => {
-    const pinsUrl = `http://localhost:8000/api/pins?lat=${params.latitude}&long=${params.longitude}&radius=${searchRange}`;
+    const pinsUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins?lat=${params.latitude}&long=${params.longitude}&radius=${searchRange}`;
     const response = await fetch(pinsUrl);
     if (response.ok) {
       const pinsData = await response.json();
-      console.log(pinsData);
       setPins(pinsData);
     }
   };

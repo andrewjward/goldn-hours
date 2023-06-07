@@ -15,7 +15,7 @@ function Map() {
   const [pins, setPins] = useState([]);
 
   const fetchPins = async () => {
-    const pinsUrl = `http://localhost:8000/api/pins`;
+    const pinsUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins`;
     const response = await fetch(pinsUrl);
     if (response.ok) {
       const pinsData = await response.json();

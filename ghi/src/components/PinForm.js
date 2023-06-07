@@ -21,7 +21,6 @@ const PinForm = () => {
     date: new Date().toISOString().slice(0, 10),
     image_url: "",
   });
-  console.log(formData);
 
   const handleFormData = (event) => {
     const value = event.target.value;
