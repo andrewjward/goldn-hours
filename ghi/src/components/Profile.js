@@ -27,7 +27,7 @@ function Profile({ username, setUsername }) {
   };
 
   const fetchData = async () => {
-    const fetchUrl = `http://localhost:8000/api/accounts/69?username=${params.username}`;
+    const fetchUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/69?username=${params.username}`;
     const response = await fetch(fetchUrl);
     if (response.ok) {
       const data = await response.json();
@@ -36,7 +36,7 @@ function Profile({ username, setUsername }) {
   };
 
   const fetchPins = async () => {
-    const pinsUrl = `http://localhost:8000/api/pins?username=${params.username}`;
+    const pinsUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins?username=${params.username}`;
     const response = await fetch(pinsUrl);
     if (response.ok) {
       const pinsData = await response.json();
