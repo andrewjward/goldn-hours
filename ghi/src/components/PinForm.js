@@ -65,7 +65,7 @@ const PinForm = () => {
   useEffect(() => {
     if (formData.latitude !== 0 && formData.longitude !== 0) {
       const submitData = async () => {
-        const url = "http://localhost:8000/api/pins";
+        const url = "${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins";
         const fetchConfig = {
           method: "POST",
           body: JSON.stringify(formData),
