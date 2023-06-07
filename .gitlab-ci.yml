@@ -5,15 +5,15 @@ stages:
 
 # Run flake8 to check for code quality
 backend-test-job:
-image: python:3-bullseye
-stage: test
-script:
-  - pip install flake8
-  - flake8 Goldn_Hours_Service
-  - cd Goldn_Hours_Service
-  - pip install -r requirements.txt
-  - python -m pytest
-when: manual
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 Goldn_Hours_Service
+    - cd Goldn_Hours_Service
+    - pip install -r requirements.txt
+    - python -m pytest
+  when: manual
 
 build-front-end-job:
   stage: build
