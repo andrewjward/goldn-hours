@@ -11,17 +11,17 @@ class Error(BaseModel):
 class PinIn(BaseModel):
     username: str
 
-    #location
+    # location
     location_name: Optional[str]
     longitude: float
     latitude: float
 
-    #conditions
+    # conditions
     cloudy: int
     windy: int
     crowded: int
 
-    #info
+    # info
     date: str
     image_url: str
 

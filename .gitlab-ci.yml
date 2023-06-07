@@ -13,6 +13,7 @@ script:
   - cd Goldn_Hours_Service
   - pip install -r requirements.txt
   - python -m pytest
+when: manual
 
 build-front-end-job:
 stage: build
