@@ -26,9 +26,9 @@ const PinCard = ({ pin, setSearchTerm }) => {
             className="rounded-lg bg-slate-700 w-100 h-100"
           >
             <div className="flex flex-col items-center justify-center">
-              <h1>{pin.location_name}</h1>
+              <h1 className="text-xl m-2">{pin.location_name}</h1>
               <img
-                className="h-40 rounded shadow-lg object-cover"
+                className="w-11/12 h-40 rounded shadow-lg object-cover"
                 src={pin.image_url}
                 key={pin.id}
                 onClick={() => setClicked(false)}
