@@ -25,7 +25,7 @@ const LocationList = ({ searchTerm }) => {
 
   return (
     <div>
-      <h1>{searchTerm}</h1>
+      <h1 className="text-center underline text-2xl m-4">{searchTerm}</h1>
       {pins.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {pins.map((pin) => {
