@@ -1,6 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
-from datetime import date, datetime
+from typing import Optional
 from .pydantic_object import PydanticObjectId
 
 
@@ -10,6 +9,7 @@ class Error(BaseModel):
 
 class PinIn(BaseModel):
     username: str
+    profile_pic: Optional[str]
 
     # location
     location_name: Optional[str]

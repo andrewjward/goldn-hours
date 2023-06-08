@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import os, requests
+import os
+import requests
 from authenticator import authenticator
 from routers import accounts, pins
 
 
-description = "Gold'n Hours is THE app for photographers looking to maximize their productivity!"
+description = "Gold'n Hours is THE app for photographers looking to maximize "
+"their productivity!"
 
 app = FastAPI(
     title="Gold'n Hours",
@@ -13,7 +15,8 @@ app = FastAPI(
     version="0.0.1",
     terms_of_service="http://example.com/terms/",
     contact={
-        "name": "Squad-core, featuring: J-THON, Dara Structures, 1st place A-Ward, and Craig the Master",
+        "name": "Squad-core, featuring: J-THON, Dara Structures, 1st place "
+        "A-Ward, and Craig the Master",
         "url": "https://gitlab.com/jonathanrblazer/module3-project-gamma",
         "email": "squad-core@email.com",
     },

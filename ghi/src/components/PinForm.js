@@ -8,10 +8,12 @@ const PinForm = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
   const [userName, setUserName] = useState({});
+  const [profile_pic, setProfilePic] = useState('');
   const { token } = useToken();
 
   const [formData, setFormData] = useState({
     username: "",
+    profile_pic:"",
     location_name: "",
     longitude: 0,
     latitude: 0,
@@ -30,6 +32,7 @@ const PinForm = () => {
       ...formData,
       [inputName]: value,
       username: userName,
+      profile_pic: profile_pic,
     });
   };
 
@@ -42,6 +45,7 @@ const PinForm = () => {
       .then((data) => {
         setUserData(data.account);
         setUserName(data.account.username);
+        setProfilePic(data.account.profile_pic);
       })
       .catch((error) => console.error(error));
   };
@@ -79,6 +83,7 @@ const PinForm = () => {
           if (response.ok) {
             setFormData({
               username: "",
+              profile_pic:"",
               location_name: "",
               longitude: 0,
               latitude: 0,
