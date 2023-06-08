@@ -1,25 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import { useNavigate } from 'react-router-dom';
 
 
 const SearchBox = ({ searchTerm, setSearchTerm }) => {
   const navigate = useNavigate();
-
+  const [currentSearchTerm, setCurrentSearchTerm] = useState("");
 
   const getGeo = async (event) => {
     event.preventDefault();
-    geocodeByAddress(searchTerm)
+    geocodeByAddress(currentSearchTerm)
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
-        navigate(`/location/${lat}/${lng}`)
+        setSearchTerm(currentSearchTerm);
+        navigate(`/location/${lat}/${lng}`);
       });
   }
 
 
   const handleSearchTerm = (event) => {
     const value = event.target.value;
-    setSearchTerm(value);
+    setCurrentSearchTerm(value);
   }
 
 
