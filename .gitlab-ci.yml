@@ -13,7 +13,9 @@ backend-test-job:
     - cd Goldn_Hours_Service
     - pip install -r requirements.txt
     - python -m pytest
-  when: manual
+  variables:
+    - DATABASE_URL: database_url
+    - SIGNING_KEY: signing_key
 
 build-front-end-job:
   stage: build
