@@ -17,7 +17,10 @@ class CreatePin:
             "windy": 9,
             "crowded": 2,
             "date": "6-22-2023",
-            "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoivaHZMdv9L8C8ro=/0x0:2000x1330/1200x800/filters:focal(840x505:1160x825)/cdn.vox-cdn.com/uploads/chorus_image/image/66852958/MGMGrand_hearts.0.jpg",
+            "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoi"
+            "vaHZMdv9L8C8ro=/0x0:2000x1330/1200x800/filters:focal(840x5"
+            "05:1160x825)/cdn.vox-cdn.com/uploads/chorus_image/image/66"
+            "852958/MGMGrand_hearts.0.jpg",
             "id": "1",
         }
         result.update(pin)
@@ -33,7 +36,10 @@ mock_data = {
     "windy": 9,
     "crowded": 2,
     "date": "6-22-2023",
-    "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoivaHZMdv9L8C8ro=/0x0:2000x1330/1200x800/filters:focal(840x505:1160x825)/cdn.vox-cdn.com/uploads/chorus_image/image/66852958/MGMGrand_hearts.0.jpg",
+    "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoivaHZMdv9"
+    "L8C8ro=/0x0:2000x1330/1200x800/filters:focal(840x505:1160x825)/cdn"
+    ".vox-cdn.com/uploads/chorus_image/image/66852958/MGMGrand_hearts."
+    "0.jpg",
 }
 
 
@@ -55,7 +61,10 @@ def test_create_pin():
         "windy": 9,
         "crowded": 2,
         "date": "6-22-2023",
-        "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoivaHZMdv9L8C8ro=/0x0:2000x1330/1200x800/filters:focal(840x505:1160x825)/cdn.vox-cdn.com/uploads/chorus_image/image/66852958/MGMGrand_hearts.0.jpg",
+        "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoivaHZ"
+        "Mdv9L8C8ro=/0x0:2000x1330/1200x800/filters:focal(840x505:1160x"
+        "825)/cdn.vox-cdn.com/uploads/chorus_image/image/66852958/MGMGr"
+        "and_hearts.0.jpg",
         "id": "1",
     }
     expected = {
@@ -67,7 +76,10 @@ def test_create_pin():
         "windy": 9,
         "crowded": 2,
         "date": "6-22-2023",
-        "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoivaHZMdv9L8C8ro=/0x0:2000x1330/1200x800/filters:focal(840x505:1160x825)/cdn.vox-cdn.com/uploads/chorus_image/image/66852958/MGMGrand_hearts.0.jpg",
+        "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoivaHZ"
+        "Mdv9L8C8ro=/0x0:2000x1330/1200x800/filters:focal(840x505:1160x"
+        "825)/cdn.vox-cdn.com/uploads/chorus_image/image/66852958/MGMGr"
+        "and_hearts.0.jpg",
         "id": "1",
     }
     response = client.post("/api/pins", json=json)

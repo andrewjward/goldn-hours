@@ -1,5 +1,5 @@
 from .client import Queries
-from models.pins import PinIn, PinOut, Pin
+from models.pins import PinIn, PinOut
 from bson.objectid import ObjectId
 from typing import List
 from geopy.distance import distance

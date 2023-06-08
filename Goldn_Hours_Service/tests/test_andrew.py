@@ -20,7 +20,9 @@ mock_data = {
     "windy": 9,
     "crowded": 6,
     "date": "6-22-2023",
-    "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoivaHZMdv9L8C8ro=/0x0:2000x1330/1200x800/filters:focal(840x505:1160x825)/cdn.vox-cdn.com/uploads/chorus_image/image/66852958/MGMGrand_hearts.0.jpg",
+    "image_url": "https://cdn.vox-cdn.com/thumbor/EtesRJ6lRBSoivaHZMdv9L8C8ro="
+    "/0x0:2000x1330/1200x800/filters:focal(840x505:1160x825)/cdn.vox-cdn.com/u"
+    "ploads/chorus_image/image/66852958/MGMGrand_hearts.0.jpg",
     "id": "1",
 }
 
