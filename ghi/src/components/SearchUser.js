@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function SearchUserList() {
   const [accounts, setAccounts] = useState([]);
   const [user, setUser] = useState("");
   const [searchString, setSearchString] = useState("");
+  const navigate = useNavigate();
 
   const handleUserChange = (event) => {
     const value = event.target.value;
@@ -16,8 +18,15 @@ function SearchUserList() {
     setSearchString(user);
   };
 
+  const handleProfileClick = (event) => {
+    event.preventDefault();
+    const username = event.currentTarget.dataset.username;
+    navigate(`/profile/${username}`);
+  };
+
+
   const fetchAccountList = async () => {
-    const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/`;
+    const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts`;
     const fetchList = await fetch(listUrl);
     if (fetchList.ok) {
       const data = await fetchList.json();
@@ -81,9 +90,8 @@ function SearchUserList() {
                       <tr
                         className="cursor-pointer m-2"
                         key={account.username}
-                        onClick={() =>
-                          (window.location.href = `/profile/${account.username}`)
-                        }
+                        data-username={account.username}
+                        onClick={handleProfileClick}
                       >
                         <td className="">{account.name}</td>
                         <td>{account.username}</td>
