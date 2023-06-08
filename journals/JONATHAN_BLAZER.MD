@@ -1,3 +1,11 @@
+## Wednesday, 2023-Jun-7
+    Long day of trying to CICD, but things are starting to work.
+    For some reason, our frontend seems to be making an HTTP: call to the backend, which should be a HTTPS: call.
+    This is giving us a mixed content error in Chrome.
+    Our backend (Swagger) is working well.
+    Frontend can LOGIN, but not SIGNUP.
+    Pins can be made and map browsed, locations searched.
+    User Search does not work!
 ## Tuesday, 2023-Jun-6
     Made some great progress on eliminating duplicate account signups!
 ## Monday, 2023-Jun-5
