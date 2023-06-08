@@ -41,8 +41,12 @@ const LocationList = ({ searchTerm }) => {
                 ></img>
                 <p>{pin.location_name}</p>
                 <div className="flex flex-row items-center m-1">
-                  <img alt="I AM BEING CENSORED BY THE LINTER!!" src={pin.profile_pic ?? pic } className="rounded-full w-6 h-6 object-cover" />
-                  <NavLink to={`/profile/${pin.username}`} className="ml-1" >
+                  <img
+                    alt="I AM BEING CENSORED BY THE LINTER!!"
+                    src={pin.profile_pic ?? pic}
+                    className="rounded-full w-6 h-6 object-cover"
+                  />
+                  <NavLink to={`/profile/${pin.username}`} className="ml-1">
                     {pin.username}
                   </NavLink>
                 </div>

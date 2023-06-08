@@ -29,12 +29,12 @@ function Profile({ username, setUsername }) {
 
   const deletePin = async (event, id) => {
     event.preventDefault();
-    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins/${id}`
-    const response = await fetch(url, {method: "DELETE" });
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins/${id}`;
+    const response = await fetch(url, { method: "DELETE" });
     if (response.ok) {
-      setPins(pins.filter((pin) => pin.id !== id))
+      setPins(pins.filter((pin) => pin.id !== id));
     }
-  }
+  };
 
   const fetchData = async () => {
     const fetchUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/69?username=${params.username}`;
@@ -101,14 +101,20 @@ function Profile({ username, setUsername }) {
                     alt="List of Pins"
                   ></img>
                   {isLoggedIn ? (
-                  <motion.img
-                    src={deleteIcon}
-                    initial={{ opacity: 0 }}                  
-                    whileHover={{ opacity: 1, transition: { duration: 0.05 } }}
-                    alt="delete-icon"
-                    className="absolute z-3 top-0 right-0 w-10"
-                    onClick={(event) => deletePin(event, pin.id)}
-                  />) : (<></>)}
+                    <motion.img
+                      src={deleteIcon}
+                      initial={{ opacity: 0 }}
+                      whileHover={{
+                        opacity: 1,
+                        transition: { duration: 0.05 },
+                      }}
+                      alt="delete-icon"
+                      className="absolute z-3 top-0 right-0 w-10"
+                      onClick={(event) => deletePin(event, pin.id)}
+                    />
+                  ) : (
+                    <></>
+                  )}
                 </motion.div>
                 <p>{pin.location_name}</p>
               </div>

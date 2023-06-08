@@ -9,9 +9,9 @@ const PinCard = ({ pin, setSearchTerm }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-      setSearchTerm(pin.location_name);
-      navigate(`/location/${pin.latitude}/${pin.longitude}`);
-    };
+    setSearchTerm(pin.location_name);
+    navigate(`/location/${pin.latitude}/${pin.longitude}`);
+  };
 
   return (
     <div className="flex flex-col justify-center items-center bg-slate-200 rounded-lg">
@@ -62,6 +62,7 @@ const PinCard = ({ pin, setSearchTerm }) => {
             className="h-10 rounded shadow-lg object-cover"
             src={pin.image_url}
             key={pin.id}
+            alt="del pic"
             onClick={() => setClicked(true)}
           />
         )}
