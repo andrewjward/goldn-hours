@@ -32,16 +32,10 @@ function App() {
       })
       .catch((error) => console.error(error));
   };
+
   useEffect(() => {
     handleGetLoggedInUser();
   }, [token]);
-
-  // useEffect(() => {
-  //   handleGetLoggedInUser();
-  // }, []);
-
-
-
 
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, '');
