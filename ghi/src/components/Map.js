@@ -1,4 +1,4 @@
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import logo from "../images/golden-logo-transparent.png";
@@ -15,7 +15,7 @@ function Map() {
   const [pins, setPins] = useState([]);
 
   const fetchPins = async () => {
-    const pinsUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins`;
+    const pinsUrl = `http://localhost:8000/api/pins`;
     const response = await fetch(pinsUrl);
     if (response.ok) {
       const pinsData = await response.json();
