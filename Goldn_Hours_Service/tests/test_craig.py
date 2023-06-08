@@ -19,7 +19,7 @@ class GetOnePinQueries:
             windy=0,
             crowded=0,
             date="string",
-            image_url="string",
+            image_url="string"
         )
 
 
@@ -34,7 +34,7 @@ def test_get_pin():
         "windy": 0,
         "crowded": 0,
         "date": "string",
-        "image_url": "string",
+        "image_url": "string"
     }
 
     app.dependency_overrides[PinsQueries] = GetOnePinQueries
