@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import pic from "../images/gold-icon.png";
+import deleteIcon from "../images/delete-icon.svg";
 
 function Profile({ username, setUsername }) {
   const [pins, setPins] = useState([]);
@@ -25,6 +26,15 @@ function Profile({ username, setUsername }) {
       })
       .catch((error) => console.error(error));
   };
+
+  const deletePin = async (event, id) => {
+    event.preventDefault();
+    const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins/${id}`
+    const response = await fetch(url, {method: "DELETE" });
+    if (response.ok) {
+      setPins(pins.filter((pin) => pin.id !== id))
+    }
+  }
 
   const fetchData = async () => {
     const fetchUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/69?username=${params.username}`;
@@ -66,7 +76,6 @@ function Profile({ username, setUsername }) {
         />
         {isLoggedIn ? (
           <motion.button
-            // onClick={}
             type="submit"
             className="m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
             whileHover={{
@@ -85,11 +94,22 @@ function Profile({ username, setUsername }) {
                 className="flex flex-col items-center h-auto max-w-full rounded-lg"
                 key={pin.id}
               >
-                <img
-                  className="relative m-3 rounded-xl w-96 h-56 object-cover"
-                  src={pin.image_url}
-                  alt="List of Pins"
-                ></img>
+                <motion.div className=" relative" whileHover={{}}>
+                  <img
+                    className="hover:z-0 z-4 rounded-xl w-96 h-56 object-cover"
+                    src={pin.image_url}
+                    alt="List of Pins"
+                  ></img>
+                  {isLoggedIn ? (
+                  <motion.img
+                    src={deleteIcon}
+                    initial={{ opacity: 0 }}                  
+                    whileHover={{ opacity: 1, transition: { duration: 0.05 } }}
+                    alt="delete-icon"
+                    className="absolute z-3 top-0 right-0 w-10"
+                    onClick={(event) => deletePin(event, pin.id)}
+                  />) : (<></>)}
+                </motion.div>
                 <p>{pin.location_name}</p>
               </div>
             );
