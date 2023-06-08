@@ -27,15 +27,10 @@ app = FastAPI(
 
 
 origins = [
-    os.environ["PUBLIC_URL"],
+    os.environ.get("PUBLIC_URL", None),
     os.environ.get("REACT_APP_SAMPLE_SERVICE_API_HOST", None),
     os.environ.get("CORS_HOST", None),
-    os.environ.get("PUBLIC_URL", None),
 ]
-
-print("OS ENVIRON:", os.environ.get("PUBLIC_URL", None))
-print("PUBLIC_URL:", os.environ["PUBLIC_URL"])
-print("LocalHost 3000 :", os.environ)
 
 
 app.add_middleware(

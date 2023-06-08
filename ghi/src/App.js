@@ -17,7 +17,7 @@ function App() {
   const baseUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}`;
   const { token } = useToken();
   const [userData, setUserData] = useState({});
-  const [username, setUsername] = useState({});
+  const [username, setUsername] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleGetLoggedInUser = async () => {
@@ -28,6 +28,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setUserData(data.account);
+        setUsername(data.account.username);
       })
       .catch((error) => console.error(error));
   };
@@ -35,9 +36,9 @@ function App() {
     handleGetLoggedInUser();
   }, [token]);
 
-  useEffect(() => {
-    handleGetLoggedInUser();
-  }, []);
+  // useEffect(() => {
+  //   handleGetLoggedInUser();
+  // }, []);
 
 
 
