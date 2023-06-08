@@ -1,4 +1,4 @@
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import logo from "../images/golden-logo-transparent.png";
