@@ -57,7 +57,6 @@ function Map() {
             {pins.map((pin) => {
               return <PinCard key={pin.id} pin={pin} />;
             })}
-            <Marker position={center} />
           </GoogleMap>
         </div>
       </div>
