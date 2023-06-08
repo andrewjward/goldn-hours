@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 const LocationList = ({ searchTerm }) => {
   const [pins, setPins] = useState([]);
   const params = useParams();
-  const searchRange = 100;
+  const searchRange = 0.5;
 
   const fetchPins = async () => {
     const pinsUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins?lat=${params.latitude}&long=${params.longitude}&radius=${searchRange}`;
