@@ -1,7 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
 from queries.pins import PinsQueries, PinOut
-from authenticator import authenticator
 
 
 client = TestClient(app)

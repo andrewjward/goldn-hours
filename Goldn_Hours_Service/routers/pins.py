@@ -1,10 +1,6 @@
 from fastapi import (
     Depends,
-    HTTPException,
-    status,
-    Response,
     APIRouter,
-    Request,
 )
 from models.pins import PinIn, PinOut
 from queries.pins import PinsQueries

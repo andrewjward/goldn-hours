@@ -10,7 +10,7 @@ class Auth(Authenticator):
         self,
         username: str,
         accounts: AccountQueries,
-    ):  ### LOGIC
+    ):
         props = accounts.collection.find_one({"username": username})
         account_id = str(props["_id"])
         return accounts.get_account(account_id)

@@ -89,7 +89,7 @@ async def update_account(
         #   status_code=status.HTTP_400_BAD_REQUEST,
         #   detail="Account with that email already exists"
         #   )
-        account = repo.update_account(account_id, info, hashed_password)
+        account = repo.update_account(account_id, info)
     except DuplicateAccountError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
