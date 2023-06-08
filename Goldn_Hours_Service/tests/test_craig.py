@@ -11,6 +11,8 @@ class GetOnePinQueries:
         return PinOut(
             id=1,
             username="username",
+            profile_pic="https://tse1.mm.bing.net/th/id/OIP.CsLd5fh"
+            "KXR3bZg3HT4U6fwHaE8?pid=ImgDet&rs=1",
             location_name="location_name",
             longitude=69,
             latitude=69,
@@ -18,7 +20,7 @@ class GetOnePinQueries:
             windy=0,
             crowded=0,
             date="string",
-            image_url="string",
+            image_url="string"
         )
 
 
@@ -26,6 +28,8 @@ def test_get_pin():
     expected = {
         "id": "1",
         "username": "username",
+        "profile_pic": "https://tse1.mm.bing.net/th/id/OIP.CsLd5fhKX"
+        "R3bZg3HT4U6fwHaE8?pid=ImgDet&rs=1",
         "location_name": "location_name",
         "longitude": 69,
         "latitude": 69,
@@ -33,7 +37,7 @@ def test_get_pin():
         "windy": 0,
         "crowded": 0,
         "date": "string",
-        "image_url": "string",
+        "image_url": "string"
     }
 
     app.dependency_overrides[PinsQueries] = GetOnePinQueries
