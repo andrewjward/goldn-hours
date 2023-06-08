@@ -15,7 +15,7 @@ function Map() {
   const [pins, setPins] = useState([]);
 
   const fetchPins = async () => {
-    const pinsUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins`;
+    const pinsUrl = `http://localhost:8000/api/pins`;
     const response = await fetch(pinsUrl);
     if (response.ok) {
       const pinsData = await response.json();
@@ -57,7 +57,10 @@ function Map() {
             {pins.map((pin) => {
               return <PinCard key={pin.id} pin={pin} />;
             })}
+<<<<<<< HEAD
             {/* <Marker position={center} /> */}
+=======
+>>>>>>> 1b063020d07f50bfab6463e7b28423400d11a0b2
           </GoogleMap>
         </div>
       </div>
