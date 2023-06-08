@@ -58,7 +58,7 @@ function App() {
             searchTerm={searchTerm}
             />}
             />
-            <Route path="/" element={<Map />} />
+            <Route path="/" element={<Map setSearchTerm={setSearchTerm}/>} />
             <Route
               path="/signup"
               element={

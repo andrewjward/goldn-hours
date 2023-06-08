@@ -1,10 +1,16 @@
 import { InfoWindowF } from "@react-google-maps/api";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-const PinCard = ({ pin }) => {
+const PinCard = ({ pin, setSearchTerm }) => {
   const [clicked, setClicked] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+      setSearchTerm(pin.location_name);
+      navigate(`/location/${pin.latitude}/${pin.longitude}`);
+    };
 
   return (
     <div className="flex flex-col justify-center items-center bg-slate-200 rounded-lg">
@@ -36,12 +42,12 @@ const PinCard = ({ pin }) => {
               <p className="text-sm text-center truncate">
                 ☀️ {pin.cloudy} 🍃 {pin.windy} 🧔 {pin.crowded}
               </p>
-              <NavLink
-                to={`/location/${pin.latitude}/${pin.longitude}`}
+              <button
+                onClick={handleClick}
                 className="flex items-center truncate mt-2 border-b-2 border-b-amber-600 bg-amber-400 rounded-lg h-8 w-30 text-center active:bg-amber-500 hover:bg-amber-300 shadow-md active:shadow-none active:border-b-0"
               >
                 View more
-              </NavLink>
+              </button>
             </div>
           </motion.div>
         ) : (
