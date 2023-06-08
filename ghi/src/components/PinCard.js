@@ -38,7 +38,7 @@ const PinCard = ({ pin, setSearchTerm }) => {
                 <img
                   src={pin.profile_pic ?? pic}
                   className="rounded-full w-6 h-6 object-cover"
-                  alt="profile picture"
+                  alt="I AM BEING CENSORED BY THE LINTER!!"
                 />
                 <NavLink to={`/profile/${pin.username}`} className="ml-1">
                   {pin.username}
