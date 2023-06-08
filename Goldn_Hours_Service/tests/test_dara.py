@@ -10,6 +10,7 @@ class CreatePin:
     def create_pin(self, pin):
         result = {
             "username": "bob",
+            "profile_pic": "https://tse1.mm.bing.net/th/id/OIP.CsLd5fhKXR3bZg3HT4U6fwHaE8?pid=ImgDet&rs=1",
             "location_name": "New York, NY",
             "longitude": 49.65,
             "latitude": 12.88,
@@ -29,6 +30,7 @@ class CreatePin:
 
 mock_data = {
     "username": "bob",
+    "profile_pic": "https://tse1.mm.bing.net/th/id/OIP.CsLd5fhKXR3bZg3HT4U6fwHaE8?pid=ImgDet&rs=1",
     "location_name": "New York, NY",
     "longitude": 49.65,
     "latitude": 12.88,
@@ -54,6 +56,7 @@ def test_create_pin():
     ] = account_override
     json = {
         "username": "bob",
+        "profile_pic": "https://tse1.mm.bing.net/th/id/OIP.CsLd5fhKXR3bZg3HT4U6fwHaE8?pid=ImgDet&rs=1",
         "location_name": "New York, NY",
         "longitude": 49.65,
         "latitude": 12.88,
@@ -69,6 +72,7 @@ def test_create_pin():
     }
     expected = {
         "username": "bob",
+        "profile_pic": "https://tse1.mm.bing.net/th/id/OIP.CsLd5fhKXR3bZg3HT4U6fwHaE8?pid=ImgDet&rs=1",
         "location_name": "New York, NY",
         "longitude": 49.65,
         "latitude": 12.88,

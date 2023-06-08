@@ -11,6 +11,7 @@ class GetOnePinQueries:
         return PinOut(
             id=1,
             username="username",
+            profile_pic="https://tse1.mm.bing.net/th/id/OIP.CsLd5fhKXR3bZg3HT4U6fwHaE8?pid=ImgDet&rs=1",
             location_name="location_name",
             longitude=69,
             latitude=69,
@@ -26,6 +27,7 @@ def test_get_pin():
     expected = {
         "id": "1",
         "username": "username",
+        "profile_pic": "https://tse1.mm.bing.net/th/id/OIP.CsLd5fhKXR3bZg3HT4U6fwHaE8?pid=ImgDet&rs=1",
         "location_name": "location_name",
         "longitude": 69,
         "latitude": 69,
