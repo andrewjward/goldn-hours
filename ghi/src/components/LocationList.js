@@ -7,7 +7,7 @@ import pic from "../images/gold-icon.png";
 const LocationList = ({ searchTerm }) => {
   const [pins, setPins] = useState([]);
   const params = useParams();
-  const searchRange = 100;
+  const searchRange = 1;
 
   const fetchPins = async () => {
     const pinsUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins?lat=${params.latitude}&long=${params.longitude}&radius=${searchRange}`;
