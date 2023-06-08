@@ -56,9 +56,10 @@ function App() {
             path="/location/:latitude/:longitude"
             element={<LocationList
             searchTerm={searchTerm}
+            userData={userData}
             />}
             />
-            <Route path="/" element={<Map />} />
+            <Route path="/" element={<Map setSearchTerm={setSearchTerm}/>} />
             <Route
               path="/signup"
               element={

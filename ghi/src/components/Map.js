@@ -7,7 +7,7 @@ import styles from "./mapStyles";
 
 import "../App.css";
 
-function Map() {
+function Map({ setSearchTerm }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
@@ -55,7 +55,7 @@ function Map() {
             mapContainerClassName="map-container"
           >
             {pins.map((pin) => {
-              return <PinCard key={pin.id} pin={pin} />;
+              return <PinCard key={pin.id} pin={pin} setSearchTerm={setSearchTerm}/>;
             })}
           </GoogleMap>
         </div>
