@@ -47,7 +47,7 @@ const SignupForm = () => {
     data.password = password;
     data.name = name;
 
-    const accountUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/`;
+    const accountUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts`;
 
     const tryToFetchUsername = async () => {
       const fetchUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/69?username=${username}`;
