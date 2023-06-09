@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import pic from "../images/gold-icon.png";
 import deleteIcon from "../images/delete-icon.svg";
 import useToken from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from "react-router-dom";
 
-function Profile({ username, setUsername }) {
+function Profile({ userData, setUserData, setUsername }) {
   const [pins, setPins] = useState([]);
   const [profile, setProfile] = useState([]);
   const params = useParams();
-  const [userData, setUserData] = useState({});
   const { token } = useToken();
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(
     params.username === userData.username
   );
@@ -29,6 +30,10 @@ function Profile({ username, setUsername }) {
         setIsLoggedIn(params.username === data.account.username);
       })
       .catch((error) => console.error(error));
+  };
+
+  const handleEditProfile = async () => {
+    navigate(`/profile/${params.username}/update`);
   };
 
   const deletePin = async (event, id) => {
@@ -94,6 +99,7 @@ function Profile({ username, setUsername }) {
               transition: { duration: 0.2 },
             }}
             whileTap={{ scale: 0.9 }}
+            onClick={handleEditProfile}
           >
             Edit Profile
           </motion.button>

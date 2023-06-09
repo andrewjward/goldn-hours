@@ -74,32 +74,30 @@ async def create_account(
 
 @router.put(
     "/api/accounts/{account_id}",
-    response_model=AccountToken | HttpError,
+    response_model=AccountOut | HttpError,
 )
 async def update_account(
     account_id: str,
-    info: AccountIn,
-    request: Request,
-    response: Response,
+    account_in: AccountIn,
     repo: AccountQueries = Depends(),
+    account_logged_in: Account = Depends(
+        authenticator.try_get_current_account_data
+    ),
 ):
-    try:
-        # if info.email in [document.email for document in repo.get_all()]:
-        #   raise HTTPException(
-        #   status_code=status.HTTP_400_BAD_REQUEST,
-        #   detail="Account with that email already exists"
-        #   )
-        account = repo.update_account(account_id, info)
-    except DuplicateAccountError:
+    if account_logged_in:
+        try:
+            account = repo.update_account(account_id, account_in)
+        except DuplicateAccountError:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="UNABLE TO UPDATE",
+            )
+        return account
+    else:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot Create An Account With Those Credentials",
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="UNAUTHORIZED",
         )
-
-    form = AccountForm(username=info.username, password=info.password)
-    token = await authenticator.login(response, request, form, repo)
-    return AccountToken(account=account, **token.dict())
-
 
 @router.delete("/api/accounts/{account_id}", response_model=bool)
 async def delete_account(
