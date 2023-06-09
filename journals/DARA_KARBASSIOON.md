@@ -1,3 +1,20 @@
+## June 8, 2023
+
+Got the app up and deployed today. I am continuing to work on CSS and various other front end related stuff. Adding profile pics next to the posters name on the locationlist.js and to the map page.
+
+## June 7, 2023
+
+Mainly had Jonathan and Andrew drive while continuing to work on deployment. We worked on the .gitlab-ci.yml file.
+
+## June 6, 2023
+
+I started by fixing the size of the logo in the nav bar. We found out that we needed to add the __init__.py to the tests folder. Worked on closing some issues. Deployment is quite the challenge.
+
+## June 5, 2023
+
+We added some unit tests today and had some bugs with the navigation bar. I worked on adding some navigation functionality to each pin card on the map of the home page too.
+
+
 ## June 2, 2023
 
 We are all working on separate things this morning. I created and solved some issues regarding the nav bar, such as being able to access the profile page when not logged in and restricting making a post when not logged in.

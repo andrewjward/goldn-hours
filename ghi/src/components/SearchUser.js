@@ -24,7 +24,6 @@ function SearchUserList() {
     navigate(`/profile/${username}`);
   };
 
-
   const fetchAccountList = async () => {
     const listUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts`;
     const fetchList = await fetch(listUrl);

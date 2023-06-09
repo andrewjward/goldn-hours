@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import notFound from "../images/not_found.png";
 import { NavLink } from "react-router-dom";
+import pic from "../images/gold-icon.png";
 
 const LocationList = ({ searchTerm }) => {
   const [pins, setPins] = useState([]);
   const params = useParams();
-  const searchRange = 100;
+  const searchRange = 1;
 
   const fetchPins = async () => {
     const pinsUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins?lat=${params.latitude}&long=${params.longitude}&radius=${searchRange}`;
@@ -21,7 +22,6 @@ const LocationList = ({ searchTerm }) => {
     fetchPins();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
-
 
   return (
     <div>
@@ -40,9 +40,16 @@ const LocationList = ({ searchTerm }) => {
                   alt="pin"
                 ></img>
                 <p>{pin.location_name}</p>
-                <NavLink to={`/profile/${pin.username}`}>
-                  {pin.username}
-                </NavLink>
+                <div className="flex flex-row items-center m-1">
+                  <img
+                    alt="I AM BEING CENSORED BY THE LINTER!!"
+                    src={pin.profile_pic ?? pic}
+                    className="rounded-full w-6 h-6 object-cover"
+                  />
+                  <NavLink to={`/profile/${pin.username}`} className="ml-1">
+                    {pin.username}
+                  </NavLink>
+                </div>
               </div>
             );
           })}

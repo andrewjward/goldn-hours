@@ -2,15 +2,16 @@ import { InfoWindowF } from "@react-google-maps/api";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { NavLink, useNavigate } from "react-router-dom";
+import pic from "../images/gold-icon.png";
 
 const PinCard = ({ pin, setSearchTerm }) => {
   const [clicked, setClicked] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
-      setSearchTerm(pin.location_name);
-      navigate(`/location/${pin.latitude}/${pin.longitude}`);
-    };
+    setSearchTerm(pin.location_name);
+    navigate(`/location/${pin.latitude}/${pin.longitude}`);
+  };
 
   return (
     <div className="flex flex-col justify-center items-center bg-slate-200 rounded-lg">
@@ -25,20 +26,24 @@ const PinCard = ({ pin, setSearchTerm }) => {
             className="rounded-lg bg-slate-700 w-100 h-100"
           >
             <div className="flex flex-col items-center justify-center">
-              <h1>{pin.location_name}</h1>
+              <h1 className="text-xl m-2">{pin.location_name}</h1>
               <img
-                className="h-40 rounded shadow-lg object-cover"
+                className="w-11/12 h-40 rounded shadow-lg object-cover"
                 src={pin.image_url}
                 key={pin.id}
                 onClick={() => setClicked(false)}
                 alt="pin"
               />
-              <NavLink
-                to={`/profile/${pin.username}`}
-                className="pl-2 left-52 top-1"
-              >
-                {pin.username}
-              </NavLink>
+              <div className="flex flex-row items-center m-1">
+                <img
+                  src={pin.profile_pic ?? pic}
+                  className="rounded-full w-6 h-6 object-cover"
+                  alt="I AM BEING CENSORED BY THE LINTER!!"
+                />
+                <NavLink to={`/profile/${pin.username}`} className="ml-1">
+                  {pin.username}
+                </NavLink>
+              </div>
               <p className="text-sm text-center truncate">
                 ☀️ {pin.cloudy} 🍃 {pin.windy} 🧔 {pin.crowded}
               </p>
@@ -57,6 +62,7 @@ const PinCard = ({ pin, setSearchTerm }) => {
             className="h-10 rounded shadow-lg object-cover"
             src={pin.image_url}
             key={pin.id}
+            alt="del pic"
             onClick={() => setClicked(true)}
           />
         )}
