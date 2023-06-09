@@ -13,6 +13,8 @@ function Profile({ username, setUsername }) {
     params.username === userData.username
   );
 
+  const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
+
   const handleGetLoggedInUser = async () => {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
     fetch(url, {
@@ -73,6 +75,7 @@ function Profile({ username, setUsername }) {
             scale: 1.2,
             transition: { duration: 0.2 },
           }}
+          transition={transition}
         />
         {isLoggedIn ? (
           <motion.button
@@ -88,18 +91,24 @@ function Profile({ username, setUsername }) {
           </motion.button>
         ) : null}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {pins.map((pin) => {
+          {pins.map((pin, i) => {
             return (
               <div
                 className="flex flex-col items-center h-auto max-w-full rounded-lg"
                 key={pin.id}
               >
-                <motion.div className=" relative" whileHover={{}}>
-                  <img
+                <motion.div className=" relative" whileHover={{ scale: 1.1 }}>
+                  <motion.img
+                    initial={{
+                      opacity: 0,
+                      translateY: 100,
+                    }}
+                    animate={{ opacity: 1, translateX: 0, translateY: 0 }}
+                    transition={{ duration: 0.3, delay: i * 0.05 }}
                     className="hover:z-0 z-4 rounded-xl w-96 h-56 object-cover"
                     src={pin.image_url}
                     alt="List of Pins"
-                  ></img>
+                  />
                   {isLoggedIn ? (
                     <motion.img
                       src={deleteIcon}
