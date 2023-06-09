@@ -65,10 +65,7 @@ const Nav = ({ username, setUserData, searchTerm, setSearchTerm }) => {
           )}
         </ul>
         <div className="flex">
-          <SearchBox
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          />
+          <SearchBox searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           {token ? (
             <button
               onClick={handleLogout}

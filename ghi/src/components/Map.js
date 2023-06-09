@@ -55,7 +55,9 @@ function Map({ setSearchTerm }) {
             mapContainerClassName="map-container"
           >
             {pins.map((pin) => {
-              return <PinCard key={pin.id} pin={pin} setSearchTerm={setSearchTerm}/>;
+              return (
+                <PinCard key={pin.id} pin={pin} setSearchTerm={setSearchTerm} />
+              );
             })}
           </GoogleMap>
         </div>

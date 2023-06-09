@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useEffect, useState } from "react";
+import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+import { useNavigate } from "react-router-dom";
 
 const SearchBox = ({ searchTerm, setSearchTerm }) => {
   const navigate = useNavigate();
@@ -10,25 +9,22 @@ const SearchBox = ({ searchTerm, setSearchTerm }) => {
   const getGeo = async (event) => {
     event.preventDefault();
     geocodeByAddress(currentSearchTerm)
-      .then(results => getLatLng(results[0]))
+      .then((results) => getLatLng(results[0]))
       .then(({ lat, lng }) => {
         setSearchTerm(currentSearchTerm);
         navigate(`/location/${lat}/${lng}`);
       });
-  }
-
+  };
 
   const handleSearchTerm = (event) => {
     const value = event.target.value;
     setCurrentSearchTerm(value);
-  }
-
+  };
 
   useEffect(() => {
     setSearchTerm("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
+  }, []);
 
   return (
     <form className="flex" onSubmit={getGeo}>
@@ -46,7 +42,7 @@ const SearchBox = ({ searchTerm, setSearchTerm }) => {
         Search
       </button>
     </form>
-  )
-}
+  );
+};
 
-export default SearchBox
+export default SearchBox;
