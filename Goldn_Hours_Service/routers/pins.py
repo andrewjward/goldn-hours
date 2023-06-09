@@ -1,12 +1,10 @@
 from fastapi import (
     Depends,
-    HTTPException,
-    status,
-    Response,
     APIRouter,
-    Request,
 )
+from authenticator import authenticator
 from models.pins import PinIn, PinOut
+from models.accounts import Account
 from queries.pins import PinsQueries
 
 
@@ -17,9 +15,13 @@ router = APIRouter()
 async def create_pin(
     pin: PinIn,
     repo: PinsQueries = Depends(),
+    account: Account = Depends(authenticator.try_get_current_account_data),
 ):
-    pin = repo.create_pin(pin)
-    return pin
+    if account:
+        pin = repo.create_pin(pin)
+        return pin
+    else:
+        return None
 
 
 @router.get("/api/pins")  # ?q= optional query for specific user's pins
