@@ -14,7 +14,6 @@ from queries.accounts import (
     DuplicateAccountError,
 )
 from models.accounts import AccountIn, Account, AccountOut
-from queries.pins import PinsQueries
 
 
 class AccountForm(BaseModel):

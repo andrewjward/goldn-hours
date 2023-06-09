@@ -1,3 +1,7 @@
+## June 9, 2023
+
+Im adding animations to our app. Added a stagger animation to the search users function and picture loading stagger animation to the pages that load pictures. Spicing up the search users nav button too. The rest of the team is working on securing the backend preventing anyone from deleting or creating pins/accounts from the swagger. Craig is working on post modals.
+
 ## June 8, 2023
 
 Got the app up and deployed today. I am continuing to work on CSS and various other front end related stuff. Adding profile pics next to the posters name on the locationlist.js and to the map page.
