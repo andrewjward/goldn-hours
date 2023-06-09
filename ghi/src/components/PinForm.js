@@ -75,12 +75,14 @@ const PinForm = () => {
           body: JSON.stringify(formData),
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include our authorization token here
           },
         };
 
         try {
           const response = await fetch(url, fetchConfig);
           if (response.ok) {
+            console.log(response);
             setFormData({
               username: "",
               profile_pic: "",
@@ -102,6 +104,7 @@ const PinForm = () => {
 
       submitData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData, navigate, userData]);
   useEffect(() => {
     handleGetLoggedInUser();

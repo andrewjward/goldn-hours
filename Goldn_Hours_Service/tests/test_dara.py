@@ -54,7 +54,7 @@ def account_override():
 def test_create_pin():
     app.dependency_overrides[PinsQueries] = CreatePin
     app.dependency_overrides[
-        authenticator.get_current_account_data
+        authenticator.try_get_current_account_data
     ] = account_override
     json = {
         "username": "bob",

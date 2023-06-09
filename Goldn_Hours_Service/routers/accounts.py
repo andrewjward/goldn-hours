@@ -14,6 +14,7 @@ from queries.accounts import (
     DuplicateAccountError,
 )
 from models.accounts import AccountIn, Account, AccountOut
+from queries.pins import PinsQueries
 
 
 class AccountForm(BaseModel):
@@ -105,9 +106,16 @@ async def update_account(
 async def delete_account(
     account_id: str,
     repo: AccountQueries = Depends(),
+    account: Account = Depends(authenticator.try_get_current_account_data),
 ):
-    repo.delete_account(account_id)
-    return True
+    if account:
+        print("TO_DELETE:", account_id, " LOGGED_IN:", account["id"])
+        if account["is_admin"] or account["id"] == account_id:
+            return repo.delete_account(account_id)
+        else:
+            return False
+    else:
+        return False
 
 
 @router.get("/token", response_model=AccountToken | None)
