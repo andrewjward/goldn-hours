@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import notFound from "../images/not_found.png";
 import { NavLink } from "react-router-dom";

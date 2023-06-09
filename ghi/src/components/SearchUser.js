@@ -67,17 +67,17 @@ function SearchUserList() {
               </motion.button>
             </div>
           </div>
-          <div className="p-2 flex flex-col justify-center items-center"></div>
           <table className="m-4 flex flex-col items-center table-auto;">
-            <thead className=" m-3">
-              <tr className="w-64 flex justify-around">
-                <th>Pic</th>
-                <th>Name</th>
-                <th>Username</th>
+            <thead className="m-3">
+              <tr>
+                <th className="w-20">
+                  <img src={pic} alt="default-pic" className="w-7 rounded-full object-cover" />
+                </th>
+                <th className="w-32">Username</th>
               </tr>
             </thead>
             <AnimatePresence>
-              <motion.tbody exit="hidden" className="m-2">
+              <motion.tbody exit="hidden">
                 {accounts &&
                   accounts.map((account, i) => {
                     return (
@@ -97,7 +97,7 @@ function SearchUserList() {
                           }}
                           animate={{ opacity: 1, translateX: 0, translateY: 0 }}
                           transition={{ duration: 0.3, delay: i * 0.2 }}
-                          className="cursor-pointer m-2"
+                          className="cursor-pointer"
                           key={account.username}
                           data-username={account.username}
                           onClick={handleProfileClick}
@@ -107,7 +107,7 @@ function SearchUserList() {
                               scale: 1.5,
                               transition: { duration: 0.1 },
                             }}
-                            className="flex justify-between items-center"
+                            className="flex items-center"
                           >
                             <motion.td
                               initial={{
@@ -120,6 +120,7 @@ function SearchUserList() {
                                 translateY: 0,
                               }}
                               transition={{ duration: 0.3, delay: i * 0.2 }}
+                              className="w-32"
                             >
                               <img
                                 className="my-3 mr-4 rounded-full w-6 h-6 object-cover"
@@ -127,7 +128,6 @@ function SearchUserList() {
                                 alt="PROFILEPIC"
                               />
                             </motion.td>
-                            <td className="">{account.name}</td>
                             <td>{account.username}</td>
                           </motion.div>
                         </motion.tr>
