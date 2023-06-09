@@ -38,7 +38,7 @@ function App() {
   }, [token]);
 
   const domain = /https:\/\/[^/]+/;
-  const basename = process.env.PUBLIC_URL.replace(domain, '');
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
 
   return (
     <div className="">
@@ -53,12 +53,10 @@ function App() {
           />
           <Routes>
             <Route
-            path="/location/:latitude/:longitude"
-            element={<LocationList
-            searchTerm={searchTerm}
-            />}
+              path="/location/:latitude/:longitude"
+              element={<LocationList searchTerm={searchTerm} />}
             />
-            <Route path="/" element={<Map setSearchTerm={setSearchTerm}/>} />
+            <Route path="/" element={<Map setSearchTerm={setSearchTerm} />} />
             <Route
               path="/signup"
               element={
