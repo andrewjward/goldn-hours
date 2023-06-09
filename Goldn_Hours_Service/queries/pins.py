@@ -55,3 +55,6 @@ class PinsQueries(Queries):
 
     def delete_pin(self, id: str) -> bool:
         return self.collection.delete_one({"_id": ObjectId(id)})
+
+    def delete_pins_by_user(self, username: str) -> bool:
+        return self.collection.delete_many({"username": ObjectId(username)})
