@@ -9,7 +9,8 @@ Its the first map based social media application geared toward the professional.
 
 Design
 
-[Integrations]()
+[Integrations](https://gitlab.com/jonathanrblazer/module3-project-gamma/-/blob/main/docs/integrations.md)
+[Data-models](https://gitlab.com/jonathanrblazer/module3-project-gamma/-/blob/main/docs/data-models.md)
 [api](https://gitlab.com/jonathanrblazer/module3-project-gamma/-/blob/main/api_documentation.txt)
 [ghi](https://excalidraw.com/#room=770732b397ed858b7cf2,kP4jFhVTuLJJarm_PX9zIQ)
 
@@ -31,3 +32,4 @@ Project Initialization
 5. Run docker-compose up
 6. Navigate to localhost:3000
 7. Create a new profile and make new posts
+
