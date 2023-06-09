@@ -66,4 +66,5 @@ class AccountQueries(Queries):
         return AccountOut(**props, id=id)
 
     def delete_account(self, account_id: str) -> bool:
+        username = self.get_account_by_username(account_id)["username"]
         return self.collection.delete_one({"_id": ObjectId(account_id)})
