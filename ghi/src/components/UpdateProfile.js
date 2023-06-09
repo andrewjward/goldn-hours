@@ -12,7 +12,6 @@ const UpdateProfile = ({ userData, setUserData }) => {
     password: "",
     is_admin: "",
   });
-  const { token } = useToken();
   const navigate = useNavigate();
 
   const handleProfileChange = (event) => {
