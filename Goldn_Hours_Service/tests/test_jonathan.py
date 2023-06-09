@@ -16,7 +16,7 @@ class DeletePinQueries:
 def test_delete_pin():
     app.dependency_overrides[PinsQueries] = DeletePinQueries
     app.dependency_overrides[
-        authenticator.get_current_account_data
+        authenticator.try_get_current_account_data
     ] = DeletePinQueries
     response = client.delete("/api/pins/1")
     assert response.status_code == 200
