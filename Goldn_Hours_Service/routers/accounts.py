@@ -99,6 +99,7 @@ async def update_account(
             detail="UNAUTHORIZED",
         )
 
+
 @router.delete("/api/accounts/{account_id}", response_model=bool)
 async def delete_account(
     account_id: str,

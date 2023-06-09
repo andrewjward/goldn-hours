@@ -71,7 +71,11 @@ function SearchUserList() {
             <thead className="m-3">
               <tr>
                 <th className="w-20">
-                  <img src={pic} alt="default-pic" className="w-7 rounded-full object-cover" />
+                  <img
+                    src={pic}
+                    alt="default-pic"
+                    className="w-7 rounded-full object-cover"
+                  />
                 </th>
                 <th className="w-32">Username</th>
               </tr>
