@@ -71,12 +71,14 @@ const PinForm = () => {
           body: JSON.stringify(formData),
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include our authorization token here
           },
         };
 
         try {
           const response = await fetch(url, fetchConfig);
           if (response.ok) {
+            console.log(response);
             setFormData({
               username: "",
               location_name: "",
