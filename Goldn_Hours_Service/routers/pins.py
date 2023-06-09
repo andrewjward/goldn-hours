@@ -52,6 +52,10 @@ async def get_pin(
 async def delete_pin(
     pin_id: str,
     repo: PinsQueries = Depends(),
+    account: Account = Depends(authenticator.try_get_current_account_data),
 ):
-    repo.delete_pin(pin_id)
-    return True
+    if account:
+        repo.delete_pin(pin_id)
+        return True
+    else:
+        return None

@@ -105,9 +105,17 @@ async def update_account(
 async def delete_account(
     account_id: str,
     repo: AccountQueries = Depends(),
+    account: Account = Depends(authenticator.try_get_current_account_data),
 ):
-    repo.delete_account(account_id)
-    return True
+    if account:
+        print("hey this is the account:", account)
+        if account["is_admin"] or account["id"] == account_id:
+            repo.delete_account(account_id)
+            return True
+        else:
+            return False
+    else:
+        return False
 
 
 @router.get("/token", response_model=AccountToken | None)
