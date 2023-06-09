@@ -14,6 +14,7 @@ from queries.accounts import (
     DuplicateAccountError,
 )
 from models.accounts import AccountIn, Account, AccountOut
+from queries.pins import PinsQueries
 
 
 class AccountForm(BaseModel):
@@ -105,13 +106,15 @@ async def update_account(
 async def delete_account(
     account_id: str,
     repo: AccountQueries = Depends(),
+    pins_repo: PinsQueries = Depends(),
     account: Account = Depends(authenticator.try_get_current_account_data),
 ):
     if account:
         print("hey this is the account:", account)
         if account["is_admin"] or account["id"] == account_id:
-            repo.delete_account(account_id)
-            return True
+            if repo.delete_account(account_id):
+                repo.delete_pins_by_user(account.username)
+                return True
         else:
             return False
     else:

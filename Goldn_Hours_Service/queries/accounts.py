@@ -4,6 +4,7 @@ from models.accounts import Account, AccountIn, AccountOut
 from pymongo import ReturnDocument, ASCENDING
 from pymongo.errors import DuplicateKeyError
 
+
 # from typing import Union
 
 

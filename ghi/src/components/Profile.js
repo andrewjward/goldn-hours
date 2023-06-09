@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import pic from "../images/gold-icon.png";
 import deleteIcon from "../images/delete-icon.svg";
+import useToken from "@galvanize-inc/jwtdown-for-react";
 
 function Profile({ username, setUsername }) {
   const [pins, setPins] = useState([]);
   const [profile, setProfile] = useState([]);
   const params = useParams();
   const [userData, setUserData] = useState({});
+  const { token } = useToken();
   const [isLoggedIn, setIsLoggedIn] = useState(
     params.username === userData.username
   );
@@ -30,7 +32,13 @@ function Profile({ username, setUsername }) {
   const deletePin = async (event, id) => {
     event.preventDefault();
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins/${id}`;
-    const response = await fetch(url, { method: "DELETE" });
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include our authorization token here
+      },
+    });
     if (response.ok) {
       setPins(pins.filter((pin) => pin.id !== id));
     }
