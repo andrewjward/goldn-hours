@@ -86,7 +86,7 @@ const SignupForm = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       {/* <img className="m-4 w-1/4 rounded" src={signup} /> */}
-      <div className="w-1/3 rounded-lg bg-slate-700 flex flex-col justify-center items-center p-4 mt-4 drop-shadow-lg">
+      <div className="w-63 rounded-lg bg-slate-700 flex flex-col justify-center items-center p-4 mt-4 drop-shadow-lg">
         <form
           className="flex flex-col justify-center items-center"
           onSubmit={handleSubmit}

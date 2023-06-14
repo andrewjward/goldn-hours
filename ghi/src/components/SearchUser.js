@@ -41,7 +41,7 @@ function SearchUserList() {
   return (
     <>
       <div className="flex flex-col items-center justify-center">
-        <div className="rounded-lg w-96 h-90 bg-slate-700 mt-4 d-flex flex-row-reverse align-items-center justify-content-between">
+        <div className="rounded-lg md:w-96 h-90 bg-slate-700 mt-4 d-flex flex-row-reverse align-items-center justify-content-between">
           <div>
             <div className="input-group flex flex-col items-center">
               <input

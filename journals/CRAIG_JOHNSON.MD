@@ -1,3 +1,9 @@
+# JUNE 9TH 2023
+    Last day before the grading is over.
+    Had an amazing team, feels super lucky to have them!
+    Worked on a modal today but that will be implemented during stretch goals
+
+    my aha moment came from css and getting the modal to look just right
 # JUNE 7TH 2023
 
 

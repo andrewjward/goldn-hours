@@ -102,13 +102,13 @@ There was a lot of trouble and debugging going on that we had to have SEIRs come
 
 Today, I worked on:
 
-    Setting up the pins.py FastAPI backend. 
+    Setting up the pins.py FastAPI backend.
 
 We started defining the models in our application.
 
 ## May 15, 2023
 
-Today, I worked on: 
+Today, I worked on:
 
     setting up the Google Maps API and displaying it in the browser.
 

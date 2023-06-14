@@ -33,7 +33,7 @@ const SearchBox = ({ searchTerm, setSearchTerm }) => {
         type="search"
         onChange={handleSearchTerm}
         id="default-search"
-        className="my-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-l-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+        className="md:w-48 w-20 my-2 p-3 text-sm text-orange-900 border border-orange-300 rounded-l-lg bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
         placeholder="Search Locations"
       ></input>
       <button

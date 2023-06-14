@@ -1,3 +1,7 @@
+## Friday, 2023-Jun-9
+    A lot of work today! Our app is deployed, but we still needed to cleanup some backend authentication stuff.
+    We also added a page to edit the profile so that you can change your avatar or dsplay name. We also added some really cool CSS animations!
+    We had a bunch of AHA! moments reviewing our old code to piece together the Profile Update page. There were some useEffects and prop drills that needed work! Kornabari was extremely helpful as always!
 ## Thursday, 2023-Jun-7
     Great day so far, our code is deployed and passing all tests! Navigation is pretty fluid, the only lingering glitch is that if User refreshes page, the Location name will disappear from state and no longer be displayed
 ## Wednesday, 2023-Jun-7
