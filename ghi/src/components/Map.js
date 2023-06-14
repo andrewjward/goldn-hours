@@ -45,9 +45,8 @@ function Map({ setSearchTerm }) {
     <div>
       <div
         className="flex items-center justify-center"
-        style={{ width: "99vw", height: "100vh" }}
       >
-        <div className=" h-4/5 w-4/5 flex items-center justify-center">
+        <div className=" h-screen w-screen flex items-center justify-center">
           <GoogleMap
             zoom={4}
             options={{ styles: styles }}

@@ -42,7 +42,7 @@ function App() {
   const basename = process.env.PUBLIC_URL.replace(domain, "");
 
   return (
-    <div className="">
+    <div className="scroll-smooth">
       <BrowserRouter basename={basename}>
         <AuthProvider baseUrl={baseUrl}>
           <Nav

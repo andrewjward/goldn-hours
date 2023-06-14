@@ -34,9 +34,8 @@ const Nav = ({ username, setUserData, searchTerm, setSearchTerm }) => {
               <img
                 src={logo}
                 alt="Golden Logo"
-                style={{ width: "50px", minWidth: "50px" }}
                 aria-current="page"
-                className="p-1 mx-2"
+                className="md:w-12 md:h-12 w-9 h-9 p-1 mx-2"
               />
             </NavLink>
           </motion.li>
@@ -46,7 +45,7 @@ const Nav = ({ username, setUserData, searchTerm, setSearchTerm }) => {
               whileHover={{ translateY: -3 }}
             >
               <NavLink
-                className="md:text-xl text-xs m-2 hover:text-orange-500 active:text-orange-500 focus:text-orange-500"
+                className="flex text-center md:text-base text-xs m-2 hover:text-orange-500 active:text-orange-500 focus:text-orange-500"
                 to={`/profile/${username}`}
                 aria-current="page"
               >
@@ -60,9 +59,12 @@ const Nav = ({ username, setUserData, searchTerm, setSearchTerm }) => {
           <motion.li
             whileTap={{ translateY: 1, scale: 0.9 }}
             whileHover={{ translateY: -3 }}
+            flex
+            text-center
+            className="flex text-center"
           >
             <NavLink
-              className="md:text-xl text-xs m-2 hover:text-orange-500 active:text-orange-500 focus:text-orange-500"
+              className="md:text-base text-xs m-2 hover:text-orange-500 active:text-orange-500 focus:text-orange-500"
               aria-current="page"
               to="/search-users"
             >
@@ -75,7 +77,7 @@ const Nav = ({ username, setUserData, searchTerm, setSearchTerm }) => {
               whileHover={{ translateY: -3 }}
             >
               <NavLink
-                className="md:text-xl text-xs m-2 hover:text-orange-500 active:text-orange-500 focus:text-orange-500"
+                className="flex text-center md:text-base text-xs m-2 hover:text-orange-500 active:text-orange-500 focus:text-orange-500"
                 aria-current="page"
                 to="/new-pin"
               >
@@ -92,7 +94,7 @@ const Nav = ({ username, setUserData, searchTerm, setSearchTerm }) => {
             <button
               onClick={handleLogout}
               type="submit"
-              className="md:text-xl text-xs flex justify-center items-center md:w-20 w-10 m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+              className="md:text-base text-xs flex justify-center items-center md:w-20 w-10 m-2 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
             >
               Logout
             </button>

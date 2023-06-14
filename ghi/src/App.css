@@ -16,7 +16,6 @@
 .map-container {
   height: 100%;
   width: 100%;
-  border-radius: 25px 25px 25px 25px / 25px 25px 25px 25px;
 }
 
 .loginButton {

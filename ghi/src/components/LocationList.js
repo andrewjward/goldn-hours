@@ -28,7 +28,7 @@ const LocationList = ({ searchTerm }) => {
     <div>
       <h1 className="text-center underline text-2xl m-4">{searchTerm}</h1>
       {pins.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="m-2 grid grid-cols-2 md:grid-cols-3 gap-4">
           {pins.map((pin, i) => {
             return (
               <motion.div
