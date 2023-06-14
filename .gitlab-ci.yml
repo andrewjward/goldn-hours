@@ -39,17 +39,13 @@ build-front-end-job:
 services:
   - docker:dind
 
-deploy-user-image:
-  stage: deploy
-  image: registry.gitlab.com/galvanize-inc/foss/glv-cloud-cli:latest
-  script:
-    - glv-cloud-cli reset -a ${GOLDN_HOURS_API} -t ${CIRRUS_TOKEN}
-  only:
-    - main
-
 build-goldn-hours-service-image:
   stage: build
   image: docker:git
+  dependencies:
+    - backend-test-job
+  needs:
+    - backend-test-job
   variables:
     GITLAB_IMAGE: ${CI_REGISTRY_IMAGE}/goldn_hours_service_image
   before_script:
@@ -58,6 +54,18 @@ build-goldn-hours-service-image:
   script:
     - docker build --tag $GITLAB_IMAGE:latest Goldn_Hours_Service
     - docker push $GITLAB_IMAGE:latest
+  only:
+    - main
+
+deploy-user-image:
+  stage: deploy
+  image: registry.gitlab.com/galvanize-inc/foss/glv-cloud-cli:latest
+  dependencies:
+    - build-goldn-hours-service-image
+  needs:
+    - build-goldn-hours-service-image
+  script:
+    - glv-cloud-cli reset -a ${GOLDN_HOURS_API} -t ${CIRRUS_TOKEN}
   only:
     - main
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function ImageModal({ pin, setShowModal, setSearchTerm }) {
     const navigate = useNavigate();
@@ -32,11 +33,23 @@ function ImageModal({ pin, setShowModal, setSearchTerm }) {
     }
 
     return (
-        <div
+        <motion.div
         className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-[5px] z-30 flex justify-center items-center"
         >
-            <img alt={pin.location_name} src={pin.image_url} className="rounded-l-2xl h-5/6 w-3/4 object-cover object-center" name="modal-image" />
-            <div className="bg-slate-800 h-5/6 to-50% w-96 rounded-r-2xl" name="modal-information">
+            <svg
+                className="fill-current text-red-500 h-10 w-10 absolute right-5 top-5"
+                role="button"
+                onClick={clickedOffModal}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+
+            >
+                <title>Close</title>
+                <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+            </svg>
+
+            <img alt={pin.location_name} src={pin.image_url} className="rounded-lg xl:rounded-l-2xl md:h-[720px] md:w-[1280px] object-cover object-center" name="modal-image" />
+            <div className="hidden bg-slate-800 xl:block md:h-[720px] to-50% w-96 rounded-r-2xl" name="modal-information">
                 <div className="px-14 text-center text-xl" name="titles">
                     <h1 className="text-4xl pt-20 pb-1 font-bold text-amber-400">Image Title</h1>
                     <div className="pb-4">
@@ -74,11 +87,7 @@ function ImageModal({ pin, setShowModal, setSearchTerm }) {
                     </div>
                 </div>
             </div>
-            <div
-            className="bg-red-500 h-10 w-10 absolute right-5 top-5"
-            onClick={clickedOffModal}
-            />
-        </div>
+        </motion.div>
     );
 }
 export default ImageModal

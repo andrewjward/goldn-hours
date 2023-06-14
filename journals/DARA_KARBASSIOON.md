@@ -1,3 +1,7 @@
+## June 9, 2023
+
+I'm adding animations to our app. Added a stagger animation to the search users function and picture loading stagger animation to the pages that load pictures. Spicing up the search users nav button too. The rest of the team is working on securing the backend preventing anyone from deleting or creating pins/accounts from the swagger. Craig is working on post modals. Finally done.
+
 ## June 8, 2023
 
 Got the app up and deployed today. I am continuing to work on CSS and various other front end related stuff. Adding profile pics next to the posters name on the locationlist.js and to the map page.
@@ -98,13 +102,13 @@ There was a lot of trouble and debugging going on that we had to have SEIRs come
 
 Today, I worked on:
 
-    Setting up the pins.py FastAPI backend. 
+    Setting up the pins.py FastAPI backend.
 
 We started defining the models in our application.
 
 ## May 15, 2023
 
-Today, I worked on: 
+Today, I worked on:
 
     setting up the Google Maps API and displaying it in the browser.
 

@@ -1,8 +1,11 @@
 from bson.objectid import ObjectId
 from .client import Queries
 from models.accounts import Account, AccountIn, AccountOut
+import pymongo
+import os
 from pymongo import ReturnDocument, ASCENDING
 from pymongo.errors import DuplicateKeyError
+
 
 # from typing import Union
 
@@ -66,4 +69,17 @@ class AccountQueries(Queries):
         return AccountOut(**props, id=id)
 
     def delete_account(self, account_id: str) -> bool:
-        return self.collection.delete_one({"_id": ObjectId(account_id)})
+        username = self.get_account(account_id).username
+        print("username:", username)
+        did_acct_find = self.collection.delete_one(
+            {"_id": ObjectId(account_id)}
+        )
+
+        if did_acct_find:
+            DATABASE_URL = os.environ["DATABASE_URL"]
+            conn = pymongo.MongoClient(DATABASE_URL)
+            db = conn["Gold'n-Hours"].pins
+            print("DB:", db)
+            db.delete_many({"username": username})
+            return True
+        return False
