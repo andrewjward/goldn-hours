@@ -3,11 +3,23 @@ import { useParams } from "react-router-dom";
 import notFound from "../images/not_found.png";
 import { NavLink } from "react-router-dom";
 import pic from "../images/gold-icon.png";
+import ImageModal from "./imageFocusModal";
 
-const LocationList = ({ searchTerm }) => {
+const LocationList = ({ searchTerm, setSearchTerm }) => {
   const [pins, setPins] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [modalInformation, setModalInformation] = useState({});
   const params = useParams();
   const searchRange = 1;
+
+  if (params.longitude == 0 && params.latitude == 0){
+    setSearchTerm("All Pins");
+  }
+
+  function imageClicked(pin) {
+    setModalInformation(pin);
+    setShowModal(true);
+  }
 
   const fetchPins = async () => {
     const pinsUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/pins?lat=${params.latitude}&long=${params.longitude}&radius=${searchRange}`;
@@ -25,6 +37,7 @@ const LocationList = ({ searchTerm }) => {
 
   return (
     <div>
+      {showModal && ( <ImageModal pin={modalInformation} setShowModal={setShowModal} setSearchTerm={setSearchTerm} /> )}
       <h1 className="text-center underline text-2xl m-4">{searchTerm}</h1>
       {pins.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -32,6 +45,7 @@ const LocationList = ({ searchTerm }) => {
             return (
               <div
                 className="flex flex-col items-center h-auto max-w-full rounded-lg"
+                onClick={() => imageClicked(pin)}
                 key={pin.id}
               >
                 <img

@@ -57,6 +57,7 @@ function App() {
             element={<LocationList
             searchTerm={searchTerm}
             userData={userData}
+            setSearchTerm={setSearchTerm}
             />}
             />
             <Route path="/" element={<Map setSearchTerm={setSearchTerm}/>} />
@@ -81,7 +82,7 @@ function App() {
             <Route
               path="/profile/:username"
               element={
-                <Profile username={username} setUsername={setUsername} />
+                <Profile username={username} setUsername={setUsername} setSearchTerm={setSearchTerm} />
               }
             />
           </Routes>

@@ -31,7 +31,7 @@ function Map({ setSearchTerm }) {
 
   if (!isLoaded)
     return (
-      <div className="w-screen h-screen flex items-center justify-center">
+      <div className="w-100 h-screen flex items-center justify-center">
         <motion.img
           src={logo}
           alt="Golden Logo"

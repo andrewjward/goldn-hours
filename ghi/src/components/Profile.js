@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import pic from "../images/gold-icon.png";
+import ImageModal from "./imageFocusModal";
 
-function Profile({ username, setUsername }) {
+function Profile({ username, setUsername, setSearchTerm }) {
   const [pins, setPins] = useState([]);
   const [profile, setProfile] = useState([]);
   const params = useParams();
@@ -11,6 +12,14 @@ function Profile({ username, setUsername }) {
   const [isLoggedIn, setIsLoggedIn] = useState(
     params.username === userData.username
   );
+  const [showModal, setShowModal] = useState(false);
+  const [modalInformation, setModalInformation] = useState({});
+
+
+  function imageClicked(pin) {
+    setModalInformation(pin);
+    setShowModal(true);
+  }
 
   const handleGetLoggedInUser = async () => {
     const url = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/token`;
@@ -49,10 +58,12 @@ function Profile({ username, setUsername }) {
     fetchData();
     fetchPins();
     // eslint-disable-next-line
-  }, [params]);
+  }, [params, showModal]);
+
 
   return (
     <main>
+      {showModal && ( <ImageModal pin={modalInformation} setShowModal={setShowModal} setSearchTerm={setSearchTerm} /> )}
       <div className="m-3 mx-auto px-4 flex flex-col justify-center items-center">
         <div>{profile.name}</div>
         <motion.img
@@ -83,13 +94,14 @@ function Profile({ username, setUsername }) {
             return (
               <div
                 className="flex flex-col items-center h-auto max-w-full rounded-lg"
+                onClick={() => imageClicked(pin)}
                 key={pin.id}
               >
                 <img
                   className="relative m-3 rounded-xl w-96 h-56 object-cover"
                   src={pin.image_url}
-                  alt="List of Pins"
-                ></img>
+                  value="pin"
+                />
                 <p>{pin.location_name}</p>
               </div>
             );
