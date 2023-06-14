@@ -12,6 +12,7 @@ import PinForm from "./components/PinForm";
 import PinCard from "./components/PinCard";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import SearchUserList from "./components/SearchUser";
+import UpdateProfile from "./components/UpdateProfile";
 
 function App() {
   const baseUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}`;
@@ -38,7 +39,7 @@ function App() {
   }, [token]);
 
   const domain = /https:\/\/[^/]+/;
-  const basename = process.env.PUBLIC_URL.replace(domain, '');
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
 
   return (
     <div className="">
@@ -60,7 +61,7 @@ function App() {
             setSearchTerm={setSearchTerm}
             />}
             />
-            <Route path="/" element={<Map setSearchTerm={setSearchTerm}/>} />
+            <Route path="/" element={<Map setSearchTerm={setSearchTerm} />} />
             <Route
               path="/signup"
               element={
@@ -82,7 +83,17 @@ function App() {
             <Route
               path="/profile/:username"
               element={
-                <Profile username={username} setUsername={setUsername} setSearchTerm={setSearchTerm} />
+                <Profile
+                  userData={userData}
+                  setUserData={setUserData}
+                  setUsername={setUsername}
+                />
+              }
+            />
+            <Route
+              path="/profile/:username/update"
+              element={
+                <UpdateProfile userData={userData} setUserData={setUserData} />
               }
             />
           </Routes>

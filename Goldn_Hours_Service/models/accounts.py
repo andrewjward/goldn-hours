@@ -9,6 +9,7 @@ class AccountIn(BaseModel):
     username: str
     profile_pic: Optional[str]
     name: str
+    is_admin: Optional[bool] = False
 
 
 class Account(AccountIn):

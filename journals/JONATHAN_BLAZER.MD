@@ -1,3 +1,9 @@
+## Friday, 2023-Jun-9
+    A lot of work today! Our app is deployed, but we still needed to cleanup some backend authentication stuff.
+    We also added a page to edit the profile so that you can change your avatar or dsplay name. We also added some really cool CSS animations!
+    We had a bunch of AHA! moments reviewing our old code to piece together the Profile Update page. There were some useEffects and prop drills that needed work! Kornabari was extremely helpful as always!
+## Thursday, 2023-Jun-7
+    Great day so far, our code is deployed and passing all tests! Navigation is pretty fluid, the only lingering glitch is that if User refreshes page, the Location name will disappear from state and no longer be displayed
 ## Wednesday, 2023-Jun-7
     Long day of trying to CICD, but things are starting to work.
     For some reason, our frontend seems to be making an HTTP: call to the backend, which should be a HTTPS: call.
@@ -30,7 +36,15 @@
     Now we can signup/login/logout/view accts.
     It seems like the baked-in login function was expecting something that we just weren't passing correctly.
 
+## Wednesday, 2023-May-17
 
+
+## Monday, 2023-May-15
+    Today we reviewed the project rubric and made  sure we understood the requirements.
+    We continued to plot out our application, which will be the first map-based social media app geared towards the professional photographer!
+## Friday, 2023-May-12
+    More massaging of Google Maps API and wire-framing our app.
+    We've decided we want to have a Pin model with picture url, location name, latitude, longitude, and username
 ## Thursday, 2023-May-11
     This week we were able to set up Google Maps accounts and get API keys, and display a Google Map in React.
     A-HA! occurred when we realized we were trying to pass a REQUIRED 'center' parameter to the GMaps-React app, but we had named it 'cenEter' 😆
