@@ -34,13 +34,13 @@ const LocationList = ({ searchTerm }) => {
               <motion.div
                 className="flex flex-col items-center h-auto max-w-full rounded-lg"
                 key={pin.id}
+                whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
               >
                 <motion.img
                   initial={{
                     opacity: 0,
                     translateY: 100,
                   }}
-                  whileHover={{ scale: 1.1 }}
                   animate={{ opacity: 1, translateX: 0, translateY: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.05 }}
                   whileTap={{

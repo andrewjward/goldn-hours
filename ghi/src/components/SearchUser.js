@@ -45,11 +45,11 @@ function SearchUserList() {
           <div>
             <div className="input-group flex flex-col items-center">
               <input
-                className="w-2/3 m-4 text-white right-2.5 bg-amber-600 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-orange-400 font-medium rounded-lg text-sm dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+                className="rounded-lg w-2/3 m-4 text-orange-900 border border-orange-300 bg-orange-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-orange-700 dark:border-orange-600 dark:placeholder-orange-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                 type="text"
                 id="usernameinput"
                 name="usernameinput"
-                placeholder="Search Users"
+                placeholder="search..."
                 maxLength="25"
                 onChange={handleUserChange}
                 value={user}
@@ -71,7 +71,11 @@ function SearchUserList() {
             <thead className="m-3">
               <tr>
                 <th className="w-20">
-                  <img src={pic} alt="default-pic" className="w-7 rounded-full object-cover" />
+                  <img
+                    src={pic}
+                    alt="default-pic"
+                    className="w-7 rounded-full object-cover"
+                  />
                 </th>
                 <th className="w-32">Username</th>
               </tr>

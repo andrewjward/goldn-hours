@@ -105,7 +105,10 @@ function Profile({ username, setUsername }) {
                 className="flex flex-col items-center h-auto max-w-full rounded-lg"
                 key={pin.id}
               >
-                <motion.div className=" relative" whileHover={{ scale: 1.1 }}>
+                <motion.div
+                  className="flex items-center flex-col"
+                  whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
+                >
                   <motion.img
                     initial={{
                       opacity: 0,
@@ -132,8 +135,8 @@ function Profile({ username, setUsername }) {
                   ) : (
                     <></>
                   )}
+                  <p>{pin.location_name}</p>
                 </motion.div>
-                <p>{pin.location_name}</p>
               </div>
             );
           })}
