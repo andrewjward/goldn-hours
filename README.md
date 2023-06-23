@@ -1,5 +1,7 @@
 Goldn' Hours
 
+live site: (https://squad-core.gitlab.io/goldn-hours/)
+
 - Andrew Ward
 - Craig Johnson
 - Jonathan Blazer
