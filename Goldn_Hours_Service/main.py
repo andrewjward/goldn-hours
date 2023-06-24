@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 import requests
 from authenticator import authenticator
-from routers import accounts, pins
+from routers import accounts, pins, messages
 
 
 description = "Gold'n Hours is THE app for photographers looking to maximize "
@@ -53,7 +53,8 @@ async def health_check():
 
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
-app.include_router(pins.router)
+app.include_router(pins.router, tags=["pins"])
+app.include_router(messages.router, tags=["messages"])
 
 
 @app.get("/geocode")
