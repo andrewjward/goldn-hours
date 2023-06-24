@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi import WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import requests
@@ -65,3 +66,11 @@ async def geocode(address: str):
     response = requests.get(url, params=params)
     response.raise_for_status()
     return response.json()
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    while True:
+        data = await websocket.receive_text()
+        print(data)
+        await websocket.send_text(f"Message text was: {data}")

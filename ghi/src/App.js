@@ -13,6 +13,7 @@ import PinCard from "./components/PinCard";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import SearchUserList from "./components/SearchUser";
 import UpdateProfile from "./components/UpdateProfile";
+import Chat from "./components/Chat";
 
 function App() {
   const baseUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}`;
@@ -68,6 +69,7 @@ function App() {
                 <SignupForm userData={userData} setUserData={setUserData} />
               }
             />
+            <Route path="/chat" element={<Chat userData={userData} setUserData={setUserData} />} />
             <Route
               path="/search-users"
               element={<SearchUserList userData={userData} />}
