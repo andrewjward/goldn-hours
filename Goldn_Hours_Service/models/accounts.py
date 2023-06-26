@@ -14,6 +14,7 @@ class AccountIn(BaseModel):
 
 class Account(AccountIn):
     id: PydanticObjectId
+    user_rating: float
 
 
 class AccountOut(AccountIn):

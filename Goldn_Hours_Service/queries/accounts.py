@@ -53,6 +53,7 @@ class AccountQueries(Queries):
         except DuplicateKeyError:
             raise DuplicateAccountError()
         props["id"] = str(props["_id"])
+        props["user_rating"] = float(0)
         return AccountOut(**props)
 
     def update_account(self, id: str, info: AccountIn):

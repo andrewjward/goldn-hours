@@ -25,6 +25,10 @@ class PinIn(BaseModel):
     date: str
     image_url: str
 
+    # rating
+    sunnies: int
+    cloudies: int
+
 
 class Pin(PinIn):
     id: PydanticObjectId

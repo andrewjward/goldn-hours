@@ -13,6 +13,8 @@ class PinsQueries(Queries):
         props = pin.dict()
         self.collection.insert_one(props)
         props["id"] = str(props["_id"])
+        props["sunnies"] = int(0)
+        props["cloudies"] = int(0)
         return PinOut(**props)
 
     def get_all_pins(self) -> List[PinOut]:
@@ -55,3 +57,16 @@ class PinsQueries(Queries):
 
     def delete_pin(self, id: str) -> bool:
         return self.collection.delete_one({"_id": ObjectId(id)})
+
+    def sunnies(self, id: str, info: PinIn):
+        props = info.dict()
+        self.collection.find_one_and_update(
+            {"_id": ObjectId(id)},
+            {"$set": {
+                field: value
+                for field, value in props.items()
+            }
+            },
+        )
+        result = self.collection.find_one({"_id": ObjectId(id)})
+        return PinOut(**result)

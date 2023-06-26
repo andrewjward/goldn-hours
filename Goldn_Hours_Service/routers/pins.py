@@ -1,6 +1,7 @@
 from fastapi import (
     Depends,
     APIRouter,
+    Response,
 )
 from authenticator import authenticator
 from models.pins import PinIn, PinOut
@@ -59,3 +60,18 @@ async def delete_pin(
         return True
     else:
         return None
+
+
+@router.put("/api/pins/{pin_id}", response_model=PinOut)
+async def sunnies(
+    pin_id: str,
+    response: Response,
+    repo: PinsQueries = Depends(),
+):
+    pin_data = repo.get_one_pin(id=pin_id)
+    pin_data.sunnies += 1
+    update = repo.sunnies(id=pin_id, info=pin_data)
+    if update is None:
+        response.status_code = 404
+    else:
+        return update
